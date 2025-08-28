@@ -1,0 +1,47 @@
+---
+import { SEO } from "astro-seo";
+import ThemeButton from "../components/ThemeButton.astro";
+
+interface BaseLayoutProps {
+  title?: string;
+  description?: string;
+}
+
+const { title = "Jowy", description = "Productor musical · DJ · Sonidista" } =
+  Astro.props as BaseLayoutProps;
+---
+
+<!doctype html>
+<html lang="es" class="transition-colors duration-500 ease-in-out">
+  <head>
+    <SEO
+      title=`${title} | Jowy Portfolio`
+      description={description}
+      openGraph={{
+        basic: {
+          title,
+          type: "website",
+          image: "https://tusitio.com/og-image.png",
+        },
+        optional: {
+          siteName: "DJ Jowy",
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+      }}
+    />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body
+    class="dark:text-text-dark bg-primary font-sans text-text transition-colors duration-500 ease-in-out dark:bg-primary-dark"
+  >
+    <ThemeButton />
+
+    <slot />
+  </body>
+</html>

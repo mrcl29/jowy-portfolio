@@ -1,9 +1,45 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-import '../styles/global.css'
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NavPhoto from "../components/NavPhoto.astro";
+
+import photo1 from "../assets/photo/photo.png";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout
+  title="Inicio"
+  description="Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional."
+>
+  <div class="flex h-screen w-screen">
+    <div class="relative flex-1 cursor-pointer">
+      <div
+        class="border-l-solid absolute h-full w-full border-t-[70dvh] border-l-[100dvh] border-t-transparent border-l-emerald-800 mask-fade-diagonal"
+      >
+      </div>
+      <NavPhoto
+        image={photo1}
+        className="mask-fade-top-bottom-right grayscale hover:grayscale-0"
+      />
+    </div>
+    <div class="relative flex-1 cursor-pointer">
+      <div
+        class="border-l-solid absolute h-full w-full border-t-[70dvh] border-l-[100dvh] border-t-transparent border-l-amber-200 mask-fade-diagonal"
+      >
+      </div>
+      <NavPhoto
+        image={photo1}
+        className="mask-fade-all-sides grayscale hover:grayscale-0"
+      />
+    </div>
+    <div class="relative flex-1 cursor-pointer">
+      <div
+        class="border-l-solid absolute h-full w-full border-t-[70dvh] border-l-[100dvh] border-t-transparent border-l-cyan-400 mask-fade-diagonal"
+      >
+      </div>
+      <NavPhoto
+        image={photo1}
+        className="mask-fade-top-bottom-left grayscale hover:grayscale-0"
+      />
+    </div>
+  </div>
+</BaseLayout>

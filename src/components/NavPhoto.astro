@@ -1,0 +1,23 @@
+---
+import { Image } from "astro:assets";
+
+interface NavPhotoProps {
+  image: any;
+  className?: string;
+  altImage?: string;
+}
+
+const {
+  image,
+  className = "w-full h-full overflow-hidden",
+  altImage = "Imagen de navegación",
+} = Astro.props as NavPhotoProps;
+---
+
+<Image
+  src={image}
+  alt={altImage}
+  class={`h-full max-h-full w-full ${className} object-contain object-bottom transition duration-400 hover:scale-110`}
+  sizes="100vw"
+  loading="eager"
+/>

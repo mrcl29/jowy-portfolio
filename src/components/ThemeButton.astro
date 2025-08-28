@@ -1,0 +1,60 @@
+---
+import { THEME_ICONS } from "../constants/theme.ts";
+
+interface ThemeButtonProps {
+  className?: string;
+}
+
+const { className = "fixed top-3 right-3 cursor-pointer rounded p-2" } =
+  Astro.props as ThemeButtonProps;
+---
+
+<button
+  id="theme-toggle"
+  class=`${className} transition duration-500 ease-in-out hover:scale-120 z-9999`
+>
+  <img
+    id="theme-toggle-icon"
+    src={THEME_ICONS["light"]}
+    alt="theme icon"
+    class="h-[2vw] max-h-7 min-h-5 transition-opacity duration-500 ease-in-out"
+  />
+</button>
+
+<script lang="ts">
+  const THEME_ICONS = {
+    light: "/theme/dark.svg",
+    dark: "/theme/light.svg",
+  };
+
+  const toggleButton = document.getElementById("theme-toggle");
+  const icon = document.getElementById("theme-toggle-icon");
+
+  // Inicializar tema según localStorage o preferencia del sistema
+  const storedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let currentTheme = storedTheme || (prefersDark ? "dark" : "light");
+  document.documentElement.classList.toggle("dark", currentTheme === "dark");
+  icon.src = THEME_ICONS[currentTheme];
+
+  toggleButton.addEventListener("click", () => {
+    // Hacer fade out
+    icon.style.opacity = "0";
+
+    setTimeout(() => {
+      // Cambiar tema
+      currentTheme = currentTheme === "dark" ? "light" : "dark";
+      document.documentElement.classList.toggle(
+        "dark",
+        currentTheme === "dark"
+      );
+      localStorage.setItem("theme", currentTheme);
+
+      // Cambiar la imagen
+      icon.src = THEME_ICONS[currentTheme];
+
+      // Hacer fade in
+      icon.style.opacity = "1";
+    }, 200); // 200ms coincide con la duración de la transición
+  });
+</script>

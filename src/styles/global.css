@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary: #f7a009;
+  --color-primary-dark: #000000;
+  --color-text: #000000;
+  --color-text-dark: #FFFFFF;
+}
+
+  /* Fade arriba + abajo + izquierda */
+  @utility mask-fade-top-bottom-left {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), 
+                        linear-gradient(to right, transparent 0%, black 5%);
+    -webkit-mask-composite: intersect;
+    mask-composite: intersect;
+  }
+
+  /* Fade arriba + abajo + derecha */
+  @utility mask-fade-top-bottom-right {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), 
+                        linear-gradient(to left, transparent 0%, black 5%);
+    -webkit-mask-composite: intersect;
+    mask-composite: intersect;
+  }
+
+  /* Fade arriba + abajo + izquierda + derecha */
+  @utility mask-fade-all-sides {
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), 
+                        linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
+    -webkit-mask-composite: intersect;
+    mask-composite: intersect;
+  }
+
+  /* Fade arriba + abajo + izquierda + derecha */
+ @utility mask-fade-diagonal {
+  mask-image: linear-gradient(-142deg, transparent 45%, black 60%);
+}
