@@ -9,15 +9,16 @@ interface NavPhotoProps {
 
 const {
   image,
-  className = "w-full h-full overflow-hidden",
+  className = "overflow-hidden",
   altImage = "Imagen de navegación",
 } = Astro.props as NavPhotoProps;
 ---
 
-<Image
-  src={image}
-  alt={altImage}
-  class={`h-full max-h-full w-full ${className} object-contain object-bottom transition duration-400 hover:scale-110`}
-  sizes="100vw"
-  loading="eager"
-/>
+<div class="flex h-full items-end justify-center">
+  <Image
+    src={image}
+    alt={altImage}
+    class={`h-auto max-h-[70%] w-auto object-bottom ${className} grayscale transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:grayscale-0`}
+    loading="eager"
+  />
+</div>

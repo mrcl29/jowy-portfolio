@@ -6,34 +6,85 @@
   --color-primary: #f7a009;
   --color-primary-dark: #000000;
   --color-text: #000000;
-  --color-text-dark: #FFFFFF;
+  --color-text-dark: #ffffff;
 }
 
-  /* Fade arriba + abajo + izquierda */
-  @utility mask-fade-top-bottom-left {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), 
-                        linear-gradient(to right, transparent 0%, black 5%);
-    -webkit-mask-composite: intersect;
-    mask-composite: intersect;
-  }
+/* Fade arriba + abajo + izquierda */
+@utility mask-fade-top-bottom-left {
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 0%,
+      black 80%,
+      transparent 100%
+    ),
+    linear-gradient(to right, transparent 0%, black 5%);
+  -webkit-mask-composite: intersect;
+  mask-composite: intersect;
+}
 
-  /* Fade arriba + abajo + derecha */
-  @utility mask-fade-top-bottom-right {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), 
-                        linear-gradient(to left, transparent 0%, black 5%);
-    -webkit-mask-composite: intersect;
-    mask-composite: intersect;
-  }
+/* Fade arriba + abajo + derecha */
+@utility mask-fade-top-bottom-right {
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 0%,
+      black 80%,
+      transparent 100%
+    ),
+    linear-gradient(to left, transparent 0%, black 5%);
+  -webkit-mask-composite: intersect;
+  mask-composite: intersect;
+}
 
-  /* Fade arriba + abajo + izquierda + derecha */
-  @utility mask-fade-all-sides {
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%), 
-                        linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%);
-    -webkit-mask-composite: intersect;
-    mask-composite: intersect;
-  }
+/* Fade arriba + abajo + izquierda + derecha */
+@utility mask-fade-all-sides {
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 0%,
+      black 0%,
+      black 80%,
+      transparent 100%
+    ),
+    linear-gradient(
+      to right,
+      transparent 0%,
+      black 5%,
+      black 95%,
+      transparent 100%
+    );
+  -webkit-mask-composite: intersect;
+  mask-composite: intersect;
+}
 
-  /* Fade arriba + abajo + izquierda + derecha */
- @utility mask-fade-diagonal {
-  mask-image: linear-gradient(-142deg, transparent 45%, black 60%);
+/* Fade arriba + abajo + izquierda + derecha */
+.mask-fade-diagonal {
+  mask-image: linear-gradient(-142deg, transparent 35%, black 50%);
+}
+
+@media (max-width: 762px) {
+  .mask-fade-diagonal {
+    mask-image: linear-gradient(-146deg, transparent 0%, black 0%);
+  }
+}
+
+@media (max-height: 447px) {
+  .mask-fade-diagonal {
+    mask-image: linear-gradient(-146deg, transparent 0%, black 0%);
+  }
+}
+
+/* Estilo por defecto (pantallas grandes) */
+.div-poligono {
+  clip-path: polygon(0% 0%, 100% 50%, 100% 100%, 0% 100%);
+}
+
+/* Pantallas de 767px o menos */
+@media (max-width: 767px) {
+  .div-poligono {
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  }
 }

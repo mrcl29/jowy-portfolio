@@ -1,0 +1,42 @@
+---
+import NavPhoto from "./NavPhoto.astro";
+
+interface NavPhotoSectionProps {
+  image: any;
+  title?: string;
+  color: string; // hex, rgb o nombre de Tailwind traducido
+  mask: string;
+  extraClass?: string;
+}
+
+const {
+  image,
+  title = "JOWY",
+  color,
+  mask,
+  extraClass = "",
+} = Astro.props as NavPhotoSectionProps;
+---
+
+<div
+  class="bg-color-primary group relative flex h-[100dvh] w-full cursor-pointer flex-col overflow-hidden md:flex-1"
+  style={`--section-color: ${color};`}
+>
+  <!-- Triángulo -->
+  <div
+    class="div-poligono mask-fade-diagonal absolute top-0 right-0 bottom-0 left-0"
+    style="background-color: var(--section-color);"
+  >
+  </div>
+
+  <!-- Título -->
+  <h1
+    class="absolute top-[10dvh] left-1/2 -translate-x-1/2 text-center text-3xl font-bold drop-shadow-lg transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:underline group-hover:decoration-2 sm:text-xl md:text-4xl"
+    style="color: var(--section-color);"
+  >
+    {title}
+  </h1>
+
+  <!-- Imagen -->
+  <NavPhoto image={image} className={`mt-auto ${mask} ${extraClass}`} />
+</div>
