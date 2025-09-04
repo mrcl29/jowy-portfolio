@@ -1,18 +1,21 @@
 ---
+// scr/layout/BaseLayout.astro
 import { SEO } from "astro-seo";
 import ThemeButton from "../components/ThemeButton.astro";
+import LangSwitcher from "../components/LangSwitcher.astro";
 
 interface BaseLayoutProps {
   title?: string;
   description?: string;
+  lang: string;
 }
 
-const { title = "Jowy", description = "Productor musical · DJ · Sonidista" } =
+const { title = "Jowy", description = "Productor musical · DJ · Sonidista", lang } =
   Astro.props as BaseLayoutProps;
 ---
 
 <!doctype html>
-<html lang="es" class="transition-colors duration-500 ease-in-out">
+<html lang={lang} class="transition-colors duration-500 ease-in-out">
   <head>
     <SEO
       title=`${title} | Jowy Portfolio`
@@ -41,6 +44,7 @@ const { title = "Jowy", description = "Productor musical · DJ · Sonidista" } =
     class="dark:text-text-dark bg-primary font-sans text-text transition-colors duration-500 ease-in-out dark:bg-primary-dark"
   >
     <ThemeButton />
+    <LangSwitcher currentLang={lang} />
 
     <slot />
   </body>

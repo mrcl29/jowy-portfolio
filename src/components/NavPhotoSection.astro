@@ -31,11 +31,29 @@ const {
 
   <!-- Título -->
   <h1
-    class="absolute top-[10dvh] left-1/2 -translate-x-1/2 text-center text-3xl font-bold drop-shadow-lg transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:underline group-hover:decoration-2 sm:text-xl md:text-4xl"
-    style="color: var(--section-color);"
+    class="underline-animation absolute top-[10dvh] left-1/2 -translate-x-1/2 whitespace-nowrap text-center font-bold drop-shadow-lg transition-all duration-500 ease-in-out group-hover:scale-110 sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl"
+    style="color: var(--section-color); text-shadow: 0 0 2px grey;"
   >
     {title}
   </h1>
+  <style>
+    .underline-animation::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px; /* distancia del texto */
+      width: 100%;
+      height: 3px; /* grosor de la línea */
+      background-color: currentColor; /* usa el mismo color del texto */
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease-in-out;
+    }
+
+    .group:hover .underline-animation::after {
+      transform: scaleX(1);
+    }
+  </style>
 
   <!-- Imagen -->
   <NavPhoto image={image} className={`mt-auto ${mask} ${extraClass}`} />

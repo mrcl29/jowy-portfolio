@@ -16,7 +16,7 @@
       to bottom,
       transparent 0%,
       black 0%,
-      black 80%,
+      black 60%,
       transparent 100%
     ),
     linear-gradient(to right, transparent 0%, black 5%);
@@ -31,7 +31,7 @@
       to bottom,
       transparent 0%,
       black 0%,
-      black 80%,
+      black 60%,
       transparent 100%
     ),
     linear-gradient(to left, transparent 0%, black 5%);
@@ -46,14 +46,14 @@
       to bottom,
       transparent 0%,
       black 0%,
-      black 80%,
+      black 60%,
       transparent 100%
     ),
     linear-gradient(
       to right,
       transparent 0%,
       black 5%,
-      black 95%,
+      black 60%,
       transparent 100%
     );
   -webkit-mask-composite: intersect;

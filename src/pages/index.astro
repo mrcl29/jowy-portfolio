@@ -1,30 +1,8 @@
 ---
-import "../styles/global.css";
-import BaseLayout from "../layouts/BaseLayout.astro";
-import NavPhotoSection from "../components/NavPhotoSection.astro";
-
-import photo1 from "../assets/photo/photo.png";
-
-const sections = [
-  {
-    image: photo1,
-    color: "#065f46",
-    mask: "mask-fade-top-bottom-right",
-  },
-  { image: photo1, color: "#fde68a", mask: "mask-fade-all-sides" },
-  {
-    image: photo1,
-    color: "#22d3ee",
-    mask: "mask-fade-top-bottom-left",
-  },
-];
+// src/pages/index.astro
 ---
-
-<BaseLayout
-  title="Inicio"
-  description="Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional."
->
-  <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
-    {sections.map((section) => <NavPhotoSection {...section} />)}
-  </div>
-</BaseLayout>
+<!-- export async function get() {
+  // redirige a /es por defecto
+  return Astro.redirect('/es', 307);
+}
+--- -->
