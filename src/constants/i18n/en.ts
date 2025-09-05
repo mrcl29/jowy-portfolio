@@ -22,4 +22,5 @@ export const sections = [
   },
 ];
 
+export const title = "Home"
 export const description = "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services."

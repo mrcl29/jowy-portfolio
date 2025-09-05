@@ -1,11 +1,12 @@
 ---
 // src/components/LangSwitcher.astro
-const { currentLang } = Astro.props as { currentLang: string };
-const otherLang = currentLang === "es" ? "en" : "es";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+const otherLang = Astro.currentLocale === "es" ? "en" : "es";
 ---
 <a
-  href={`/${otherLang}`}
-  class="fixed top-2 right-15 p-2 lg:text-lg md:text-base sm:text-xs cursor-pointer text-center justify-center align-middle hover:scale-125 transition-all duration-300 z-9999"
+  href={getRelativeLocaleUrl(otherLang)}
+  class="fixed top-3 right-15 p-2 lg:text-lg md:text-base sm:text-xs cursor-pointer text-center justify-center align-middle hover:scale-125 transition-all duration-300 z-9999"
 >
   {otherLang.toUpperCase()}
 </a>

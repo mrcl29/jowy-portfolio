@@ -1,8 +1,21 @@
 ---
 // src/pages/index.astro
+import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import NavPhotoSection from "../components/NavPhotoSection.astro";
+import { i18n, type Lang } from "../constants/i18n";
+
+// Esto se ejecuta para cada página generada
+const langParam = Astro.currentLocale as Lang;
+const { sections, description, title } = i18n[langParam];
 ---
-<!-- export async function get() {
-  // redirige a /es por defecto
-  return Astro.redirect('/es', 307);
-}
---- -->
+
+<BaseLayout
+  title={title}
+  lang={langParam}
+  description={description}
+>
+  <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
+    {sections.map((section) => <NavPhotoSection {...section} />)}
+  </div>
+</BaseLayout>
