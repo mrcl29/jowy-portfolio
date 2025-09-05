@@ -1,0 +1,26 @@
+---
+// src/pages/[...locale]/index.astro
+import "../../styles/global.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NavPhotoSection from "../../components/NavPhotoSection.astro";
+import { i18n, type Lang, defaultLang } from "../../../i18n.config";
+
+// Genera rutas estáticas: "/", "/en"
+export function getStaticPaths() {
+  return Object.keys(i18n).map((lang) => {
+    if (lang === defaultLang) {
+      return { params: { locale: undefined } };
+    }
+    return { params: { locale: lang } };
+  });
+}
+
+const langParam = (Astro.params.locale || defaultLang) as Lang;
+const { sections, description, title } = i18n[langParam];
+---
+
+<BaseLayout title={title} lang={langParam} description={description}>
+  <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
+    {sections.map((section) => <NavPhotoSection {...section} />)}
+  </div>
+</BaseLayout>

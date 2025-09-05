@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import compress from "astro-compress";
-import { defaultLang } from "./src/constants/i18n";
+import { defaultLang, i18n } from "./i18n.config";
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,7 +16,7 @@ export default defineConfig({
 
   i18n: {
     defaultLocale: defaultLang,
-    locales: ["es", "en"],
+    locales: Object.keys(i18n),
     routing: {
       prefixDefaultLocale: false,
       redirectToDefaultLocale: true,

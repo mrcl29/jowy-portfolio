@@ -1,0 +1,23 @@
+---
+// src/pages/[...locale]/dj.astro
+import "../../styles/global.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { i18n, type Lang, defaultLang } from "../../../i18n.config";
+
+// Genera rutas estáticas: "/", "/en"
+export function getStaticPaths() {
+  return Object.keys(i18n).map((lang) => {
+    if (lang === defaultLang) {
+      return { params: { locale: undefined } };
+    }
+    return { params: { locale: lang } };
+  });
+}
+
+const langParam = (Astro.params.locale || defaultLang) as Lang;
+const { description, title } = i18n[langParam];
+---
+
+<BaseLayout title={title} lang={langParam} description={description}>
+
+</BaseLayout>

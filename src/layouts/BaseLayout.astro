@@ -3,7 +3,7 @@
 import { SEO } from "astro-seo";
 import ThemeButton from "../components/ThemeButton.astro";
 import LangSwitcher from "../components/LangSwitcher.astro";
-import { defaultLang } from "../constants/i18n";
+import { defaultLang } from "../../i18n.config";
 
 interface BaseLayoutProps {
   title?: string;
@@ -11,7 +11,7 @@ interface BaseLayoutProps {
   lang: string;
 }
 
-const { title = "Jowy", description = "Productor musical · DJ · Sonidista", lang } =
+const { title = "Jowy", description = "Productor musical · DJ · Sonidista", lang = defaultLang } =
   Astro.props as BaseLayoutProps;
 ---
 
@@ -40,10 +40,6 @@ const { title = "Jowy", description = "Productor musical · DJ · Sonidista", la
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <!-- Fallback si JS está deshabilitado -->
-    <noscript>
-      <meta http-equiv="refresh" content="0; url=/{defaultLang}" />
-    </noscript>
   </head>
   <body
     class="dark:text-text-dark bg-primary font-sans text-text transition-colors duration-500 ease-in-out dark:bg-primary-dark"
