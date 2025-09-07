@@ -2,11 +2,17 @@
 // src/components/LangSwitcher.astro
 import { getRelativeLocaleUrl } from 'astro:i18n';
 
+const currentPath = Astro.url.pathname;
+
+// quitamos el prefijo de idioma si existe
+const normalizedPath = currentPath.replace(/^\/(en|es)(\/|$)/, "/");
+
 const otherLang = Astro.currentLocale === "es" ? "en" : "es";
+const otherUrl = getRelativeLocaleUrl(otherLang, normalizedPath);
 ---
 <a
-  href={getRelativeLocaleUrl(otherLang)}
-  class="fixed top-3 right-15 p-2 lg:text-lg md:text-base sm:text-xs cursor-pointer text-center justify-center align-middle hover:scale-125 transition-all duration-300 z-9999"
+  href={otherUrl}
+  class="fixed top-3 right-15 pt-[1dvh] lg:text-lg md:text-base sm:text-sm cursor-pointer text-center justify-center align-middle hover:scale-125 transition-all duration-300 z-9999"
 >
   {otherLang.toUpperCase()}
 </a>

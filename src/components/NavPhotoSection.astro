@@ -7,6 +7,7 @@ interface NavPhotoSectionProps {
   color: string; // hex, rgb o nombre de Tailwind traducido
   mask: string;
   extraClass?: string;
+  link?: string;
 }
 
 const {
@@ -15,10 +16,12 @@ const {
   color,
   mask,
   extraClass = "",
+  link = Astro.url.pathname,
 } = Astro.props as NavPhotoSectionProps;
 ---
 
-<div
+<a
+  href={link}
   class="bg-color-primary group relative flex h-[100dvh] w-full cursor-pointer flex-col overflow-hidden md:flex-1"
   style={`--section-color: ${color};`}
 >
@@ -57,4 +60,4 @@ const {
 
   <!-- Imagen -->
   <NavPhoto image={image} className={`mt-auto ${mask} ${extraClass}`} />
-</div>
+</a>

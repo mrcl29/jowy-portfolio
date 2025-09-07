@@ -19,5 +19,7 @@ const { description, title } = i18n[langParam];
 ---
 
 <BaseLayout title={title} lang={langParam} description={description}>
-
+  <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
+    {langParam === defaultLang ? "DJ Español" : "DJ Inglés"}
+  </div>
 </BaseLayout>

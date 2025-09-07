@@ -1,0 +1,25 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { defaultLang } from "../../i18n.config";
+
+interface PageLayoutProps {
+  title?: string;
+}
+
+const {
+  
+} = Astro.props as PageLayoutProps;
+
+const currentLang = Astro.currentLocale ? Astro.currentLocale : defaultLang;
+
+const homeUrl = getRelativeLocaleUrl(currentLang, "/");
+
+const HOME_ICONS = {
+  light: "home.svg",
+  dark: "homedark.svg",
+}
+---
+
+
+
+<slot />

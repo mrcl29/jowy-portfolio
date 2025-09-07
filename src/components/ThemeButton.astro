@@ -21,7 +21,7 @@ const { className = "fixed top-3 right-3 cursor-pointer rounded p-2" } =
   />
 </button>
 
-<script lang="ts">
+<script lang="ts" is:inline>
   const THEME_ICONS = {
     light: "/theme/dark.svg",
     dark: "/theme/light.svg",
@@ -30,31 +30,32 @@ const { className = "fixed top-3 right-3 cursor-pointer rounded p-2" } =
   const toggleButton = document.getElementById("theme-toggle");
   const icon = document.getElementById("theme-toggle-icon");
 
-  // Inicializar tema según localStorage o preferencia del sistema
-  const storedTheme = localStorage.getItem("theme");
+  // Iniciar icono según estado actual del <html>
+  const stored = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  let currentTheme = storedTheme || (prefersDark ? "dark" : "light");
-  document.documentElement.classList.toggle("dark", currentTheme === "dark");
+  let currentTheme =
+    stored ??
+    (prefersDark
+      ? "dark"
+      : document.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light");
   icon.src = THEME_ICONS[currentTheme];
 
   toggleButton.addEventListener("click", () => {
-    // Hacer fade out
     icon.style.opacity = "0";
 
+    currentTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.classList.toggle("dark", currentTheme === "dark");
+    document.documentElement.setAttribute(
+      "data-theme",
+      currentTheme === "dark" ? "github-dark-default" : "github-light-default"
+    );
+    localStorage.setItem("theme", currentTheme);
+
     setTimeout(() => {
-      // Cambiar tema
-      currentTheme = currentTheme === "dark" ? "light" : "dark";
-      document.documentElement.classList.toggle(
-        "dark",
-        currentTheme === "dark"
-      );
-      localStorage.setItem("theme", currentTheme);
-
-      // Cambiar la imagen
       icon.src = THEME_ICONS[currentTheme];
-
-      // Hacer fade in
       icon.style.opacity = "1";
-    }, 200); // 200ms coincide con la duración de la transición
+    }, 200);
   });
 </script>

@@ -40,6 +40,21 @@ const { title = "Jowy", description = "Productor musical · DJ · Sonidista", la
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+
+    <script is:inline>
+    (() => {
+      const storedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const theme = storedTheme || (prefersDark ? "dark" : "light");
+
+      // Aplica la clase antes de renderizar
+      document.documentElement.classList.toggle("dark", theme === "dark");
+      document.documentElement.setAttribute(
+        "data-theme",
+        theme === "dark" ? "github-dark-default" : "github-light-default"
+      );
+    })();
+  </script>
   </head>
   <body
     class="dark:text-text-dark bg-primary font-sans text-text transition-colors duration-500 ease-in-out dark:bg-primary-dark"

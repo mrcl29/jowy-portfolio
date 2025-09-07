@@ -7,6 +7,7 @@ export const sections = [
     title: "DJ Jowy",
     color: "#065f46",
     mask: "mask-fade-top-bottom-right",
+    link: "/en/dj"
   },
   { 
     image: photo1, 
