@@ -1,6 +1,4 @@
 ---
-import { THEME_ICONS } from "@/constants/theme.ts";
-
 interface ThemeButtonProps {
   className?: string;
 }
@@ -15,8 +13,8 @@ const { className = "fixed top-3 right-3 cursor-pointer rounded p-2" } =
 >
   <img
     id="theme-toggle-icon"
-    src={THEME_ICONS["light"]}
-    alt="theme icon"
+    src="theme/light.svg"
+    alt="Icono de Tema"
     class="h-[2vw] max-h-6 min-h-5 transition-opacity duration-500 ease-in-out"
   />
 </button>

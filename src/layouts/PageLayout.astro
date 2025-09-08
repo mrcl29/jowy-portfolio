@@ -6,20 +6,40 @@ interface PageLayoutProps {
   title?: string;
 }
 
-const {
-  
-} = Astro.props as PageLayoutProps;
+const {} = Astro.props as PageLayoutProps;
 
 const currentLang = Astro.currentLocale ? Astro.currentLocale : defaultLang;
-
 const homeUrl = getRelativeLocaleUrl(currentLang, "/");
-
-const HOME_ICONS = {
-  light: "home.svg",
-  dark: "homedark.svg",
-}
 ---
 
-
+<a>
+  <img
+    id="nav-home-icon"
+    src="home.svg"
+    alt="Icono de Inicio"
+    class="h-[2vw] max-h-6 min-h-5 transition-opacity duration-500 ease-in-out"
+  />
+</a>
 
 <slot />
+
+<script lang="ts" is:inline>
+  const HOME_ICONS = {
+    dark: "home.svg",
+    light: "homedark.svg",
+  };
+
+  const icon = document.getElementById("nav-home-icon");
+
+  // Iniciar icono según estado actual del <html>
+  const stored = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  let currentTheme =
+    stored ??
+    (prefersDark
+      ? "dark"
+      : document.documentElement.classList.contains("dark")
+        ? "dark"
+        : "light");
+  icon.src = HOME_ICONS[currentTheme];
+</script>

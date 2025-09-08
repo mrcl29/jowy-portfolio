@@ -1,5 +1,5 @@
 // src/constants/i18n/es.ts
-import { photo1, djCutPhoto, soundCutPhoto } from "@/constants/photos";
+import { photo1, djCutPhoto, soundCutPhoto, producerPhoto } from "@/constants/photos";
 
 export const sections = [
   {
@@ -10,10 +10,10 @@ export const sections = [
     link: "/dj"
   },
   { 
-    image: photo1, 
+    image: producerPhoto, 
     title: "Productor",
     color: "#fde68a", 
-    mask: "mask-fade-all-sides" 
+    mask: "mask-fade-all-sides pb-30" 
   },
   {
     image: soundCutPhoto,

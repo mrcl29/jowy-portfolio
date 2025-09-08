@@ -2,6 +2,7 @@
 // src/pages/[...locale]/dj.astro
 import "@/styles/global.css";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
 import { i18n, type Lang, defaultLang } from "../../../i18n.config";
 
 // Genera rutas estáticas: "/", "/en"
@@ -19,7 +20,9 @@ const { description, title } = i18n[langParam];
 ---
 
 <BaseLayout title={title} lang={langParam} description={description}>
-  <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
-    {langParam === defaultLang ? "DJ Español" : "DJ Inglés"}
-  </div>
+  <PageLayout>
+    <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
+      {langParam === defaultLang ? "DJ Español" : "DJ Inglés"}
+    </div>
+  </PageLayout>
 </BaseLayout>
