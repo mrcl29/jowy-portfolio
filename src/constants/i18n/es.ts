@@ -25,3 +25,8 @@ export const sections = [
 
 export const title = "Inicio"
 export const description = "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional."
+
+// Página de DJ
+export const djPage = {
+  title: "DJ"
+}

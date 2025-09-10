@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Anta';
+  src: url('/fonts/anta/Anta-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Aplicamos la fuente a toda la web */
+html, body {
+  font-family: 'Anta', sans-serif;
+}
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {

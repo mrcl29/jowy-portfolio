@@ -27,11 +27,10 @@ const homeUrl = getRelativeLocaleUrl(currentLang, "/");
 </a>
 
 <main class="mx-auto max-w-3xl px-6 py-12 ">
-
+  <h1 class="w-full flex justify-center align-middle text-5xl font-extrabold mb-1">{title}</h1>
   <slot />
 </main>
 
-<!-- <script src="/js/theme.js" defer></script> -->
 <script>
   import { type Theme, HOME_ICONS, getCurrentTheme } from "@/theme/theme"
 

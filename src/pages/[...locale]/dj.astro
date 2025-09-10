@@ -4,6 +4,7 @@ import "@/styles/global.css";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { i18n, type Lang, defaultLang } from "../../../i18n.config";
+import { djPage } from "@/constants/i18n/es";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -20,7 +21,7 @@ const { description, title } = i18n[langParam];
 ---
 
 <BaseLayout title={title} lang={langParam} description={description}>
-  <PageLayout title="DJ">
+  <PageLayout title={djPage.title}>
     <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
       {langParam === defaultLang ? "DJ Español" : "DJ Inglés"}
     </div>
