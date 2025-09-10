@@ -4,6 +4,7 @@ import { SEO } from "astro-seo";
 import ThemeButton from "@/components/ThemeButton.astro";
 import LangSwitcher from "@/components/LangSwitcher.astro";
 import { defaultLang } from "../../i18n.config";
+import { djCutPhoto, soundCutPhoto, producerPhoto } from "@/constants/photos";
 
 interface BaseLayoutProps {
   title?: string;
@@ -11,12 +12,18 @@ interface BaseLayoutProps {
   lang: string;
 }
 
-const { title = "Jowy", description = "Productor musical · DJ · Sonidista", lang = defaultLang } =
-  Astro.props as BaseLayoutProps;
+const {
+  title = "Jowy",
+  description = "Productor musical · DJ · Sonidista",
+  lang = defaultLang,
+} = Astro.props as BaseLayoutProps;
 ---
 
 <!doctype html>
-<html lang={lang} class="transition-colors duration-500 ease-in-out">
+<html
+  lang={lang}
+  class="scroll-smooth transition-colors duration-500 ease-in-out"
+>
   <head>
     <SEO
       title=`${title} | Jowy Portfolio`
@@ -38,26 +45,35 @@ const { title = "Jowy", description = "Productor musical · DJ · Sonidista", la
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script is:inline>
+      (function() {
+      try {
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+
+        const html = document.documentElement;
+        if (theme === 'dark') {
+          html.classList.add('dark');
+          html.setAttribute('data-theme', 'github-dark-default');
+        } else {
+          html.classList.remove('dark');
+          html.setAttribute('data-theme', 'github-light-default');
+        }
+      } catch(e) {
+        // fallback silencioso
+      }
+    })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <script is:inline>
-    (() => {
-      const storedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      const theme = storedTheme || (prefersDark ? "dark" : "light");
-
-      // Aplica la clase antes de renderizar
-      document.documentElement.classList.toggle("dark", theme === "dark");
-      document.documentElement.setAttribute(
-        "data-theme",
-        theme === "dark" ? "github-dark-default" : "github-light-default"
-      );
-    })();
-  </script>
+    <link rel="preload" as="image" href={djCutPhoto.src} />
+    <link rel="preload" as="image" href={soundCutPhoto.src} />
+    <link rel="preload" as="image" href={producerPhoto.src} />
   </head>
   <body
-    class="dark:text-text-dark bg-primary font-sans text-text transition-colors duration-500 ease-in-out dark:bg-primary-dark"
+    class="bg-primary font-sans text-text transition-colors duration-200 ease-in-out dark:bg-primary-dark dark:text-text-dark"
   >
     <ThemeButton />
     <LangSwitcher currentLang={lang} />

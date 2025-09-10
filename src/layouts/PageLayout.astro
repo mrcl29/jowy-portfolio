@@ -1,45 +1,51 @@
 ---
+import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { defaultLang } from "../../i18n.config";
+import { homeLightIcon } from "@/constants/themeIcons";
 
 interface PageLayoutProps {
-  title?: string;
+  title: string;
 }
 
-const {} = Astro.props as PageLayoutProps;
+const { title } = Astro.props as PageLayoutProps;
 
 const currentLang = Astro.currentLocale ? Astro.currentLocale : defaultLang;
 const homeUrl = getRelativeLocaleUrl(currentLang, "/");
 ---
 
-<a>
-  <img
+<a href={homeUrl}>
+  <Image
     id="nav-home-icon"
-    src="home.svg"
-    alt="Icono de Inicio"
-    class="h-[2vw] max-h-6 min-h-5 transition-opacity duration-500 ease-in-out"
+    src={homeLightIcon}
+    alt="Home Icon"
+    class="fixed top-3 left-5 h-[3vw] max-h-10 min-h-5 w-auto hover:scale-120 z-9999 transition duration-300 ease-in-out"
+    loading="eager"
+    fetchpriority="high"
+    format="svg"
   />
 </a>
 
-<slot />
+<main class="mx-auto max-w-3xl px-6 py-12 ">
 
-<script lang="ts" is:inline>
-  const HOME_ICONS = {
-    dark: "home.svg",
-    light: "homedark.svg",
-  };
+  <slot />
+</main>
 
-  const icon = document.getElementById("nav-home-icon");
+<!-- <script src="/js/theme.js" defer></script> -->
+<script>
+  import { type Theme, HOME_ICONS, getCurrentTheme } from "@/theme/theme"
 
-  // Iniciar icono según estado actual del <html>
-  const stored = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  let currentTheme =
-    stored ??
-    (prefersDark
-      ? "dark"
-      : document.documentElement.classList.contains("dark")
-        ? "dark"
-        : "light");
-  icon.src = HOME_ICONS[currentTheme];
+  const homeIcon = document.getElementById("nav-home-icon") as HTMLImageElement;
+  homeIcon.src = HOME_ICONS[getCurrentTheme()].src;
+  // Escuchar cambios
+  window.addEventListener("themechange", (e: any) => {
+    homeIcon.style.opacity = "0";
+    const theme: Theme  = e.detail;
+
+    setTimeout(() => {
+      homeIcon.src = HOME_ICONS[theme].src;
+      homeIcon.alt = theme + " home icon";
+      homeIcon.style.opacity = "1";
+    }, 200);
+  });
 </script>

@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import { darkIcon } from "@/constants/themeIcons";
+
 interface ThemeButtonProps {
   className?: string;
 }
@@ -11,48 +14,34 @@ const { className = "fixed top-3 right-3 cursor-pointer rounded p-2" } =
   id="theme-toggle"
   class=`${className} transition duration-300 ease-in-out hover:scale-120 z-9999`
 >
-  <img
+  <Image
     id="theme-toggle-icon"
-    src="theme/light.svg"
-    alt="Icono de Tema"
-    class="h-[2vw] max-h-6 min-h-5 transition-opacity duration-500 ease-in-out"
+    alt="Dark Icon"
+    src={darkIcon}
+    class="h-[2vw] max-h-6 min-h-5 w-auto transition-opacity duration-500 ease-in-out"
+    loading="eager"
+    fetchpriority="high"
+    format="svg"
   />
 </button>
 
-<script lang="ts" is:inline>
-  const THEME_ICONS = {
-    light: "/theme/dark.svg",
-    dark: "/theme/light.svg",
-  };
+<script>
+  import { THEME_ICONS, getCurrentTheme, updateTheme } from "@/theme/theme"
 
-  const toggleButton = document.getElementById("theme-toggle");
-  const icon = document.getElementById("theme-toggle-icon");
+  const toggleButton = document.getElementById("theme-toggle") as HTMLButtonElement;
+  const icon = document.getElementById("theme-toggle-icon") as HTMLImageElement;
 
-  // Iniciar icono según estado actual del <html>
-  const stored = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  let currentTheme =
-    stored ??
-    (prefersDark
-      ? "dark"
-      : document.documentElement.classList.contains("dark")
-        ? "dark"
-        : "light");
-  icon.src = THEME_ICONS[currentTheme];
+  icon.src = THEME_ICONS[getCurrentTheme()].src;
 
   toggleButton.addEventListener("click", () => {
     icon.style.opacity = "0";
 
-    currentTheme = currentTheme === "dark" ? "light" : "dark";
-    document.documentElement.classList.toggle("dark", currentTheme === "dark");
-    document.documentElement.setAttribute(
-      "data-theme",
-      currentTheme === "dark" ? "github-dark-default" : "github-light-default"
-    );
-    localStorage.setItem("theme", currentTheme);
+    const currentTheme = getCurrentTheme() === "dark" ? "light" : "dark";
+    updateTheme(currentTheme);
 
     setTimeout(() => {
-      icon.src = THEME_ICONS[currentTheme];
+      icon.src = THEME_ICONS[currentTheme].src;
+      icon.alt = currentTheme + " theme icon"
       icon.style.opacity = "1";
     }, 200);
   });
