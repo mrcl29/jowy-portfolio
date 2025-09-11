@@ -1,8 +1,6 @@
 // src/constants/theme.ts
 import { darkIcon, lightIcon, homeDarkIcon, homeLightIcon } from "@/constants/themeIcons";
-
-// Tipos de tema permitidos
-export type Theme = "light" | "dark";
+import { type Theme } from "@/constants/types";
 
 export const THEME_ICONS: Record<Theme, ImageMetadata> = {
   light: darkIcon,

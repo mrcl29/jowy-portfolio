@@ -32,7 +32,8 @@ const homeUrl = getRelativeLocaleUrl(currentLang, "/");
 </main>
 
 <script>
-  import { type Theme, HOME_ICONS, getCurrentTheme } from "@/theme/theme"
+  import { type Theme } from "@/constants/types";
+  import { HOME_ICONS, getCurrentTheme } from "@/theme/theme"
 
   const homeIcon = document.getElementById("nav-home-icon") as HTMLImageElement;
   homeIcon.src = HOME_ICONS[getCurrentTheme()].src;
