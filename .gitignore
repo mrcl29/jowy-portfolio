@@ -25,3 +25,7 @@ pnpm-debug.log*
 
 # Documentación API
 Jowy Portfolio - API Doc
+
+# PNPM cache
+.pnpm-store/
+

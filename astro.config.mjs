@@ -11,6 +11,9 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  server: {
+    host: true,
+  },
 
   integrations: [sitemap(), compress()],
 

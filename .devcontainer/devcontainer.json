@@ -1,0 +1,34 @@
+{
+  "name": "Astro + PNPM Dev Container",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20",
+      "pnpm": "true"
+    }
+  },
+
+  // Ejecuta pnpm install al crear el contenedor
+  "postCreateCommand": "pnpm install",
+
+  "customizations": {
+    "vscode": {
+      // Extensiones recomendadas
+      "extensions": ["astro-build.astro-vscode", "esbenp.prettier-vscode"],
+      // Esto hace que se importen tus extensiones locales automáticamente
+      "settings": {
+        "dev.containers.copyExtensions": true
+      }
+    }
+  },
+
+  "remoteUser": "node",
+
+  "forwardPorts": [4321],
+  "portsAttributes": {
+    "4321": {
+      "label": "Astro Dev Server"
+    }
+  }
+}
