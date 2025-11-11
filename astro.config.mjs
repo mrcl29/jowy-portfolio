@@ -12,7 +12,8 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   server: {
-    host: true,
+    host: true, // Establece el host en '0.0.0.0'
+    port: 4321,
   },
 
   integrations: [sitemap(), compress()],

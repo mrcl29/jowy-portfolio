@@ -1,0 +1,69 @@
+---
+// Define las propiedades (props) que aceptará el componente.
+interface Props {
+  // La URL pública de la pista de SoundCloud (ej: 'https://soundcloud.com/user/track-name').
+  trackUrl: string;
+  // Altura del reproductor (por defecto, 166px es estándar para la versión compacta).
+  height?: string;
+  // Ancho del reproductor (por defecto, 100% para ser responsivo).
+  width?: string;
+}
+
+const { trackUrl, height = "166", width = "100%" } = Astro.props;
+
+// Codificamos la URL de la pista para asegurar que es segura para el parámetro 'url'.
+const encodedUrl = encodeURIComponent(trackUrl);
+
+// Parámetros de configuración del reproductor de SoundCloud.
+// Estos se mantienen constantes para la estética que tenías.
+const playerParams = {
+  color: "d50000", // Color play button and other controls. e.g. “0066CC”
+  auto_play: "false", // Start playing the item automatically
+  hide_related: "false",
+  show_comments: "true",
+  show_user: "true", // Show/Hide the uploader name
+  show_reposts: "false",
+  show_teaser: "true",
+  visual: "false", // 'true' para la versión grande/visual
+  buying: "true", // Show/Hide buy buttons
+  sharing: "true", // Show/Hide share buttons
+  download: "true", // Show/Hide download buttons
+  show_artwork: "true", // 	Show/Hide the item’s artwork
+  show_playcount: "true", // 	Show/Hide number of track plays
+  single_active: "false", // If set to false the multiple players on the page won’t toggle each other off when playing
+};
+
+// Construimos la query string completa a partir de los parámetros.
+const queryString = Object.entries(playerParams)
+  .map(([key, value]) => `${key}=${value}`)
+  .join("&amp;");
+
+// La URL final del reproductor.
+const srcUrl = `https://w.soundcloud.com/player/?url=${encodedUrl}&amp;${queryString}`;
+---
+
+<!-- Aplicamos clases de Tailwind al contenedor para dar sombra y bordes redondeados. --><!-- mx-auto y w-full asegura que sea centrado y responsivo. -->
+<div
+  class="soundcloud-player-container mx-auto w-full max-w-4xl overflow-hidden rounded-xl shadow-xl"
+>
+  <iframe
+    width={width}
+    height={height}
+    scrolling="no"
+    frameborder="no"
+    allow="autoplay"
+    src={srcUrl}
+    title={`SoundCloud Player for ${trackUrl}`}
+    class="block border-none"
+  >
+  </iframe>
+</div>
+<!-- El bloque <style> ya no es necesario ya que usamos Tailwind, pero se mantiene si se necesita CSS puro. -->
+<style>
+  /* * Mantengo un estilo mínimo en caso de que las utilidades de width/height no se traduzcan
+ * perfectamente al iframe, pero la mayoría de la apariencia visual es ahora Tailwind.
+ */
+  .soundcloud-player-container {
+    line-height: 0;
+  }
+</style>

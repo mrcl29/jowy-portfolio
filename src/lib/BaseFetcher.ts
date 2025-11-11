@@ -22,17 +22,12 @@ export async function baseFetcher<T>(
   options: FetcherOptions = {}
 ): Promise<T> {
 
-  // 1. Configuración de Headers por defecto (ej. JSON)
-  const defaultHeaders = {
-    'Content-Type': 'application/json',
-    ...options.headers // Sobrescribe si se pasan en options
-  };
-
   try {
-    console.log("BaseFetcher ejecutado.........")
+    console.log({
+      ...options,
+    })
     const response = await fetch(url, {
       ...options,
-      headers: defaultHeaders,
     });
 
     // 2. Manejo de Respuestas con Status OK (200-299)
