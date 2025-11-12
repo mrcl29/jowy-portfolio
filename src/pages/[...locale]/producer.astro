@@ -1,10 +1,12 @@
 ---
-// src/pages/[...locale]/dj.astro
+// src/pages/[...locale]/producer.astro
 import "@/styles/global.css";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { i18n, type Lang, defaultLang } from "@/../i18n.config";
 import { getDictionary } from "@/utils/i18n";
+import { getSoundCloudSongInfo } from "@/server/services/soundcloud";
+import SoundCloudPlayer from "@/components/SoundCloudPlayer.astro"
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -18,14 +20,24 @@ export function getStaticPaths() {
 
 const langParam = (Astro.params.locale || defaultLang) as Lang;
 const { description, title } = i18n[langParam];
-const dictionary = await getDictionary(langParam);
-const { djPage } = dictionary;
+const dictionary = await getDictionary(langParam)
+
+// --- Lógica del Servidor ---
+// 1. ID de la canción que queremos mostrar.
+const favoriteSongId = "2110005924";
+
+// 2. Llamamos a nuestra función de servicio. Esto se ejecuta en el servidor.
+const songInfo = await getSoundCloudSongInfo(favoriteSongId);
+const { producerPage } = dictionary;
+
+// 3. El cliente nunca ve esta lógica, solo el HTML renderizado abajo.
 ---
 
 <BaseLayout title={title} lang={langParam} description={description}>
-  <PageLayout title={djPage.title}>
+  <PageLayout title={producerPage.title}>
     <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
-      {djPage.heroSection.heading}
+      <h1>{producerPage.heroSection.heading}</h1>
+      <SoundCloudPlayer trackUrl={songInfo ? songInfo.permalink_url : ""} />
     </div>
   </PageLayout>
 </BaseLayout>

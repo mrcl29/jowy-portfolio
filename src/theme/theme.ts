@@ -1,6 +1,6 @@
 // src/constants/theme.ts
 import { darkIcon, lightIcon, homeDarkIcon, homeLightIcon } from "@/constants/themeIcons";
-import { type Theme } from "@/constants/types";
+import { type Theme } from "@/types/theme.d";
 
 export const THEME_ICONS: Record<Theme, ImageMetadata> = {
   light: darkIcon,

@@ -3,7 +3,8 @@
 import "@/styles/global.css";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import NavPhotoSection from "@/components/NavPhotoSection.astro";
-import { i18n, type Lang, defaultLang } from "../../../i18n.config";
+import { i18n, type Lang, defaultLang } from "@/../i18n.config";
+import { getDictionary } from "@/utils/i18n";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -16,7 +17,19 @@ export function getStaticPaths() {
 }
 
 const langParam = (Astro.params.locale || defaultLang) as Lang;
-const { sections, description, title } = i18n[langParam];
+const globalMetadata = i18n[langParam]; // Metadatos globales del sitio (title, description para BaseLayout)
+const dictionary = await getDictionary(langParam);
+const { indexPage } = dictionary; // Contenido específico de la página principal
+
+const { title, description, sections } = indexPage; // Destructura el contenido de indexPage
+
+// Función auxiliar para construir enlaces localizados
+const getLocalizedLink = (pathSegment: string | undefined) => {
+  if (!pathSegment) return undefined; // Si no hay segmento de ruta, no hay enlace
+  return langParam === defaultLang
+    ? `/${pathSegment}`
+    : `/${langParam}/${pathSegment}`;
+};
 ---
 
 <BaseLayout title={title} lang={langParam} description={description}>
