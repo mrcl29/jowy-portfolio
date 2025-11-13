@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { defaultLang } from "../../i18n.config";
-import { homeLightIcon } from "@/constants/themeIcons";
+import { homeLightIcon, homeDarkIcon } from "@/constants/themeIcons";
 
 interface PageLayoutProps {
   title: string;
@@ -17,7 +17,7 @@ const homeUrl = getRelativeLocaleUrl(currentLang, "/");
 <a href={homeUrl}>
   <Image
     id="nav-home-icon"
-    src={homeLightIcon}
+    src={homeDarkIcon}
     alt="Home Icon"
     class="fixed top-3 left-5 h-[3vw] max-h-10 min-h-5 w-auto hover:scale-120 z-9999 transition duration-300 ease-in-out"
     loading="eager"
@@ -32,20 +32,20 @@ const homeUrl = getRelativeLocaleUrl(currentLang, "/");
 </main>
 
 <script>
-  import { type Theme } from "@/types/theme.d";
-  import { HOME_ICONS, getCurrentTheme } from "@/theme/theme"
+  // import { type Theme } from "@/types/theme.d";
+  // import { HOME_ICONS, getCurrentTheme } from "@/theme/theme"
 
-  const homeIcon = document.getElementById("nav-home-icon") as HTMLImageElement;
-  homeIcon.src = HOME_ICONS[getCurrentTheme()].src;
-  // Escuchar cambios
-  window.addEventListener("themechange", (e: any) => {
-    homeIcon.style.opacity = "0";
-    const theme: Theme  = e.detail;
+  // const homeIcon = document.getElementById("nav-home-icon") as HTMLImageElement;
+  // homeIcon.src = HOME_ICONS[getCurrentTheme()].src;
+  // // Escuchar cambios
+  // window.addEventListener("themechange", (e: any) => {
+  //   homeIcon.style.opacity = "0";
+  //   const theme: Theme  = e.detail;
 
-    setTimeout(() => {
-      homeIcon.src = HOME_ICONS[theme].src;
-      homeIcon.alt = theme + " home icon";
-      homeIcon.style.opacity = "1";
-    }, 200);
-  });
+  //   setTimeout(() => {
+  //     homeIcon.src = HOME_ICONS[theme].src;
+  //     homeIcon.alt = theme + " home icon";
+  //     homeIcon.style.opacity = "1";
+  //   }, 200);
+  // });
 </script>

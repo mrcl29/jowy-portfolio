@@ -74,7 +74,7 @@ html, body {
 }
 
 /* Fade arriba + abajo + izquierda + derecha */
-.mask-fade-diagonal {
+/* .mask-fade-diagonal {
   mask-image: linear-gradient(-143deg, transparent 38%, black 65%);
 }
 
@@ -88,11 +88,59 @@ html, body {
   .mask-fade-diagonal {
     mask-image: linear-gradient(-146deg, transparent 0%, black 0%);
   }
+} */
+ /* Fade diagonal + izquierda + derecha */
+.mask-fade-diagonal {
+  /* Define el ancho de los degradados laterales.
+    Puedes cambiar este valor (ej. 10%, 20%, 50px) 
+  */
+  --side-fade-width: 30%;
+
+  mask-image: 
+    /* 1. Tu degradado diagonal original */
+    /* linear-gradient(-143deg, transparent 38%, black 65%), */
+    linear-gradient(to bottom, transparent 0%, black 99%),
+    
+    /* 2. Nuevo degradado vertical izquierdo */
+    linear-gradient(to right, 
+      transparent 0%, 
+      black var(--side-fade-width)
+    ),
+    
+    /* 3. Nuevo degradado vertical derecho */
+    linear-gradient(to left, 
+      transparent 0%, 
+      black var(--side-fade-width)
+    );
+  
+  /* --- ¡IMPORTANTE! --- */
+  /* Esta propiedad combina las máscaras.
+     Un píxel solo será visible si es 'black' (visible) 
+     en LAS TRES máscaras que definiste arriba. */
+  -webkit-mask-composite: destination-in; /* Para Chrome/Safari */
+  mask-composite: intersect;             /* Estándar moderno */
+}
+
+/* He actualizado tus media queries. 
+  'mask-image: none;' es la forma correcta de *desactivar* la máscara.
+  Tu versión original (transparent 0%, black 0%) no es fiable
+  y puede no funcionar como esperas.
+*/
+@media (max-width: 762px) {
+  .mask-fade-diagonal {
+    mask-image: none;
+  }
+}
+
+@media (max-height: 447px) {
+  .mask-fade-diagonal {
+    mask-image: none;
+  }
 }
 
 /* Estilo por defecto (pantallas grandes) */
 .div-poligono {
-  clip-path: polygon(0% 0%, 100% 50%, 100% 100%, 0% 100%);
+  /* clip-path: polygon(0% 0%, 100% 50%, 100% 100%, 0% 100%); */
 }
 
 /* Pantallas de 767px o menos */

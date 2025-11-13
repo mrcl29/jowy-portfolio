@@ -1,6 +1,7 @@
 ---
 // scr/layout/BaseLayout.astro
 import { SEO } from "astro-seo";
+import { ClientRouter } from "astro:transitions";
 import ThemeButton from "@/components/ThemeButton.astro";
 import LangSwitcher from "@/components/LangSwitcher.astro";
 import { defaultLang } from "../../i18n.config";
@@ -23,6 +24,7 @@ const {
 <html
   lang={lang}
   class="scroll-smooth transition-colors duration-500 ease-in-out"
+  transition:animate="none"
 >
   <head>
     <SEO
@@ -46,24 +48,29 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script is:inline>
-      (function() {
-      try {
-        const storedTheme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = storedTheme || (prefersDark ? 'dark' : 'light');
+      (function () {
+        // try {
+        //   const storedTheme = localStorage.getItem("theme");
+        //   const prefersDark = window.matchMedia(
+        //     "(prefers-color-scheme: dark)"
+        //   ).matches;
+        //   const theme = storedTheme || (prefersDark ? "dark" : "light");
 
+        //   const html = document.documentElement;
+        //   if (theme === "dark") {
+        //     html.classList.add("dark");
+        //     html.setAttribute("data-theme", "github-dark-default");
+        //   } else {
+        //     html.classList.remove("dark");
+        //     html.setAttribute("data-theme", "github-light-default");
+        //   }
+        // } catch (e) {
+        //   // fallback silencioso
+        // }
         const html = document.documentElement;
-        if (theme === 'dark') {
-          html.classList.add('dark');
-          html.setAttribute('data-theme', 'github-dark-default');
-        } else {
-          html.classList.remove('dark');
-          html.setAttribute('data-theme', 'github-light-default');
-        }
-      } catch(e) {
-        // fallback silencioso
-      }
-    })();
+        html.classList.add("dark");
+        html.setAttribute("data-theme", "github-dark-default");
+      })();
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
@@ -71,11 +78,14 @@ const {
     <link rel="preload" as="image" href={djCutPhoto.src} />
     <link rel="preload" as="image" href={soundCutPhoto.src} />
     <link rel="preload" as="image" href={producerPhoto.src} />
+
+    <ClientRouter />
   </head>
   <body
-    class="bg-primary font-sans text-text transition-colors duration-200 ease-in-out dark:bg-primary-dark dark:text-text-dark"
+    class=" font-sans bg-primary-dark text-text-dark"
+    transition:animate="fade"
   >
-    <ThemeButton />
+    <!-- <ThemeButton /> -->
     <LangSwitcher currentLang={lang} />
 
     <slot />
