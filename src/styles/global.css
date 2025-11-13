@@ -99,7 +99,7 @@ html, body {
   mask-image: 
     /* 1. Tu degradado diagonal original */
     /* linear-gradient(-143deg, transparent 38%, black 65%), */
-    linear-gradient(to bottom, transparent 0%, black 99%),
+    linear-gradient(to bottom, transparent 0%, black 80%),
     
     /* 2. Nuevo degradado vertical izquierdo */
     linear-gradient(to right, 
