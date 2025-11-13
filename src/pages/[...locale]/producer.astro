@@ -3,14 +3,14 @@
 import "@/styles/global.css";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
-import { i18n, type Lang, defaultLang } from "@/../i18n.config";
-import { getDictionary } from "@/utils/i18n";
-import { soundCloudApi } from "@/server/services/soundcloud/index";
+import { defaultLang, locales } from "@/../i18n.config";
+import { getI18nInfo } from "@/utils/i18n";
+import getTrackLinks from "@/utils/getTracksLinks";
 import SoundCloudPlayer from "@/components/SoundCloudPlayer.astro";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
-  return Object.keys(i18n).map((lang) => {
+  return locales.map((lang) => {
     if (lang === defaultLang) {
       return { params: { locale: undefined } };
     }
@@ -18,25 +18,23 @@ export function getStaticPaths() {
   });
 }
 
-const langParam = (Astro.params.locale || defaultLang) as Lang;
-const { description, title } = i18n[langParam];
-const dictionary = await getDictionary(langParam);
-
-const songsInfo = await soundCloudApi.tracks.getFromUser("itsjowyhouse");
+const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
 const { producerPage } = dictionary;
+
+const tracksLinks = await getTrackLinks();
 ---
 
-<BaseLayout title={title} lang={langParam} description={description}>
+<BaseLayout
+  title={producerPage.title}
+  lang={langParam}
+  description={producerPage.description}
+>
   <PageLayout title={producerPage.title}>
     <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-col">
       <h1>{producerPage.heroSection.heading}</h1>
       {
-        songsInfo?.map((songInfo) => {
-          if (songInfo.duration < 600000) {
-            return(<SoundCloudPlayer
-              trackUrl={songInfo ? songInfo.permalink_url : ""}
-            />)
-          }
+        tracksLinks?.map((link) => {
+          return <SoundCloudPlayer trackUrl={link} />;
         })
       }
     </div>

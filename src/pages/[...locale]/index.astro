@@ -3,37 +3,28 @@
 import "@/styles/global.css";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import NavPhotoSection from "@/components/NavPhotoSection.astro";
-import { i18n, type Lang, defaultLang } from "@/../i18n.config";
-import { getDictionary } from "@/utils/i18n";
+import { defaultLang, locales } from "@/../i18n.config";
+import { getI18nInfo } from "@/utils/i18n";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
-  return Object.keys(i18n).map((lang) => {
+  return locales.map((lang) => {
     if (lang === defaultLang) {
       return { params: { locale: undefined } };
     }
     return { params: { locale: lang } };
   });
 }
-
-const langParam = (Astro.params.locale || defaultLang) as Lang;
-const globalMetadata = i18n[langParam]; // Metadatos globales del sitio (title, description para BaseLayout)
-const dictionary = await getDictionary(langParam);
+const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
 const { indexPage } = dictionary; // Contenido específico de la página principal
-
-const { title, description, sections } = indexPage; // Destructura el contenido de indexPage
-
-// Función auxiliar para construir enlaces localizados
-const getLocalizedLink = (pathSegment: string | undefined) => {
-  if (!pathSegment) return undefined; // Si no hay segmento de ruta, no hay enlace
-  return langParam === defaultLang
-    ? `/${pathSegment}`
-    : `/${langParam}/${pathSegment}`;
-};
 ---
 
-<BaseLayout title={title} lang={langParam} description={description}>
+<BaseLayout
+  title={indexPage.title}
+  lang={langParam}
+  description={indexPage.description}
+>
   <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
-    {sections.map((section) => <NavPhotoSection {...section} />)}
+    {indexPage.sections.map((section) => <NavPhotoSection {...section} />)}
   </div>
 </BaseLayout>

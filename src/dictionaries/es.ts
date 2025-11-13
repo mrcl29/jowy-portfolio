@@ -4,6 +4,7 @@ import { djCutPhoto, soundCutPhoto, producerPhoto } from "../constants/photos"; 
 export default {
   djPage: {
     title: "DJ",
+    description: "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
     heroSection: {
       heading: "¡Hola DJ!",
       description: "Explora mis sets y mezclas.",
@@ -12,6 +13,7 @@ export default {
   },
   producerPage: {
     title: "Productor",
+    description: "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
     heroSection: {
       heading: "¡Bienvenido a mi estudio!",
       description: "Descubre mi trabajo como productor musical.",

@@ -19,6 +19,7 @@ export async function getUserTracks(
   limit = 10,
   offset = 0
 ): Promise<SoundCloudTrack[] | null> {
+  console.log("---------- getUserTracks ----------")
   try {
     let userId: number | undefined = undefined;
     // 1. Obtener la información del usuario para conseguir su ID

@@ -3,12 +3,12 @@
 import "@/styles/global.css";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
-import { i18n, type Lang, defaultLang } from "@/../i18n.config";
-import { getDictionary } from "@/utils/i18n";
+import { defaultLang, locales } from "@/../i18n.config";
+import { getI18nInfo } from "@/utils/i18n";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
-  return Object.keys(i18n).map((lang) => {
+  return locales.map((lang) => {
     if (lang === defaultLang) {
       return { params: { locale: undefined } };
     }
@@ -16,13 +16,15 @@ export function getStaticPaths() {
   });
 }
 
-const langParam = (Astro.params.locale || defaultLang) as Lang;
-const { description, title } = i18n[langParam];
-const dictionary = await getDictionary(langParam);
+const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
 const { djPage } = dictionary;
 ---
 
-<BaseLayout title={title} lang={langParam} description={description}>
+<BaseLayout
+  title={djPage.title}
+  lang={langParam}
+  description={djPage.description}
+>
   <PageLayout title={djPage.title}>
     <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
       {djPage.heroSection.heading}

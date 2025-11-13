@@ -13,3 +13,4 @@ export const soundCloudAuthBody = { grant_type: "client_credentials" };
 export const soundCloudClientID = import.meta.env.SOUNDCLOUD_CLIENT_ID;
 export const soundCloudClientSecret = import.meta.env.SOUNDCLOUD_CLIENT_SECRET;
 export const soundCloudAuthorization = import.meta.env.SOUNDCLOUD_AUTHORIZATION;
+export const soundCloudUserId = parseInt(import.meta.env.SOUNDCLOUD_USER_ID, 10);
