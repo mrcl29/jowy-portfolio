@@ -11,5 +11,6 @@ import xLogo from "@/assets/rrss/x.svg"
 import spotifyLogo from "@/assets/rrss/spotify.svg"
 import soundcloudLogo from "@/assets/rrss/soundcloud.svg"
 import linkedinLogo from "@/assets/rrss/linkedin.svg"
+import djBio from "@/assets/dj/dj_bio.webp"
 
-export { photo1, djPhoto, djCutPhoto, soundPhoto, soundCutPhoto, producerPhoto, instagramLogo, youtubeLogo, linkedinLogo, xLogo, soundcloudLogo, spotifyLogo };
+export { photo1, djPhoto, djCutPhoto, soundPhoto, soundCutPhoto, producerPhoto, instagramLogo, youtubeLogo, linkedinLogo, xLogo, soundcloudLogo, spotifyLogo, djBio };

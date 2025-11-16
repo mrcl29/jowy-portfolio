@@ -1,22 +1,32 @@
 ---
+import { Image } from "astro:assets";
 import { type SocialNetworksList } from "@/types/socialNetworksList.d";
 
 interface SocialNetworkListProps {
   socialNetworksList: SocialNetworksList;
+  orientation?: "horizontal" | "vertical";
+  loadingMode?: "eager" | "lazy";
 }
 
-const { socialNetworksList } = Astro.props as SocialNetworkListProps;
+const { socialNetworksList, orientation = "vertical", loadingMode = "eager" } =
+  Astro.props as SocialNetworkListProps;
+
+const containerClasses =
+  orientation === "horizontal"
+    ? "flex flex-row items-center justify-center gap-6"
+    : "flex flex-col items-center justify-center gap-6";
 ---
 
-<div class="flex flex-col items-center justify-center gap-6">
+<div class={containerClasses}>
   {
     socialNetworksList.map((socialNetwork) => {
       return (
         <a href={socialNetwork.url} target="_blank">
-          <img
-            src={socialNetwork.imageUrl.src}
-            alt={`${socialNetwork.name} logo`}            
+          <Image
+            src={socialNetwork.imageUrl}
+            alt={`${socialNetwork.name} logo`}
             class={`h-8 w-8 invert transition-transform duration-300 ease-in-out hover:scale-125 ${socialNetwork.class}`}
+            loading={loadingMode}
           />
         </a>
       );

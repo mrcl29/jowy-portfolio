@@ -5,7 +5,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { defaultLang, locales } from "@/../i18n.config";
 import { getI18nInfo } from "@/utils/i18n";
-import getTrackLinks from "@/utils/getTracksLinks";
+import { getShortSoundCloudTracksLinks } from "@/utils/getSoundCloudTracksLinks";
 import SoundCloudPlayer from "@/components/SoundCloudPlayer.astro";
 
 // Genera rutas estáticas: "/", "/en"
@@ -21,7 +21,7 @@ export function getStaticPaths() {
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
 const { producerPage } = dictionary;
 
-const tracksLinks = await getTrackLinks();
+const tracksLinks = await getShortSoundCloudTracksLinks();
 ---
 
 <BaseLayout

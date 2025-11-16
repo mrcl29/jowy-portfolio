@@ -3,17 +3,23 @@ import { djCutPhoto, soundCutPhoto, producerPhoto } from "../constants/photos"; 
 
 export default {
   djPage: {
-    title: "DJ",
-    description: "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
+    title: "DJ Jowy",
+    description:
+      "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
     heroSection: {
       heading: "¡Hola DJ!",
       description: "Explora mis sets y mezclas.",
     },
-    // Añade aquí otros textos específicos de la página DJ en español
+    bio: {
+      altImage: "DJ Jowy pinchando en una fiesta. Está mirando hacia abajo con los cascos puestos.",
+      title: "Biografía",
+      text: "Lorem ipsum dolor sit amet consectetur adipiscing elit, mauris odio sapien cubilia tellus sociosqu, quis proin iaculis auctor bibendum ligula. Feugiat diam ultrices proin commodo odio facilisis ac ornare sed, fermentum purus consequat ante laoreet primis lacus vivamus semper nascetur, viverra facilisi pulvinar potenti convallis sagittis ridiculus dictumst. Sapien phasellus luctus inceptos sem ultricies sollicitudin semper lacinia, libero mollis primis sociosqu tempus vestibulum aptent etiam nulla, risus nisl vel nunc urna vehicula suspendisse. Magna nunc tristique urna lobortis ultrices hac risus porta class, augue viverra montes fermentum diam orci habitant auctor conubia aliquet, sociosqu molestie pretium primis iaculis metus congue cras.",
+    },
   },
   producerPage: {
-    title: "Productor",
-    description: "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
+    title: "UGFLOWERS",
+    description:
+      "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
     heroSection: {
       heading: "¡Bienvenido a mi estudio!",
       description: "Descubre mi trabajo como productor musical.",
@@ -23,22 +29,26 @@ export default {
   common: {
     home: "Inicio",
     contact: "Contacto",
-    // Añade aquí textos comunes a varias páginas
+    footer: {
+      copyright: "Jowy. Todos los derechos reservados.",
+      privacyPolicy: "Política de privacidad",
+    },
   },
   indexPage: {
     title: "Inicio",
-    description: "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
+    description:
+      "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
     sections: [
       {
         image: djCutPhoto,
         title: "DJ Jowy",
         color: "#065f46",
         mask: "mask-fade-top-bottom-right translate-y-20 max-h-full",
-        link: "dj" // Usamos pathSegment en lugar de link completo
+        link: "dj", // Usamos pathSegment en lugar de link completo
       },
       {
         image: producerPhoto,
-        title: "Productor",
+        title: "UGFLOWERS",
         color: "#fde68a",
         mask: "-translate-y-25 px-10 max-h-[70%]",
         link: "producer", // Usamos pathSegment en lugar de link completo
@@ -54,4 +64,4 @@ export default {
 };
 
 // Exporta el tipo del diccionario para usarlo en TypeScript
-export type Dictionary = typeof import('./es').default;
+export type Dictionary = typeof import("./es").default;
