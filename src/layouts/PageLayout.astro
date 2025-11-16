@@ -3,12 +3,16 @@ import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { defaultLang } from "../../i18n.config";
 import { homeLightIcon, homeDarkIcon } from "@/constants/themeIcons";
+import { type SocialNetworksList } from "@/types/socialNetworksList";
+import SocialNetworksListComponent from "@/components/SocialNetworksList.astro";
 
 interface PageLayoutProps {
   title: string;
+  phrase?: string;
+  socialNetworksList?: SocialNetworksList;
 }
 
-const { title } = Astro.props as PageLayoutProps;
+const { title, phrase, socialNetworksList } = Astro.props as PageLayoutProps;
 
 const currentLang = Astro.currentLocale ? Astro.currentLocale : defaultLang;
 const homeUrl = getRelativeLocaleUrl(currentLang, "/");
@@ -19,16 +23,37 @@ const homeUrl = getRelativeLocaleUrl(currentLang, "/");
     id="nav-home-icon"
     src={homeDarkIcon}
     alt="Home Icon"
-    class="fixed top-4 left-5 h-[3vw] max-h-10 min-h-5 w-auto hover:scale-120 z-9999 transition duration-300 ease-in-out"
+    class="fixed top-4 left-5 z-9999 h-[3vw] max-h-10 min-h-5 w-auto transition duration-300 ease-in-out hover:scale-120"
     loading="eager"
     fetchpriority="high"
     format="png"
   />
 </a>
 
-<main class="mx-auto max-w-3xl px-6 py-12 ">
-  <h1 class="w-full flex justify-center align-middle text-5xl font-extrabold mb-1">{title}</h1>
-  <slot />
+{
+  socialNetworksList && (
+    <div class="fixed left-4 top-1/2 z-50 -translate-y-1/2">
+      <SocialNetworksListComponent socialNetworksList={socialNetworksList} />
+    </div>
+  )
+}
+
+<main class="mx-auto max-w-3xl px-6 py-12">
+  <h1
+    class="mb-15 flex w-full justify-center align-middle text-5xl font-extrabold"
+  >
+    {title}
+  </h1>
+  <div
+    class="y-center flex min-h-screen w-full flex-col items-center gap-8 overflow-y-auto align-middle"
+  >
+    {
+      phrase && (
+        <h2 class="flex w-full justify-center align-middle">{phrase}</h2>
+      )
+    }
+    <slot />
+  </div>
 </main>
 
 <script>

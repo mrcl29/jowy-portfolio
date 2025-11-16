@@ -5,6 +5,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { defaultLang, locales } from "@/../i18n.config";
 import { getI18nInfo } from "@/utils/i18n";
+import { djSocialNetworksList } from "@/constants/socialNetworksList";
+import SocialNetworksList from "@/components/SocialNetworksList.astro";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -25,9 +27,9 @@ const { djPage } = dictionary;
   lang={langParam}
   description={djPage.description}
 >
-  <PageLayout title={djPage.title}>
-    <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-row">
-      {djPage.heroSection.heading}
-    </div>
-  </PageLayout>
+  <PageLayout
+    title={djPage.title}
+    phrase={djPage.heroSection.heading}
+    socialNetworksList={djSocialNetworksList}
+  >hola</PageLayout>
 </BaseLayout>

@@ -1,0 +1,25 @@
+---
+import { type SocialNetworksList } from "@/types/socialNetworksList.d";
+
+interface SocialNetworkListProps {
+  socialNetworksList: SocialNetworksList;
+}
+
+const { socialNetworksList } = Astro.props as SocialNetworkListProps;
+---
+
+<div class="flex flex-col items-center justify-center gap-6">
+  {
+    socialNetworksList.map((socialNetwork) => {
+      return (
+        <a href={socialNetwork.url} target="_blank">
+          <img
+            src={socialNetwork.imageUrl.src}
+            alt={`${socialNetwork.name} logo`}            
+            class={`h-8 w-8 invert transition-transform duration-300 ease-in-out hover:scale-125 ${socialNetwork.class}`}
+          />
+        </a>
+      );
+    })
+  }
+</div>
