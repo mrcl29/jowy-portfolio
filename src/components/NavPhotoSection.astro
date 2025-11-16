@@ -1,5 +1,7 @@
 ---
 import NavPhoto from "./NavPhoto.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getI18nInfo } from "@/utils/i18n";
 
 interface NavPhotoSectionProps {
   image: any;
@@ -18,10 +20,12 @@ const {
   extraClass = "",
   link = Astro.url.pathname,
 } = Astro.props as NavPhotoSectionProps;
+
+const { langParam } = await getI18nInfo(Astro.params.locale);
 ---
 
 <a
-  href=`/${link}`
+  href={getRelativeLocaleUrl(langParam, `/${link}`)}
   class="bg-color-primary group relative flex h-[100dvh] w-full cursor-pointer flex-col overflow-hidden md:flex-1"
   style={`--section-color: ${color};`}
 >

@@ -69,14 +69,17 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
     <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
       <a href={homeUrl} class="hover:text-white">{dictionary.common.home}</a>
       {
-        indexPage.sections.map((section) => (
-          <a
-            href={getRelativeLocaleUrl(langParam, section.link)}
-            class="hover:text-white"
-          >
-            {section.title}
-          </a>
-        ))
+        indexPage.sections.map(
+          (section) =>
+            section.link && (
+              <a
+                href={getRelativeLocaleUrl(langParam, `/${section.link}`)}
+                class="hover:text-white"
+              >
+                {section.title}
+              </a>
+            )
+        )
       }
     </nav>
 
@@ -94,7 +97,10 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
 
   <!-- Copyright and Legal -->
   <div class="mt-8">
-    <p>&copy; {new Date().getFullYear()} {dictionary.common.footer.copyright}</p>
+    <p>
+      &copy; {new Date().getFullYear()}
+      {dictionary.common.footer.copyright}
+    </p>
     <div class="mt-2 flex flex-wrap justify-center gap-x-4">
       <a href={`mailto:${generalEmail}`} class="hover:text-white">
         {generalEmail}
