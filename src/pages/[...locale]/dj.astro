@@ -10,6 +10,9 @@ import { djSocialNetworksList } from "@/constants/socialNetworksList";
 import { djBio } from "@/constants/photos";
 import { getLongSoundCloudTracksLinks } from "@/utils/getSoundCloudTracksLinks";
 import SoundCloudPlayer from "@/components/SoundCloudPlayer.astro";
+import Calendar from "@/components/Calendar.astro";
+import { djGoogleCalendarSrc } from "@/constants/calendar";
+import Separador from "@/components/Separador.astro";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -37,72 +40,64 @@ const setsLinks = await getLongSoundCloudTracksLinks();
     phrase={djPage.heroSection.heading}
     socialNetworksList={djSocialNetworksList}
   >
-    <!-- Contenedor de la biografía: vertical en móvil, horizontal en pantallas medianas y grandes -->
-    <div
-      class="flex w-full flex-col items-center gap-8 md:flex-row md:items-stretch md:gap-5"
-    >
-      <!-- Contenedor del texto: define la altura -->
-      <div class="flex w-full flex-col md:w-1/2">
-        <h3 class="mb-4 text-2xl font-bold md:text-3xl">
+    <!-- Sección Biografía -->
+    <section class="w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <h3 class="flex-shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.bio.title}
         </h3>
-        <p class="text-justify text-base md:text-lg">
+        <Separador />
+      </div>
+      <div
+        class="flex w-full flex-col items-center gap-8 md:flex-row md:items-stretch md:gap-5"
+      >
+        <p class="w-full text-justify text-base md:w-1/2 md:text-lg">
           {djPage.bio.text}
         </p>
+        <div class="relative h-80 w-full md:h-auto md:w-1/2">
+          <Image
+            src={djBio}
+            alt={djPage.bio.altImage}
+            class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+            loading="eager"
+          />
+        </div>
       </div>
-      <!-- Contenedor de la imagen: se adapta a la altura del texto -->
-      <div class="relative w-full md:w-1/2">
-        <Image
-          src={djBio}
-          alt={djPage.bio.altImage}
-          class={`absolute h-full w-full rounded-lg object-cover object-top shadow-lg`}
-          loading="eager"
-        />
+    </section>
+
+    <!-- Sección Sets de SoundCloud -->
+    <section class="w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="flex-shrink-0 text-2xl font-bold md:text-3xl">
+          {djPage.sets.title}
+        </h3>
       </div>
-    </div>
+      <div class="flex h-auto w-full flex-col justify-center gap-5">
+        {
+          setsLinks?.map((link, index) => {
+            if (index === 0) {
+              return <SoundCloudPlayer trackUrl={link} />;
+            }
 
-    <div class="w-full h-auto flex flex-col justify-center gap-5">
-      {
-        setsLinks?.map((link) => {
-          return <SoundCloudPlayer trackUrl={link} />;
-        })
-      }
-    </div>
-<p>
-    4. Eventos (Calendario) ⭐ [Requisito]<br>
+            return <SoundCloudPlayer trackUrl={link} loading="lazy" />;
+          })
+        }
+      </div>
+    </section>
 
-Próximos Eventos: Una lista simple:<br>
-Fecha | Nombre del Evento | Lugar (Club, Ciudad) | [Enlace a Entradas]<br>
-Eventos Pasados (Destacados): Justo debajo de los próximos, una pequeña lista de "Gigs Anteriores Destacados" para mostrar tu experiencia.
-<br><br>
-5. Galería / Media (Elemento Conveniente)<br>
-
-Fotos de Actuación: Imágenes de alta calidad de tus eventos. Muestra al público, las luces, tu energía en la cabina.<br>
-Vídeos: Un "Sizzle Reel" o "Aftermovie" (un vídeo corto de 1-2 minutos con los mejores momentos de varias actuaciones) es increíblemente efectivo. Incrústalos desde YouTube o Vimeo.<br>
-<br><br>
-6. Press Kit & Rider (Elemento Conveniente SÚPER importante)<br>
-Descargar EPK (Electronic Press Kit): Un botón para descargar un archivo .zip o un PDF que contenga:<br>
-Tu biografía (corta y larga).<br>
-Tus fotos de prensa oficiales (alta resolución, varias opciones).<br>
-Tu logo (en .png con fondo transparente).<br>
-Enlaces a tus redes y música.<br>
-Technical Rider (Rider Técnico): Una lista clara del equipo que necesitas para pinchar (Ej: "3x Pioneer CDJ-3000, 1x Allen & Heath Xone:96"). Esto es fundamental para cualquier contratación seria.<br>
-<br><br>
-7. Contacto ⭐ [Requisito]<br>
-
-Formulario de Contacto: Simple (Nombre, Email, Asunto, Mensaje).<br>
-Email de Booking: Muestra un correo electrónico profesional (Ej: booking@tunombrededj.com).<br>
-
-<br><br> (Pie de Página)
-En la parte inferior de todas las páginas/secciones.
-
-Qué incluir:
-
-Enlaces rápidos (Inicio, Música, Contacto).
-
-Iconos de redes sociales (¡otra vez!).
-
-Copyright © [Año] [Tu Nombre de DJ]. Todos los derechos reservados.
-</p>
+    <!-- Sección Calendario -->
+    <section class="w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <h3 class="flex-shrink-0 text-2xl font-bold md:text-3xl">
+          {djPage.calendar.title}
+        </h3>
+        <Separador />
+      </div>
+      <Calendar
+        googleCalendarSrc={djGoogleCalendarSrc}
+        title={djPage.calendar.calendarTitle}
+      />
+    </section>
   </PageLayout>
 </BaseLayout>

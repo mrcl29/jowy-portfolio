@@ -1,0 +1,21 @@
+---
+interface CalendarProps {
+  googleCalendarSrc: string;
+  height?: string;
+  title: string;
+}
+
+const { googleCalendarSrc, height = "h-160", title } = Astro.props as CalendarProps;
+---
+
+<div id="calendar-wrapper" class="h-auto w-full overflow-hidden">
+  <div id="calendar">
+    <iframe
+      src=`https://calendar.google.com/calendar/embed?src=${googleCalendarSrc}&ctz=Europe/Madrid`
+      class=`border-10 rounded-lg border-[#F0F4F9] w-full ${height} overflow-y-hidden`
+      frameborder="0"
+      scrolling="no"
+      title={title}
+      loading="lazy"></iframe>
+  </div>
+</div>

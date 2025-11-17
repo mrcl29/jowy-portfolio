@@ -15,6 +15,13 @@ export default {
       title: "Biografía",
       text: "Lorem ipsum dolor sit amet consectetur adipiscing elit, mauris odio sapien cubilia tellus sociosqu, quis proin iaculis auctor bibendum ligula. Feugiat diam ultrices proin commodo odio facilisis ac ornare sed, fermentum purus consequat ante laoreet primis lacus vivamus semper nascetur, viverra facilisi pulvinar potenti convallis sagittis ridiculus dictumst. Sapien phasellus luctus inceptos sem ultricies sollicitudin semper lacinia, libero mollis primis sociosqu tempus vestibulum aptent etiam nulla, risus nisl vel nunc urna vehicula suspendisse. Magna nunc tristique urna lobortis ultrices hac risus porta class, augue viverra montes fermentum diam orci habitant auctor conubia aliquet, sociosqu molestie pretium primis iaculis metus congue cras.",
     },
+    sets: {
+      title: "Mis Sets",
+    },
+    calendar: {
+      title: "Próximas Fechas",
+      calendarTitle: "Calendario con los próximos eventos donde el DJ va a tocar."
+    },
   },
   producerPage: {
     title: "UGFLOWERS",

@@ -1,15 +1,17 @@
 ---
 // Define las propiedades (props) que aceptará el componente.
-interface Props {
+interface SoundCloudPlayerProps {
   // La URL pública de la pista de SoundCloud (ej: 'https://soundcloud.com/user/track-name').
   trackUrl: string;
   // Altura del reproductor (por defecto, 166px es estándar para la versión compacta).
   height?: string;
   // Ancho del reproductor (por defecto, 100% para ser responsivo).
   width?: string;
+
+  loading?: "lazy" | "eager";
 }
 
-const { trackUrl, height = "166", width = "100%" } = Astro.props;
+const { trackUrl, height = "166", width = "100%", loading="eager" } = Astro.props as SoundCloudPlayerProps;
 
 // Codificamos la URL de la pista para asegurar que es segura para el parámetro 'url'.
 const encodedUrl = encodeURIComponent(trackUrl);
@@ -55,6 +57,7 @@ const srcUrl = `https://w.soundcloud.com/player/?url=${encodedUrl}&amp;${querySt
     src={srcUrl}
     title={`SoundCloud Player for ${trackUrl}`}
     class="block border-none"
+    loading={loading}
   >
   </iframe>
 </div>

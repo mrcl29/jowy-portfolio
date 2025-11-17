@@ -1,0 +1,1 @@
+export const djGoogleCalendarSrc = import.meta.env.GOOGLE_CALENDAR_SRC;
