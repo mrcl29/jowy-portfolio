@@ -6,6 +6,7 @@ import { homeLightIcon, homeDarkIcon } from "@/constants/themeIcons";
 import { type SocialNetworksList } from "@/types/socialNetworksList";
 import SocialNetworksListComponent from "@/components/SocialNetworksList.astro";
 import { generalEmail } from "@/constants/email";
+import Modal from "@/components/Modal.astro";
 
 interface PageLayoutProps {
   title: string;
@@ -48,13 +49,16 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
     {title}
   </h1>
   <div
-    class="y-center flex min-h-screen w-full flex-col items-center gap-8 overflow-y-auto align-middle overflow-hidden"
+    class="y-center flex min-h-screen w-full flex-col items-center gap-8 overflow-hidden overflow-y-auto align-middle"
   >
     {
       phrase && (
         <h2 class="flex w-full justify-center align-middle italic">{phrase}</h2>
       )
     }
+    <Modal buttonTitle="Contacto" modalTitle="Formulario de Contacto"
+      >Hola</Modal
+    >
     <slot />
   </div>
 </main>

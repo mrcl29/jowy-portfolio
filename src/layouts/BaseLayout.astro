@@ -2,7 +2,7 @@
 // scr/layout/BaseLayout.astro
 import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
-import ThemeButton from "@/components/ThemeButton.astro";
+// import ThemeButton from "@/components/ThemeButton.astro";
 import LangSwitcher from "@/components/LangSwitcher.astro";
 import { defaultLang } from "../../i18n.config";
 import { djCutPhoto, soundCutPhoto, producerPhoto } from "@/constants/photos";
@@ -82,7 +82,7 @@ const {
     <ClientRouter />
   </head>
   <body
-    class=" font-sans bg-primary-dark text-text-dark transition-colors duration-500 ease-in-out overflow-y-auto 
+    class="font-sans bg-primary-dark text-text-dark transition-colors duration-500 ease-in-out overflow-y-auto 
   [&::-webkit-scrollbar]:w-2 
   [&::-webkit-scrollbar-track]:m-2
   [&::-webkit-scrollbar-track]:rounded-full 
