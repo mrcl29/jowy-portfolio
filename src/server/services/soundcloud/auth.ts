@@ -9,7 +9,7 @@ import {
   soundCloudClientSecret,
   soundCloudAuthorization,
 } from "@/server/constants";
-import { getFromCache, setInCache } from "./cache";
+import { getFromCache, setInCache } from "../cache";
 
 const TOKEN_CACHE_KEY = "soundcloud_token";
 

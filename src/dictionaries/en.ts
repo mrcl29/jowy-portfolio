@@ -36,6 +36,7 @@ export default {
   common: {
     home: "Home",
     contact: "Contact",
+    modalTitle: "Contact Form",
     footer: {
       copyright: "Jowy. All rights reserved.",
       privacyPolicy: "Privacy Policy",

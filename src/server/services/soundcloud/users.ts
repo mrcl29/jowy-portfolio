@@ -2,7 +2,7 @@
 import { baseFetcher } from "@/lib/BaseFetcher";
 import type { SoundCloudUser } from "@/types/soundcloud/user.d";
 import { getSoundCloudToken } from "./auth";
-import { getFromCache, setInCache } from "./cache";
+import { getFromCache, setInCache } from "../cache";
 
 const USER_CACHE_DURATION_SECONDS = 3600; // 1 hora
 

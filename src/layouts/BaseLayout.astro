@@ -21,11 +21,7 @@ const {
 ---
 
 <!doctype html>
-<html
-  lang={lang}
-  class="scroll-smooth"
-  transition:animate="none"
->
+<html lang={lang} class="scroll-smooth" transition:animate="none">
   <head>
     <SEO
       title=`${title} | Jowy Portfolio`
@@ -82,20 +78,13 @@ const {
     <ClientRouter />
   </head>
   <body
-    class="font-sans bg-primary-dark text-text-dark transition-colors duration-500 ease-in-out overflow-y-auto 
-  [&::-webkit-scrollbar]:w-2 
-  [&::-webkit-scrollbar-track]:m-2
-  [&::-webkit-scrollbar-track]:rounded-full 
-  [&::-webkit-scrollbar-track]:bg-gray-100 
-  [&::-webkit-scrollbar-thumb]:rounded-full 
-  [&::-webkit-scrollbar-thumb]:bg-gray-300 
-  dark:[&::-webkit-scrollbar-track]:bg-neutral-700 
-  dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500"
+    class="overflow-y-auto bg-primary-dark font-sans text-text-dark transition-colors duration-500 ease-in-out [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:m-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-neutral-700"
     transition:animate="fade"
   >
     <!-- <ThemeButton /> -->
-    <LangSwitcher currentLang={lang} />
-
+    <div class="fixed top-5 right-5 pt-[1dvh] flex flex-row justify-center align-middle gap-8 z-9999">
+      <LangSwitcher currentLang={lang} />
+    </div>
     <slot />
   </body>
 </html>

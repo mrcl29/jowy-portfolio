@@ -5,8 +5,9 @@ import { getI18nInfo } from "@/utils/i18n";
 import { homeLightIcon, homeDarkIcon } from "@/constants/themeIcons";
 import { type SocialNetworksList } from "@/types/socialNetworksList";
 import SocialNetworksListComponent from "@/components/SocialNetworksList.astro";
-import { generalEmail } from "@/constants/email";
-import Modal from "@/components/Modal.astro";
+import { generalEmail, djEmail } from "@/constants/email";
+import Mail from "@/components/Mail.astro";
+// import Modal from "@/components/Modal.astro";
 
 interface PageLayoutProps {
   title: string;
@@ -51,14 +52,21 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
   <div
     class="y-center flex min-h-screen w-full flex-col items-center gap-8 overflow-hidden overflow-y-auto align-middle"
   >
-    {
-      phrase && (
-        <h2 class="flex w-full justify-center align-middle italic">{phrase}</h2>
-      )
-    }
-    <Modal buttonTitle="Contacto" modalTitle="Formulario de Contacto"
-      >Hola</Modal
+    <div
+      class="flex w-[80%] flex-row items-center justify-between gap-20 overflow-visible pt-3 align-middle"
     >
+      {
+        phrase && (
+          <h2 class="flex justify-center align-middle italic">{phrase}</h2>
+        )
+      }
+      <!-- <Modal buttonTitle={dictionary.common.contact} modalTitle={dictionary.common.modalTitle}
+        >
+    <div class="flex items-center justify-center align-middle text-xl">{djEmail}</div>
+        </Modal
+      > -->
+      <Mail email={djEmail} />
+    </div>
     <slot />
   </div>
 </main>
