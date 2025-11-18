@@ -10,21 +10,23 @@ export async function getPlaylist(
   playlistId: string,
   maxResults = 50,
   part = "contentDetails,snippet,status"
-): Promise<YouTubePlaylistItemResponse[] | null> {
+): Promise<YouTubePlaylistItemResponse | null> {
   console.log("---------- getPlaylist ----------");
   try {
     // 1. Comprobar la caché para la lista
     const cacheKey = `youtube_playlist_${playlistId}_maxresults${maxResults}_part${part}`;
     const cachedPlaylists =
-      getFromCache<YouTubePlaylistItemResponse[]>(cacheKey);
+      getFromCache<YouTubePlaylistItemResponse>(cacheKey);
     if (cachedPlaylists) {
       return cachedPlaylists;
     }
 
     // 2. Si no está en caché, obtener la información de la playtlist
-    const tracksURL = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${playlistId}maxResults=${maxResults}&part=${part}&key=${youtubeApiKey}`;
+    const tracksURL = `https://www.googleapis.com/youtube/v3/playlistItems?playlistId=${playlistId}&maxResults=${maxResults}&part=${part}&key=${youtubeApiKey}`;
 
-    const res = await baseFetcher<YouTubePlaylistItemResponse[]>(tracksURL, {
+    console.log(tracksURL)
+
+    const res = await baseFetcher<YouTubePlaylistItemResponse>(tracksURL, {
       headers: {
         accept: "application/json",
       },

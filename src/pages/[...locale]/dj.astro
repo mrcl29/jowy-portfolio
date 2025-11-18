@@ -13,6 +13,8 @@ import SoundCloudPlayer from "@/components/SoundCloudPlayer.astro";
 import Calendar from "@/components/Calendar.astro";
 import { djGoogleCalendarSrc } from "@/constants/calendar";
 import Separador from "@/components/Separador.astro";
+import { getYoutubeSetsInfo } from "@/utils/getYoutubeVideosInfo";
+import YouTubePlayer from "@/components/YouTubePlayer.astro";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -28,6 +30,7 @@ const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
 const { djPage } = dictionary;
 
 const setsLinks = await getLongSoundCloudTracksLinks();
+const youTubeSetsInfo = await getYoutubeSetsInfo();
 ---
 
 <BaseLayout
@@ -81,6 +84,14 @@ const setsLinks = await getLongSoundCloudTracksLinks();
             }
 
             return <SoundCloudPlayer trackUrl={link} loading="lazy" />;
+          })
+        }
+
+        {
+          youTubeSetsInfo?.map((setInfo) => {
+            return (
+              <YouTubePlayer title={setInfo.title} videoId={setInfo.videoId} />
+            );
           })
         }
       </div>
