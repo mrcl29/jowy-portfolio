@@ -11,7 +11,12 @@ interface SoundCloudPlayerProps {
   loading?: "lazy" | "eager";
 }
 
-const { trackUrl, height = "166", width = "100%", loading="eager" } = Astro.props as SoundCloudPlayerProps;
+const {
+  trackUrl,
+  height = "166",
+  width = "100%",
+  loading = "eager",
+} = Astro.props as SoundCloudPlayerProps;
 
 // Codificamos la URL de la pista para asegurar que es segura para el parámetro 'url'.
 const encodedUrl = encodeURIComponent(trackUrl);

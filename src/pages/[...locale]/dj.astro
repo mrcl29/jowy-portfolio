@@ -15,6 +15,7 @@ import { djGoogleCalendarSrc } from "@/constants/calendar";
 import Separador from "@/components/Separador.astro";
 import { getYoutubeSetsInfo } from "@/utils/getYoutubeVideosInfo";
 import YouTubePlayer from "@/components/YouTubePlayer.astro";
+import Carousel from "@/components/Carousel.astro";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -77,23 +78,20 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
         </h3>
       </div>
       <div class="flex h-auto w-full flex-col justify-center gap-5">
-        {
-          setsLinks?.map((link, index) => {
-            if (index === 0) {
-              return <SoundCloudPlayer trackUrl={link} />;
-            }
-
-            return <SoundCloudPlayer trackUrl={link} loading="lazy" />;
-          })
-        }
-
-        {
-          youTubeSetsInfo?.map((setInfo) => {
-            return (
+        <Carousel>
+          <!-- Mapeo de YouTube -->
+          {
+            youTubeSetsInfo?.map((setInfo) => (
               <YouTubePlayer title={setInfo.title} videoId={setInfo.videoId} />
-            );
-          })
-        }
+            ))
+          }
+          <!-- Mapeo de SoundCloud -->
+          {
+            setsLinks?.map((link) => (
+              <SoundCloudPlayer trackUrl={link} />
+            ))
+          }
+        </Carousel>
       </div>
     </section>
 

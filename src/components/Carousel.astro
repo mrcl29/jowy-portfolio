@@ -1,0 +1,156 @@
+---
+// src/components/SetsCarousel.astro
+import { arrowLeft, arrowRight } from "@/constants/icons";
+import { Image } from "astro:assets";
+---
+
+<div id="sets-carousel" class="relative w-full px-16">
+  <!-- Contenedor principal con overflow hidden para recortar el slider -->
+  <div class="overflow-hidden rounded-lg">
+    <!-- Slider que se moverá horizontalmente -->
+    <div class="flex items-center">
+      <slot />
+    </div>
+  </div>
+
+  <!-- Botones de Navegación -->
+  <button
+    id="prev-btn"
+    class="absolute top-1/2 left-2 -translate-y-1/2 transform cursor-pointer rounded-full bg-black/50 p-2 text-white transition-transform duration-300 hover:scale-125 disabled:cursor-not-allowed disabled:opacity-20"
+    aria-label="Set anterior"
+  >
+    <Image
+      src={arrowLeft}
+      id="arrow-left-icon"
+      alt="Arrow Left Icon"
+      class="max-w-8 invert"
+      loading="lazy"
+      fetchpriority="high"
+      format="svg"
+    />
+  </button>
+  <button
+    id="next-btn"
+    class="absolute top-1/2 right-2 -translate-y-1/2 transform cursor-pointer rounded-full bg-black/50 p-2 text-white transition-transform duration-300 hover:scale-125 disabled:cursor-not-allowed disabled:opacity-20"
+    aria-label="Siguiente set"
+  >
+    <Image
+      src={arrowRight}
+      id="arrow-right-icon"
+      alt="Arrow Right Icon"
+      class="max-w-8 invert"
+      loading="lazy"
+      fetchpriority="high"
+      format="svg"
+    />
+  </button>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  document.addEventListener("astro:page-load", () => {
+    const carousel = document.querySelector("#sets-carousel");
+    if (!carousel) return;
+
+    const slider = carousel.querySelector<HTMLElement>(".flex");
+    const nextBtn = carousel.querySelector<HTMLButtonElement>("#next-btn");
+    const prevBtn = carousel.querySelector<HTMLButtonElement>("#prev-btn");
+
+    if (slider) {
+      // Envolvemos cada elemento del slot en el div necesario para el carrusel.
+      Array.from(slider.children).forEach((child) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "carousel-item w-full shrink-0";
+        child.parentNode!.insertBefore(wrapper, child);
+        wrapper.appendChild(child);
+      });
+    }
+
+    const items = carousel.querySelectorAll<HTMLElement>(".carousel-item");
+
+    if (!slider || items.length <= 1 || !nextBtn || !prevBtn) {
+      if (nextBtn) nextBtn.style.display = "none";
+      if (prevBtn) prevBtn.style.display = "none";
+      return;
+    }
+
+    // --- Lógica del carrusel infinito ---
+    const realTotalItems = items.length;
+    const firstClone = items[0].cloneNode(true) as HTMLElement;
+    const lastClone = items[realTotalItems - 1].cloneNode(true) as HTMLElement;
+
+    slider.appendChild(firstClone);
+    slider.prepend(lastClone);
+
+    // El índice ahora se refiere a la posición en el slider modificado (con clones)
+    let currentIndex = 1; // Empezamos en el primer elemento REAL
+    gsap.set(slider, { x: `-${currentIndex * 100}%` });
+
+    let autoplayInterval: number;
+    const AUTOPLAY_DELAY = 5000; // 5 segundos
+    let isAnimating = false; // Flag para evitar clics múltiples durante la animación
+
+    function updateButtons() {
+      prevBtn!.disabled = false;
+      nextBtn!.disabled = false;
+    }
+
+    function goToSlide(index: number) {
+      if (isAnimating) return;
+      isAnimating = true;
+      currentIndex = index;
+
+      gsap.to(slider, {
+        x: `-${currentIndex * 100}%`,
+        duration: 0.5,
+        ease: "power2.inOut",
+        onComplete: () => {
+          // Si hemos llegado al clon del primer elemento (al final)
+          if (currentIndex === realTotalItems + 1) {
+            currentIndex = 1; // Saltamos al primer elemento real
+            gsap.set(slider, { x: `-${currentIndex * 100}%` });
+          }
+          // Si hemos llegado al clon del último elemento (al principio)
+          if (currentIndex === 0) {
+            currentIndex = realTotalItems; // Saltamos al último elemento real
+            gsap.set(slider, { x: `-${currentIndex * 100}%` });
+          }
+          isAnimating = false;
+        },
+      });
+    }
+
+    function startAutoplay() {
+      stopAutoplay();
+      autoplayInterval = window.setInterval(() => {
+        goToSlide(currentIndex + 1);
+      }, AUTOPLAY_DELAY);
+    }
+
+    function stopAutoplay() {
+      window.clearInterval(autoplayInterval);
+    }
+
+    nextBtn.addEventListener("click", () => {
+      goToSlide(currentIndex + 1);
+      // No es necesario reiniciar el autoplay aquí,
+      // el mouseleave/mouseenter lo gestionará.
+    });
+
+    prevBtn.addEventListener("click", () => {
+      goToSlide(currentIndex - 1);
+    });
+
+    carousel.addEventListener("mouseenter", () => {
+      stopAutoplay();
+    });
+
+    carousel.addEventListener("mouseleave", () => {
+      startAutoplay();
+    });
+
+    updateButtons();
+    startAutoplay();
+  });
+</script>
