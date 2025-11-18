@@ -34,9 +34,7 @@ export default {
     // Añade aquí otros textos específicos de la página Producer en español
   },
   common: {
-    home: "Inicio",
-    contact: "Contacto",
-    modalTitle: "Contact Form",
+    creator: "Hecho por mrcl29:",
     footer: {
       copyright: "Jowy. Todos los derechos reservados.",
       privacyPolicy: "Política de privacidad",

@@ -34,9 +34,7 @@ export default {
     },
   },
   common: {
-    home: "Home",
-    contact: "Contact",
-    modalTitle: "Contact Form",
+    creator: "Made by mrcl29:",
     footer: {
       copyright: "Jowy. All rights reserved.",
       privacyPolicy: "Privacy Policy",
