@@ -6,6 +6,8 @@ import { ClientRouter } from "astro:transitions";
 import LangSwitcher from "@/components/LangSwitcher.astro";
 import { defaultLang } from "../../i18n.config";
 import { djCutPhoto, soundCutPhoto, producerPhoto } from "@/constants/photos";
+import Mail from "@/components/Mail.astro";
+import { djEmail } from "@/constants/email";
 
 interface BaseLayoutProps {
   title?: string;
@@ -82,7 +84,10 @@ const {
     transition:animate="fade"
   >
     <!-- <ThemeButton /> -->
-    <div class="fixed top-5 right-5 pt-[1dvh] flex flex-row justify-center align-middle gap-8 z-9999">
+    <div
+      class="fixed top-5 right-5 z-9999 flex flex-row justify-center gap-8 pt-[1dvh] align-middle"
+    >
+      <Mail email={djEmail} />
       <LangSwitcher currentLang={lang} />
     </div>
     <slot />

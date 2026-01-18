@@ -16,6 +16,7 @@ import Separador from "@/components/Separador.astro";
 import { getYoutubeSetsInfo } from "@/utils/getYoutubeVideosInfo";
 import YouTubePlayer from "@/components/YouTubePlayer.astro";
 import Carousel from "@/components/Carousel.astro";
+import { djEmail } from "@/constants/email";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -44,30 +45,16 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     phrase={djPage.heroSection.heading}
     socialNetworksList={djSocialNetworksList}
   >
-    <!-- Sección Biografía -->
-    <section class="w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
-          {djPage.bio.title}
-        </h3>
-        <Separador />
+    <div class="mb-4 flex w-full items-center gap-4">
+      <div class="relative h-150 w-full md:h-150">
+        <Image
+          src={djBio}
+          alt={djPage.bio.altImage}
+          class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+          loading="eager"
+        />
       </div>
-      <div
-        class="flex w-full flex-col items-center gap-8 md:flex-row md:items-stretch md:gap-5"
-      >
-        <p class="w-full text-justify text-base md:w-1/2 md:text-lg">
-          {djPage.bio.text}
-        </p>
-        <div class="relative h-80 w-full md:h-auto md:w-1/2">
-          <Image
-            src={djBio}
-            alt={djPage.bio.altImage}
-            class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
-            loading="eager"
-          />
-        </div>
-      </div>
-    </section>
+    </div>
 
     <!-- Sección Sets de SoundCloud -->
     <section class="w-full">
@@ -76,6 +63,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
         <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.sets.title}
         </h3>
+        <Separador />
       </div>
       <div class="flex h-auto w-full flex-col justify-center gap-5">
         <Carousel>
@@ -86,11 +74,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
             ))
           }
           <!-- Mapeo de SoundCloud -->
-          {
-            setsLinks?.map((link) => (
-              <SoundCloudPlayer trackUrl={link} />
-            ))
-          }
+          {setsLinks?.map((link) => <SoundCloudPlayer trackUrl={link} />)}
         </Carousel>
       </div>
     </section>
@@ -98,6 +82,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     <!-- Sección Calendario -->
     <section class="w-full">
       <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
         <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.calendar.title}
         </h3>
@@ -107,6 +92,28 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
         googleCalendarSrc={djGoogleCalendarSrc}
         title={djPage.calendar.calendarTitle}
       />
+    </section>
+
+    <!-- Sección About -->
+    <section class="w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {djPage.bio.title}
+        </h3>
+        <Separador />
+      </div>
+      <div class="flex w-full flex-col items-center gap-8">
+        <p class="w-full text-justify text-base md:text-lg">
+          {djPage.bio.text}
+        </p>
+      </div>
+      <div class="flex w-full flex-col items-center gap-8">
+        <h3 class="shrink-0 text-2xl font-bold md:text-xl">Contacto</h3>
+        <p class="w-full text-justify text-base md:text-lg">
+          {djEmail}
+        </p>
+      </div>
     </section>
 
     <p>

@@ -5,8 +5,7 @@ import { getI18nInfo } from "@/utils/i18n";
 import { homeLightIcon, homeDarkIcon } from "@/constants/icons";
 import { type SocialNetworksList } from "@/types/socialNetworksList";
 import SocialNetworksListComponent from "@/components/SocialNetworksList.astro";
-import { generalEmail, djEmail } from "@/constants/email";
-import Mail from "@/components/Mail.astro";
+import { djEmail } from "@/constants/email";
 import { creatorNetworkList } from "@/constants/socialNetworksList";
 // import Modal from "@/components/Modal.astro";
 
@@ -44,7 +43,7 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
   )
 }
 
-<main class="mx-auto max-w-7xl px-20 py-12">
+<main class="mx-auto max-w-5xl px-20 py-12">
   <h1
     class="mb-15 flex w-full justify-center align-middle text-6xl font-extrabold"
   >
@@ -54,14 +53,15 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
     class="y-center flex min-h-screen w-full flex-col items-center gap-8 overflow-hidden overflow-y-auto align-middle"
   >
     <div
-      class="flex w-[80%] flex-col items-center gap-6 pt-3 md:flex-row md:justify-between md:gap-5"
+      class="flex w-[80%] flex-col items-center gap-6 pt-3 md:justify-between md:gap-5"
     >
       {
         phrase && (
-          <h2 class="flex justify-center text-center italic">{phrase}</h2>
+          <h2 class="flex justify-center text-center text-xl italic">
+            {phrase}
+          </h2>
         )
       }
-      <Mail email={djEmail} />
     </div>
     <slot />
   </div>
@@ -89,10 +89,13 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
             )
         )
       }
+      {djEmail}
     </nav>
 
     <!-- Social Networks -->
-    <div class="flex flex-row items-center justify-end align-middle text-center gap-4">
+    <div
+      class="flex flex-row items-center justify-end gap-4 text-center align-middle"
+    >
       {dictionary.common.creator}
       {
         socialNetworksList && (
@@ -113,8 +116,8 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
       {dictionary.common.footer.copyright}
     </p>
     <div class="mt-2 flex flex-wrap justify-center gap-x-4">
-      <a href={`mailto:${generalEmail}`} class="hover:text-white">
-        {generalEmail}
+      <a href={`mailto:${{ djEmail }}`} class="hover:text-white">
+        {djEmail}
       </a>
       <!-- <span class="text-gray-500">|</span>
       <a href="#" class="hover:text-white">
