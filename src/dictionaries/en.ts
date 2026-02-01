@@ -1,6 +1,7 @@
 // src/dictionaries/en.ts
 import { title } from "framer-motion/client";
 import { djCutPhoto, soundCutPhoto, producerPhoto } from "../constants/photos"; // Asumiendo que las fotos están aquí
+import { colabIcon, mezclaIcon, masteringIcon } from "@/constants/icons";
 
 export default {
   djPage: {
@@ -15,10 +16,10 @@ export default {
       text: "I'm Jowy, a DJ specializing in house and techno, and my goal in every set is simple: that you come to feel the music and don't stop dancing. Only good people dance house music.",
     },
     sets: {
-      title: "My DJ Sets",
+      title: "MY DJ SETS",
     },
     calendar: {
-      title: "Next Gigs",
+      title: "NEXT GIGS",
       calendarTitle:
         "Calendar of the Next Events where the DJ is going to play.",
     },
@@ -27,7 +28,30 @@ export default {
     title: "JOWY",
     description:
       "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",
-    heading: "YOU ARE HOUSED",
+    heading: "FEEL THE SOUND",
+    discography: {
+      title: "DISCOGRAPHY",
+    },
+    services: {
+      title: "SERVICES",
+      list: [
+        {
+          image: colabIcon,
+          name: "Colab",
+        },
+        {
+          image: mezclaIcon,
+          name: "Mixing",
+        },
+        {
+          image: masteringIcon,
+          name: "Mastering",
+        },
+      ],
+    },
+    store: {
+      title: "STORE",
+    },
     bio: {
       altImage:
         "DJ Jowy playing in a gig. He is looking down with the headsets on.",

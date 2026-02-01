@@ -9,6 +9,10 @@ interface SoundCloudPlayerProps {
   width?: string;
 
   loading?: "lazy" | "eager";
+
+  buying: "true" | "false"; // Show/Hide buy buttons
+  sharing: "true" | "false"; // Show/Hide share buttons
+  download: "true" | "false";
 }
 
 const {
@@ -16,6 +20,9 @@ const {
   height = "166",
   width = "100%",
   loading = "eager",
+  buying = "false", // Show/Hide buy buttons
+  sharing = "false", // Show/Hide share buttons
+  download = "false", // Show/Hide download buttons
 } = Astro.props as SoundCloudPlayerProps;
 
 // Codificamos la URL de la pista para asegurar que es segura para el parámetro 'url'.
@@ -32,9 +39,9 @@ const playerParams = {
   show_reposts: "false",
   show_teaser: "true",
   visual: "false", // 'true' para la versión grande/visual
-  buying: "true", // Show/Hide buy buttons
-  sharing: "true", // Show/Hide share buttons
-  download: "true", // Show/Hide download buttons
+  buying: buying, // Show/Hide buy buttons
+  sharing: sharing, // Show/Hide share buttons
+  download: download, // Show/Hide download buttons
   show_artwork: "true", // 	Show/Hide the item’s artwork
   show_playcount: "true", // 	Show/Hide number of track plays
   single_active: "false", // If set to false the multiple players on the page won’t toggle each other off when playing

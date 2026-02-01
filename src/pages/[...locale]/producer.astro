@@ -1,12 +1,17 @@
 ---
 // src/pages/[...locale]/producer.astro
 import "@/styles/global.css";
+import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { defaultLang, locales } from "@/../i18n.config";
 import { getI18nInfo } from "@/utils/i18n";
 import { getShortSoundCloudTracksLinks } from "@/utils/getSoundCloudTracksLinks";
 import SoundCloudPlayer from "@/components/SoundCloudPlayer.astro";
+import { producerSocialNetworksList } from "@/constants/socialNetworksList";
+import { djEmail } from "@/constants/email";
+import Separador from "@/components/Separador.astro";
+import { djBio } from "@/constants/photos";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -19,7 +24,7 @@ export function getStaticPaths() {
 }
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
-const { producerPage } = dictionary;
+const { producerPage, common, djPage } = dictionary;
 
 const tracksLinks = await getShortSoundCloudTracksLinks();
 ---
@@ -29,24 +34,116 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
   lang={langParam}
   description={producerPage.description}
 >
-  <PageLayout title={producerPage.title} phrase={producerPage.heading}>
-    <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-col">
-      <h1>{producerPage.heading}</h1>
-      {
-        tracksLinks?.map((link) => {
-          return <SoundCloudPlayer trackUrl={link} />;
-        })
-      }
+  <PageLayout
+    title={producerPage.title}
+    phrase={producerPage.heading}
+    socialNetworksList={producerSocialNetworksList}
+  >
+    <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
+      <div class="relative h-150 w-full md:h-150">
+        <Image
+          src={djBio}
+          alt={djPage.bio.altImage}
+          class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+          loading="eager"
+        />
+      </div>
     </div>
 
-    <!-- Inicio: (Foto impactante + Frase ganadora").
+    <section class="animate-on-scroll w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {producerPage.discography.title}
+        </h3>
+        <Separador />
+      </div>
+      <div class="mt-5 grid w-full grid-cols-1 gap-8 md:grid-cols-2">
+        {
+          tracksLinks?.slice(0, 6).map((link) => {
+            return (
+              <SoundCloudPlayer
+                trackUrl={link}
+                buying="false"
+                sharing="true"
+                download="true"
+                loading="lazy"
+              />
+            );
+          })
+        }
+        <!-- TODO: Implementar las canciones de spotify -->
+      </div>
+    </section>
 
-Discografía: (Sus mejores trabajos).
+    <section class="animate-on-scroll w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {producerPage.services.title}
+        </h3>
+        <Separador />
+      </div>
+      <div
+        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
+      >
+        {
+          producerPage.services.list?.map((serviceInfo) => (
+            <div class="flex flex-col items-center gap-4 text-center">
+              <Image
+                src={serviceInfo.image}
+                alt={serviceInfo.name}
+                class="h-24 w-24 invert transition-transform duration-300 hover:scale-110"
+              />
+              <span class="text-xl font-semibold">{serviceInfo.name}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
 
-Servicios: (Qué ofrece y, opcionalmente, el "Antes y Después").
+    <section class="animate-on-scroll w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {producerPage.store.title}
+        </h3>
+        <Separador />
+      </div>
+      <div
+        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
+      >
+        <!-- TODO: Implementar tienda -->
+        🏗️ Coming soon...
+      </div>
+    </section>
 
-Tienda / Beats: (Venta directa).
-
-Bio: (Su historia). -->
+    <section class="animate-on-scroll w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {producerPage.bio.title}
+        </h3>
+        <Separador />
+      </div>
+      <div class="flex w-full flex-col items-center gap-8">
+        <p class="w-full text-justify text-base md:text-lg">
+          {producerPage.bio.text}
+        </p>
+      </div>
+      <div class="mt-10 flex w-full items-center justify-center gap-8">
+        <p class="w-full text-center text-base md:text-lg">
+          {common.contactMe}
+          <span class="font-bold">{djEmail}</span>
+        </p>
+      </div>
+    </section>
   </PageLayout>
 </BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/utils/animations";
+  // Ejecutamos la función en el evento 'astro:page-load'
+  // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
+  document.addEventListener("astro:page-load", initScrollAnimations);
+</script>

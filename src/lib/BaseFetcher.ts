@@ -1,12 +1,12 @@
 // src/lib/BaseFetcher.ts
-import { ApiError, NetworkError } from './ErrorTypes';
+import { ApiError, NetworkError } from "./ErrorTypes";
 
 /** * Opciones extendidas para el fetcher base.
  * Añade una propiedad para incluir headers comunes de forma sencilla.
  */
 interface FetcherOptions extends RequestInit {
   // Define headers por defecto si no son proporcionados
-  headers?: Record<string, string>; 
+  headers?: Record<string, string>;
 }
 
 /**
@@ -21,11 +21,7 @@ export async function baseFetcher<T>(
   url: string,
   options: FetcherOptions = {}
 ): Promise<T> {
-
   try {
-    console.log({
-      ...options,
-    })
     const response = await fetch(url, {
       ...options,
     });
@@ -33,12 +29,12 @@ export async function baseFetcher<T>(
     // 2. Manejo de Respuestas con Status OK (200-299)
     if (response.ok) {
       // Intenta parsear el JSON. Si la respuesta es 204 (No Content), devuelve un objeto vacío o null
-      const contentType = response.headers.get('content-type');
-      if (contentType && contentType.includes('application/json')) {
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
         return (await response.json()) as T;
       }
       // Útil para llamadas DELETE o PUT sin cuerpo de respuesta
-      return null as T; 
+      return null as T;
     }
 
     // 3. Manejo de Errores HTTP (4xx y 5xx)
@@ -58,7 +54,6 @@ export async function baseFetcher<T>(
 
     // Lanza el error de la API con el status code
     throw new ApiError(errorMessage, response.status);
-
   } catch (error) {
     // 4. Manejo de Errores de Red
     if (error instanceof ApiError) {
