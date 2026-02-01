@@ -45,7 +45,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     phrase={djPage.heading}
     socialNetworksList={djSocialNetworksList}
   >
-    <div class="mb-4 flex w-full items-center gap-4">
+    <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
       <div class="relative h-150 w-full md:h-150">
         <Image
           src={djBio}
@@ -56,8 +56,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
       </div>
     </div>
 
-    <!-- Sección Sets de SoundCloud -->
-    <section class="w-full">
+    <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
         <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
@@ -67,20 +66,21 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
       </div>
       <div class="flex h-auto w-full flex-col justify-center gap-5">
         <Carousel>
-          <!-- Mapeo de YouTube -->
           {
             youTubeSetsInfo?.map((setInfo) => (
               <YouTubePlayer title={setInfo.title} videoId={setInfo.videoId} />
             ))
           }
-          <!-- Mapeo de SoundCloud -->
-          {setsLinks?.map((link) => <SoundCloudPlayer trackUrl={link} loading="lazy" />)}
+          {
+            setsLinks?.map((link) => (
+              <SoundCloudPlayer trackUrl={link} loading="lazy" />
+            ))
+          }
         </Carousel>
       </div>
     </section>
 
-    <!-- Sección Calendario -->
-    <section class="w-full">
+    <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
         <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
@@ -94,8 +94,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
       />
     </section>
 
-    <!-- Sección About -->
-    <section class="w-full">
+    <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
         <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
@@ -108,34 +107,20 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
           {djPage.bio.text}
         </p>
       </div>
-      <div class="flex w-full items-center justify-center gap-8 mt-10">
+      <div class="mt-10 flex w-full items-center justify-center gap-8">
         <p class="w-full text-center text-base md:text-lg">
-            {common.contactMe}
+          {common.contactMe}
           <span class="font-bold">{djEmail}</span>
         </p>
       </div>
     </section>
 
-    <p>
-      <!-- 5. Galería / Media (Elemento Conveniente)<br />
-
-      Fotos de Actuación: Imágenes de alta calidad de tus eventos. Muestra al
-      público, las luces, tu energía en la cabina.<br />
-      Vídeos: Un "Sizzle Reel" o "Aftermovie" (un vídeo corto de 1-2 minutos con
-      los mejores momentos de varias actuaciones) es increíblemente efectivo. Incrústalos
-      desde YouTube o Vimeo.<br /> -->
-      <!-- <br /><br />
-      6. Press Kit & Rider (Elemento Conveniente SÚPER importante)<br />
-      Descargar EPK (Electronic Press Kit): Un botón para descargar un archivo .zip
-      o un PDF que contenga:<br />
-      Tu biografía (corta y larga).<br />
-      Tus fotos de prensa oficiales (alta resolución, varias opciones).<br />
-      Tu logo (en .png con fondo transparente).<br />
-      Enlaces a tus redes y música.<br />
-      Technical Rider (Rider Técnico): Una lista clara del equipo que necesitas para
-      pinchar (Ej: "3x Pioneer CDJ-3000, 1x Allen & Heath Xone:96"). Esto es fundamental
-      para cualquier contratación seria.<br />
-      <br /><br /> -->
-    </p>
+    <p></p>
   </PageLayout>
 </BaseLayout>
+<script>
+  import { initScrollAnimations } from "@/utils/animations";
+  // Ejecutamos la función en el evento 'astro:page-load'
+  // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
+  document.addEventListener("astro:page-load", initScrollAnimations);
+</script>

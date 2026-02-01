@@ -12,5 +12,6 @@ import spotifyLogo from "@/assets/rrss/spotify.svg"
 import soundcloudLogo from "@/assets/rrss/soundcloud.svg"
 import linkedinLogo from "@/assets/rrss/linkedin.svg"
 import githubLogo from "@/assets/rrss/github.svg"
+import appleLogo from "@/assets/rrss/apple.svg"
 
-export {lightIcon, darkIcon, homeDarkIcon, homeLightIcon, arrowLeft, instagramLogo, youtubeLogo, linkedinLogo, xLogo, soundcloudLogo, spotifyLogo, githubLogo, arrowRight};
+export {lightIcon, darkIcon, homeDarkIcon, homeLightIcon, arrowLeft, instagramLogo, youtubeLogo, linkedinLogo, xLogo, soundcloudLogo, spotifyLogo, githubLogo, arrowRight, appleLogo};

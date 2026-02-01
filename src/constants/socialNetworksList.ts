@@ -7,6 +7,7 @@ import {
   soundcloudLogo,
   spotifyLogo,
   githubLogo,
+  appleLogo,
 } from "./icons";
 
 export const allSocialNetworksList: SocialNetworksList = [
@@ -39,7 +40,7 @@ export const allSocialNetworksList: SocialNetworksList = [
   {
     name: "Apple Music",
     url: "https://open.spotify.com/intl-es/artist/4F82CqF6BhUIVderZE1AwO",
-    imageUrl: spotifyLogo,
+    imageUrl: appleLogo,
   },
   {
     name: "LinkedIn",
@@ -70,10 +71,47 @@ export const djSocialNetworksList: SocialNetworksList = [
     imageUrl: xLogo,
     class: "w-full",
   },
+];
+
+export const producerSocialNetworksList: SocialNetworksList = [
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/srjoelj",
+    imageUrl: instagramLogo,
+  },
+  {
+    name: "YouTube",
+    url: "https://www.youtube.com/@Itsjowy/videos",
+    imageUrl: youtubeLogo,
+  },
+  {
+    name: "SoundCloud",
+    url: "https://soundcloud.com/itsjowyhouse",
+    imageUrl: soundcloudLogo,
+  },
+  {
+    name: "X",
+    url: "https://x.com/UG_Flowers",
+    imageUrl: xLogo,
+    class: "w-full",
+  },
   {
     name: "Spotify",
     url: "https://open.spotify.com/intl-es/artist/4F82CqF6BhUIVderZE1AwO",
     imageUrl: spotifyLogo,
+  },
+  {
+    name: "Apple Music",
+    url: "https://open.spotify.com/intl-es/artist/4F82CqF6BhUIVderZE1AwO",
+    imageUrl: appleLogo,
+  },
+];
+
+export const soundSocialNetworksList: SocialNetworksList = [
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/srjoelj",
+    imageUrl: instagramLogo,
   },
   {
     name: "LinkedIn",

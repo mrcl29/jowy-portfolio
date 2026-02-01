@@ -10,6 +10,7 @@ interface NavPhotoSectionProps {
   mask: string;
   extraClass?: string;
   link?: string;
+  neonGlowColor?: string;
 }
 
 const {
@@ -19,9 +20,19 @@ const {
   mask,
   extraClass = "",
   link = Astro.url.pathname,
+  neonGlowColor,
 } = Astro.props as NavPhotoSectionProps;
 
 const { langParam } = await getI18nInfo(Astro.params.locale);
+
+const titleStyle = `
+  color: var(--section-color);
+  text-shadow: ${
+    neonGlowColor
+      ? `0 0 5px var(--section-color), 0 0 8px var(--section-color), 0 0 15px ${neonGlowColor}, 0 0 25px ${neonGlowColor}`
+      : "0 0 2px grey"
+  };
+`;
 ---
 
 <a
@@ -39,7 +50,7 @@ const { langParam } = await getI18nInfo(Astro.params.locale);
   <!-- Título -->
   <h1
     class="underline-animation absolute top-[10dvh] left-1/2 z-900 -translate-x-1/2 text-center font-bold whitespace-nowrap drop-shadow-lg transition-all duration-500 ease-in-out group-hover:scale-110 sm:text-lg md:text-2xl lg:text-3xl xl:text-4xl"
-    style="color: var(--section-color); text-shadow: 0 0 2px grey;"
+    style={titleStyle}
   >
     {title}
   </h1>

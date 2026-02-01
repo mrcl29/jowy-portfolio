@@ -96,7 +96,7 @@ body {
   mask-image:
     /* 1. Tu degradado diagonal original */
     /* linear-gradient(-143deg, transparent 38%, black 65%), */
-    linear-gradient(to bottom, transparent 0%, black 80%),
+    linear-gradient(to bottom, transparent 0%, black 90%),
     /* 2. Nuevo degradado vertical izquierdo */
       linear-gradient(to right, transparent 0%, black var(--side-fade-width)),
     /* 3. Nuevo degradado vertical derecho */
@@ -136,5 +136,29 @@ body {
 @media (max-width: 767px) {
   .div-poligono {
     clip-path: polygon(0 0, 0% 100%, 100% 100%);
+  }
+}
+
+/* Scroll Animation */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.8s ease-out,
+    transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ACCESSIBILITY: If user has JS disabled or prefers no motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }

@@ -6,10 +6,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { defaultLang, locales } from "@/../i18n.config";
 import { getI18nInfo } from "@/utils/i18n";
-import { djSocialNetworksList } from "@/constants/socialNetworksList";
-import { djBio } from "@/constants/photos";
-import { getLongSoundCloudTracksLinks } from "@/utils/getSoundCloudTracksLinks";
-import { getYoutubeSetsInfo } from "@/utils/getYoutubeVideosInfo";
+import { allSocialNetworksList } from "@/constants/socialNetworksList";
+import { marked } from "marked";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -30,14 +28,19 @@ const { bioPage } = dictionary;
   lang={langParam}
   description={bioPage.description}
 >
-  <PageLayout
-    title={bioPage.title}
-    socialNetworksList={djSocialNetworksList}
-  >
-    <div class="mb-4 flex w-full items-center gap-4">
-      <div class="relative h-150 w-full md:h-150">
-        Hola
-      </div>
+  <PageLayout title={bioPage.title} socialNetworksList={allSocialNetworksList}>
+    <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
+      <div
+        class="relative w-full text-justify text-base md:text-lg [&>p]:mb-4"
+        set:html={marked.parse(bioPage.text)}
+      />
     </div>
   </PageLayout>
 </BaseLayout>
+
+<script>
+  import { initScrollAnimations } from "@/utils/animations";
+  // Ejecutamos la función en el evento 'astro:page-load'
+  // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
+  document.addEventListener("astro:page-load", initScrollAnimations);
+</script>
