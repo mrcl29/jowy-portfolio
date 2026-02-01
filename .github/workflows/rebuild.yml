@@ -1,0 +1,14 @@
+name: Reconstrucción Semanal
+on:
+  schedule:
+    # Se ejecuta cada lunes a las 8:00 AM UTC
+    # Puedes cambiarlo usando https://crontab.guru/
+    - cron: "0 8 * * 1"
+  workflow_dispatch: # Esto permite que lo ejecutes manualmente desde GitHub si quieres probarlo
+
+jobs:
+  trigger_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Llamar al Deploy Hook de Vercel
+        run: curl -X POST ${{ secrets.VERCEL_DEPLOY_HOOK }}

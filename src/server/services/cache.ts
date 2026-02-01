@@ -15,10 +15,10 @@ const apiCache = new Map<string, CachedItem<any>>();
 export function getFromCache<T>(key: string): T | null {
   const cached = apiCache.get(key);
   if (cached && cached.expiresAt > Date.now() / 1000) {
-    console.log(`[Cache] HIT para la clave: ${key}`);
+    // console.log(`[Cache] HIT para la clave: ${key}`);
     return cached.data as T;
   }
-  console.log(`[Cache] MISS para la clave: ${key}`);
+  //   console.log(`[Cache] MISS para la clave: ${key}`);
   return null;
 }
 
@@ -35,7 +35,7 @@ export function setInCache<T>(
 ): void {
   const expiresAt = Date.now() / 1000 + durationSeconds;
   apiCache.set(key, { data, expiresAt });
-  console.log(
-    `[Cache] SET para la clave: ${key}. Duración: ${durationSeconds}s`
-  );
+  //   console.log(
+  //     `[Cache] SET para la clave: ${key}. Duración: ${durationSeconds}s`
+  //   );
 }

@@ -26,9 +26,9 @@ export async function getSoundCloudToken(): Promise<string> {
   }
 
   // 2. Si el caché está vacío o ha expirado, obtener un nuevo token
-  console.log(
-    "Token de SoundCloud caducado o no existente. Obteniendo nuevo token..."
-  );
+  //   console.log(
+  //     "Token de SoundCloud caducado o no existente. Obteniendo nuevo token..."
+  //   );
 
   const bodyData = { ...soundCloudAuthBody };
   const bodyUrlEncoded = new URLSearchParams(bodyData).toString();

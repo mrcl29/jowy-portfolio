@@ -19,7 +19,7 @@ export async function getUserTracks(
   limit = 10,
   offset = 0
 ): Promise<SoundCloudTrack[] | null> {
-  console.log("---------- getUserTracks ----------")
+  //   console.log("---------- getUserTracks ----------")
   try {
     let userId: number | undefined = undefined;
     // 1. Obtener la información del usuario para conseguir su ID
@@ -60,10 +60,7 @@ export async function getUserTracks(
     setInCache(cacheKey, res, USER_TRACKS_CACHE_DURATION_SECONDS);
     return res;
   } catch (error) {
-    console.error(
-      `Error al obtener las canciones del usuario ${user}:`,
-      error
-    );
+    console.error(`Error al obtener las canciones del usuario ${user}:`, error);
     return null;
   }
 }
