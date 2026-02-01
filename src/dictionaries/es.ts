@@ -6,15 +6,12 @@ export default {
     title: "DJ",
     description:
       "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
-    heroSection: {
-      heading: "You are Housed",
-      description: "Explora mis sets y mezclas.",
-    },
+      heading: "YOU ARE HOUSED",
     bio: {
       altImage:
         "DJ Jowy pinchando en una fiesta. Está mirando hacia abajo con los cascos puestos.",
       title: "SOBRE MÍ",
-      text: `Soy Jowy, DJ especializado en house y techno, y mi objetivo en cada set es simple: que  vengas a sentir la música y no pares de bailar, ‘only good people dance house music.`,
+      text: `Soy Jowy, DJ especializado en house y techno, y mi objetivo en cada set es simple: que  vengas a sentir la música y no pares de bailar. Only good people dance house music.`,
     },
     sets: {
       title: "Mis Sets",
@@ -29,22 +26,22 @@ export default {
     title: "JOWY",
     description:
       "Jowy: DJ, productor y técnico de sonido. Explora mi portafolio de música, producción de tracks y servicios de audio profesional.",
-    heroSection: {
-      heading: "¡Bienvenido a mi estudio!",
-      description: "Descubre mi trabajo como productor musical.",
-    },
-    // Añade aquí otros textos específicos de la página Producer en español
+      heading: "YOU ARE HOUSED",
   },
   soundPage: {
     title: "SOUND DESIGNER",
     description:
       "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",
-    heroSection: {
-      heading: "Welcome to my studio!",
-      description: "Discover my work as a music producer.",
-    },
+      heading: "YOU ARE HOUSED",
+  },
+  bioPage:{
+    link: "bio",
+    title: "BIO",
+    description:
+      "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",
   },
   common: {
+    contactMe: "Contáctame: ",
     creator: "Hecho por mrcl29:",
     footer: {
       copyright: "Jowy. Todos los derechos reservados.",
@@ -75,6 +72,7 @@ export default {
         title: "SOUND DESIGNER",
         color: "#1b22e5",
         mask: "mask-fade-top-bottom-left translate-y-30 -translate-x-15 max-h-[90%]",
+        link: "sound",
       },
     ],
   },

@@ -29,7 +29,7 @@ export function getStaticPaths() {
 }
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
-const { djPage } = dictionary;
+const { djPage, common } = dictionary;
 
 const setsLinks = await getLongSoundCloudTracksLinks();
 const youTubeSetsInfo = await getYoutubeSetsInfo();
@@ -42,7 +42,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
 >
   <PageLayout
     title={djPage.title}
-    phrase={djPage.heroSection.heading}
+    phrase={djPage.heading}
     socialNetworksList={djSocialNetworksList}
   >
     <div class="mb-4 flex w-full items-center gap-4">
@@ -74,7 +74,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
             ))
           }
           <!-- Mapeo de SoundCloud -->
-          {setsLinks?.map((link) => <SoundCloudPlayer trackUrl={link} />)}
+          {setsLinks?.map((link) => <SoundCloudPlayer trackUrl={link} loading="lazy" />)}
         </Carousel>
       </div>
     </section>
@@ -108,10 +108,10 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
           {djPage.bio.text}
         </p>
       </div>
-      <div class="flex w-full flex-col items-center gap-8">
-        <h3 class="shrink-0 text-2xl font-bold md:text-xl">Contacto</h3>
-        <p class="w-full text-justify text-base md:text-lg">
-          {djEmail}
+      <div class="flex w-full items-center justify-center gap-8 mt-10">
+        <p class="w-full text-center text-base md:text-lg">
+            {common.contactMe}
+          <span class="font-bold">{djEmail}</span>
         </p>
       </div>
     </section>

@@ -1,17 +1,13 @@
+/* Fuente 'Syne' para un estilo moderno y artístico, ideal para música electrónica/house */
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap");
+
 @import "tailwindcss";
 @plugin "daisyui";
 
-@font-face {
-  font-family: 'Anta';
-  src: url('/fonts/anta/Anta-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 /* Aplicamos la fuente a toda la web */
-html, body {
-  font-family: 'Anta', sans-serif;
+html,
+body {
+  font-family: "Syne", sans-serif;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -90,39 +86,31 @@ html, body {
     mask-image: linear-gradient(-146deg, transparent 0%, black 0%);
   }
 } */
- /* Fade diagonal + izquierda + derecha */
+/* Fade diagonal + izquierda + derecha */
 .mask-fade-diagonal {
   /* Define el ancho de los degradados laterales.
-    Puedes cambiar este valor (ej. 10%, 20%, 50px) 
+    Puedes cambiar este valor (ej. 10%, 20%, 50px)
   */
   --side-fade-width: 30%;
 
-  mask-image: 
+  mask-image:
     /* 1. Tu degradado diagonal original */
     /* linear-gradient(-143deg, transparent 38%, black 65%), */
     linear-gradient(to bottom, transparent 0%, black 80%),
-    
     /* 2. Nuevo degradado vertical izquierdo */
-    linear-gradient(to right, 
-      transparent 0%, 
-      black var(--side-fade-width)
-    ),
-    
+      linear-gradient(to right, transparent 0%, black var(--side-fade-width)),
     /* 3. Nuevo degradado vertical derecho */
-    linear-gradient(to left, 
-      transparent 0%, 
-      black var(--side-fade-width)
-    );
-  
+      linear-gradient(to left, transparent 0%, black var(--side-fade-width));
+
   /* --- ¡IMPORTANTE! --- */
   /* Esta propiedad combina las máscaras.
-     Un píxel solo será visible si es 'black' (visible) 
+     Un píxel solo será visible si es 'black' (visible)
      en LAS TRES máscaras que definiste arriba. */
   -webkit-mask-composite: destination-in; /* Para Chrome/Safari */
-  mask-composite: intersect;             /* Estándar moderno */
+  mask-composite: intersect; /* Estándar moderno */
 }
 
-/* He actualizado tus media queries. 
+/* He actualizado tus media queries.
   'mask-image: none;' es la forma correcta de *desactivar* la máscara.
   Tu versión original (transparent 0%, black 0%) no es fiable
   y puede no funcionar como esperas.

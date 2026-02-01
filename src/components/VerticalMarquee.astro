@@ -1,0 +1,73 @@
+---
+interface Props {
+  text: string;
+  speed?: string; // Para controlar la velocidad (ej: '20s')
+  side: 'left' | 'right'; // Para decidir en qué lado ponerlo
+}
+
+const { text, speed = "120s", side } = Astro.props;
+
+// Repetimos el texto varias veces para asegurar que cubra la pantalla antes de hacer el loop
+const content = Array(10).fill(text).join(' • ');
+
+// Definimos la clase de posición según el prop 'side'
+const positionClass = side === 'left' ? 'left-50' : 'right-50';
+const rotationClass = side === 'right' ? 'rotate-180' : '';
+---
+
+<div class={`hidden min-[1455px]:block fixed top-0 bottom-0 ${positionClass} ${rotationClass} w-30 z-0 overflow-hidden pointer-events-none select-none opacity-60`}>
+  <div class="track">
+    <div class="content">
+      {content.split(' • ').map((item) => (
+        <span class="writing-vertical">{item}</span>
+      ))}
+    </div>
+    <div class="content">
+      {content.split(' • ').map((item) => (
+        <span class="writing-vertical">{item}</span>
+      ))}
+    </div>
+  </div>
+</div>
+
+<style define:vars={{ speed }}>
+  /* El contenedor que se mueve hacia arriba */
+  .track {
+    display: flex;
+    flex-direction: column;
+    /* La animación mueve el track hacia arriba un 50% (la altura de un bloque) */
+    animation: scrollUp var(--speed) linear infinite;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* Espacio entre palabras */
+    padding-bottom: 2rem;
+  }
+
+  /* Estilo del texto */
+  span {
+    font-size: 6rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: #fff; /* Cambia esto según tu fondo */
+  }
+
+  /* Si quieres que las letras estén rotadas o verticales */
+  .writing-vertical {
+    writing-mode: vertical-rl; /* Opcional: si quieres texto vertical tipo japonés/matrix */
+    text-orientation: mixed;
+    /* Si prefieres texto normal apilado, quita esta clase y usa flex-direction: column normal */
+  }
+
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-50%); /* Se mueve exactamente la mitad (un bloque completo) */
+    }
+  }
+</style>

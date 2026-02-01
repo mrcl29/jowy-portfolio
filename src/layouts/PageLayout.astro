@@ -2,11 +2,12 @@
 import { Image } from "astro:assets";
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { getI18nInfo } from "@/utils/i18n";
-import { homeLightIcon, homeDarkIcon } from "@/constants/icons";
+import { homeDarkIcon } from "@/constants/icons";
 import { type SocialNetworksList } from "@/types/socialNetworksList";
 import SocialNetworksListComponent from "@/components/SocialNetworksList.astro";
 import { djEmail } from "@/constants/email";
 import { creatorNetworkList } from "@/constants/socialNetworksList";
+import VerticalMarquee from '@/components/VerticalMarquee.astro';
 // import Modal from "@/components/Modal.astro";
 
 interface PageLayoutProps {
@@ -18,7 +19,7 @@ interface PageLayoutProps {
 const { title, phrase, socialNetworksList } = Astro.props as PageLayoutProps;
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
-const { indexPage } = dictionary;
+const { indexPage, bioPage } = dictionary;
 
 const homeUrl = getRelativeLocaleUrl(langParam, "/");
 ---
@@ -44,6 +45,12 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
 }
 
 <main class="mx-auto max-w-5xl px-20 py-12">
+    {
+        phrase && (
+          <VerticalMarquee text={phrase} side="left" />
+    <VerticalMarquee text={phrase} side="right" />
+        )
+      }
   <h1
     class="mb-15 flex w-full justify-center align-middle text-6xl font-extrabold"
   >
@@ -52,26 +59,15 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
   <div
     class="y-center flex min-h-screen w-full flex-col items-center gap-8 overflow-hidden overflow-y-auto align-middle"
   >
-    <div
-      class="flex w-[80%] flex-col items-center gap-6 pt-3 md:justify-between md:gap-5"
-    >
-      {
-        phrase && (
-          <h2 class="flex justify-center text-center text-xl italic">
-            {phrase}
-          </h2>
-        )
-      }
-    </div>
     <slot />
   </div>
 </main>
 
 <footer
-  class="mt-20 w-full border-t border-gray-700 px-6 py-8 text-center text-sm text-gray-400"
+  class="relative z-10 mt-20 w-full border-t border-gray-700 px-6 py-8 text-center text-sm text-gray-400 bg-black"
 >
   <div
-    class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row"
+    class="w-full flex max-w-7xl flex-col items-center justify-between gap-8 md:flex-row"
   >
     <!-- Quick Links -->
     <nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
@@ -89,6 +85,12 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
             )
         )
       }
+        <a
+                href={getRelativeLocaleUrl(langParam, `/${bioPage.link}`)}
+                class="hover:text-white"
+              >
+                {bioPage.title}
+              </a>
       {djEmail}
     </nav>
 

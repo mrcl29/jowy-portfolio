@@ -1,0 +1,43 @@
+---
+// src/pages/[...locale]/bio.astro
+import "@/styles/global.css";
+import { Image } from "astro:assets";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import PageLayout from "@/layouts/PageLayout.astro";
+import { defaultLang, locales } from "@/../i18n.config";
+import { getI18nInfo } from "@/utils/i18n";
+import { djSocialNetworksList } from "@/constants/socialNetworksList";
+import { djBio } from "@/constants/photos";
+import { getLongSoundCloudTracksLinks } from "@/utils/getSoundCloudTracksLinks";
+import { getYoutubeSetsInfo } from "@/utils/getYoutubeVideosInfo";
+
+// Genera rutas estáticas: "/", "/en"
+export function getStaticPaths() {
+  return locales.map((lang) => {
+    if (lang === defaultLang) {
+      return { params: { locale: undefined } };
+    }
+    return { params: { locale: lang } };
+  });
+}
+
+const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
+const { bioPage } = dictionary;
+---
+
+<BaseLayout
+  title={bioPage.title}
+  lang={langParam}
+  description={bioPage.description}
+>
+  <PageLayout
+    title={bioPage.title}
+    socialNetworksList={djSocialNetworksList}
+  >
+    <div class="mb-4 flex w-full items-center gap-4">
+      <div class="relative h-150 w-full md:h-150">
+        Hola
+      </div>
+    </div>
+  </PageLayout>
+</BaseLayout>

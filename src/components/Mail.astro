@@ -8,6 +8,7 @@ const { email } = Astro.props as ModalProps;
 
 <a
   href={`mailto:${email}`}
+  aria-label={`Enviar correo a ${email}`}
   class="flex items-center justify-center gap-2 text-xl font-medium text-gray-200 transition-transform duration-300 hover:scale-110 hover:text-white"
 >
   <svg

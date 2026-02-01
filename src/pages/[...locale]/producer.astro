@@ -29,9 +29,9 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
   lang={langParam}
   description={producerPage.description}
 >
-  <PageLayout title={producerPage.title}>
+  <PageLayout title={producerPage.title} phrase={producerPage.heading}>
     <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-col">
-      <h1>{producerPage.heroSection.heading}</h1>
+      <h1>{producerPage.heading}</h1>
       {
         tracksLinks?.map((link) => {
           return <SoundCloudPlayer trackUrl={link} />;
