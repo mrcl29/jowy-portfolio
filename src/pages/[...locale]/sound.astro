@@ -1,13 +1,16 @@
-
 ---
 // src/pages/[...locale]/sound.astro
 import "@/styles/global.css";
+import { Image } from "astro:assets";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import PageLayout from "@/layouts/PageLayout.astro";
 import { defaultLang, locales } from "@/../i18n.config";
 import { getI18nInfo } from "@/utils/i18n";
 import { getShortSoundCloudTracksLinks } from "@/utils/getSoundCloudTracksLinks";
-import SoundCloudPlayer from "@/components/SoundCloudPlayer.astro";
+import { soundSocialNetworksList } from "@/constants/socialNetworksList";
+import { djBio } from "@/constants/photos";
+import Separador from "@/components/Separador.astro";
+import { djEmail } from "@/constants/email";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
@@ -20,7 +23,7 @@ export function getStaticPaths() {
 }
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
-const { soundPage } = dictionary;
+const { soundPage, common } = dictionary;
 
 const tracksLinks = await getShortSoundCloudTracksLinks();
 ---
@@ -30,35 +33,125 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
   lang={langParam}
   description={soundPage.description}
 >
-  <PageLayout title={soundPage.title} phrase={soundPage.heading}>
-    <div class="flex min-h-screen w-full flex-col overflow-y-auto md:flex-col">
-      <h1>{soundPage.heading}</h1>
-      {
-        tracksLinks?.map((link) => {
-          return <SoundCloudPlayer trackUrl={link} />;
-        })
-      }
+  <PageLayout
+    title={soundPage.title}
+    phrase={soundPage.heading}
+    socialNetworksList={soundSocialNetworksList}
+  >
+    <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
+      <div class="relative h-150 w-full md:h-150">
+        <Image
+          src={djBio}
+          alt={soundPage.bio.altImage}
+          class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+          loading="eager"
+        />
+      </div>
     </div>
 
-    <!-- Inicio: (Foto impactante + Frase ganadora").
+    <section class="animate-on-scroll w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {soundPage.media.title}
+        </h3>
+        <Separador />
+      </div>
+      <div class="mt-5 grid w-full grid-cols-1 gap-8 md:grid-cols-2">
+        <!-- TODO -->
+        🏗️ Coming soon...
+      </div>
+    </section>
 
-Discografía: (Sus mejores trabajos).
+    <section class="animate-on-scroll w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {soundPage.design.title}
+        </h3>
+        <Separador />
+      </div>
+      <div
+        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
+      >
+        <!-- TODO -->
+        🏗️ Coming soon...
+      </div>
+    </section>
 
-Servicios: (Qué ofrece y, opcionalmente, el "Antes y Después").
+    <section class="animate-on-scroll w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {soundPage.tools.title}
+        </h3>
+        <Separador />
+      </div>
+      <div
+        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
+      >
+        <!-- TODO -->
+        🏗️ Coming soon...
+      </div>
+    </section>
 
-Tienda / Beats: (Venta directa).
-
-Bio: (Su historia). -->
+    <section class="animate-on-scroll w-full">
+      <div class="mb-4 flex w-full items-center gap-4">
+        <Separador />
+        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+          {soundPage.bio.title}
+        </h3>
+        <Separador />
+      </div>
+      <div class="flex w-full flex-col items-center gap-8">
+        <p class="w-full text-justify text-base md:text-lg">
+          {soundPage.bio.text}
+        </p>
+      </div>
+      <div class="mt-10 flex w-full items-center justify-center gap-8">
+        <p class="text-center text-base md:text-lg">
+          {common.contactMe}
+        </p>
+        <div
+          id="copy-email"
+          class="cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
+          title={common.copyToClipboard ?? "Copiar al portapapeles"}
+        >
+          {djEmail}
+        </div>
+      </div>
+    </section>
   </PageLayout>
 </BaseLayout>
 
-<!-- 1. El "Reel" de Audio (La prueba de fuego)Para un ingeniero, cómo suena es más importante que qué música es.Comparativa A/B (Vital): Al igual que con el productor, pero aquí el enfoque es técnico.Mezcla: Raw tracks vs. Final Mix.Mastering: Mix vs. Master (con volumen igualado para que no sea solo "más fuerte", sino "mejor").Restauración: Audio con ruido vs. Audio limpio (muy valorado en podcast y cine).Playlists por Género: Demuestra versatilidad. Una lista de "Rock" (baterías potentes) y otra de "Jazz" (dinámica natural).
+<script>
+  import { initScrollAnimations } from "@/utils/animations";
+  // Ejecutamos la función en el evento 'astro:page-load'
+  // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
+  document.addEventListener("astro:page-load", () => {
+    initScrollAnimations();
 
- 2. Lista de Créditos Técnica (Discografía detallada)A diferencia del productor que pone la portada grande, el técnico necesita ser específico con su rol. Usa una Tabla o una lista limpia:Artista / ProyectoCanción / ÁlbumRol DesempeñadoAñoBanda X"Título"Grabación y Mezcla2023Cortometraje Y"Título"Diseño Sonoro y Foley2024Artista Z"Live Session"Técnico de Monitores2022
+    const emailSpan = document.getElementById("copy-email");
+    if (!emailSpan) return;
 
- 3. Especialización: Sonido en Vivo (FOH / Monitores)Si el técnico trabaja en directos, el audio no se puede mostrar tan fácilmente, así que debes vender la experiencia y la fiabilidad.Lista de Tours/Venues: Artistas con los que ha girado, festivales donde ha operado y salas emblemáticas.Fotos en acción: Fotos de alta calidad operando consolas grandes (DiGiCo, Avid, Yamaha). La imagen del técnico concentrado frente a la mesa de mezclas da mucha autoridad.Conocimiento de Sistemas: Mencionar si sabe ajustar sistemas de PA (L-Acoustics, d&b, Meyer Sound) o usar software de predicción (Soundvision, ArrayCalc).
+    const originalText = emailSpan.textContent;
+    // Asumimos que el diccionario i18n tendrá una clave para el texto "Copiado"
+    // Si no, usamos un valor por defecto.
+    const copiedMessage =
+      emailSpan.dataset.copiedText ??
+      (document.documentElement.lang === "es" ? "¡Copiado!" : "Copied!");
 
- 4. Especialización: Post-Producción (Cine, TV, Videojuegos)Si se dedica al audiovisual, esta sección es obligatoria.Demo Reel Visual: Un video de 1-2 minutos con fragmentos de trabajos donde haya hecho diseño sonoro, edición de diálogos o mezcla 5.1/Dolby Atmos.Mencionar estándares: Indicar que sabe trabajar bajo estándares de Loudness para TV/Netflix (ej. EBU R128, -23 LUFS, -14 LUFS).
+    const handleClick = () => {
+      if (!originalText) return;
 
- 5. Habilidades Técnicas (Hard Skills)Un técnico es contratado por saber usar herramientas que otros no saben.Software (DAWs): Pro Tools (el estándar), Logic Pro, Reaper, Ableton Live, Nuendo.Certificaciones: Si tiene títulos oficiales (Avid Certified User, Dante Certification, etc.), van aquí con sus logos.Idiomas: Fundamental si quiere trabajar en giras internacionales.
- -->
+      navigator.clipboard.writeText(originalText).then(() => {
+        emailSpan.textContent = copiedMessage;
+        setTimeout(() => {
+          emailSpan.textContent = originalText;
+        }, 1000);
+      });
+    };
+
+    emailSpan.addEventListener("click", handleClick);
+  });
+</script>

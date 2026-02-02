@@ -64,6 +64,15 @@ export default {
     description:
       "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",
     heading: "YOU ARE HOUSED",
+    media: {
+      title: "Media",
+    },
+    design: {
+      title: "Diseño",
+    },
+    tools: {
+      title: "Habilidades y Herramientas",
+    },
     bio: {
       altImage:
         "DJ Jowy pinchando en una fiesta. Está mirando hacia abajo con los cascos puestos.",
@@ -87,6 +96,7 @@ Hoy, como **DJ, productor y sound designer**, combino técnica, creatividad y em
 Mi camino ha sido de aprendizaje constante, de probar, equivocarse y mejorar, siempre con un objetivo claro: **convertir la música y el sonido en algo que se sienta, se viva y se recuerde**.`,
   },
   common: {
+    copyToClipboard: "Copiar al portapapeles",
     contactMe: "Contáctame: ",
     creator: "Hecho por mrcl29:",
     footer: {

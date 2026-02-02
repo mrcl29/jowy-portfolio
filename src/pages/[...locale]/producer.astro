@@ -132,10 +132,16 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
         </p>
       </div>
       <div class="mt-10 flex w-full items-center justify-center gap-8">
-        <p class="w-full text-center text-base md:text-lg">
+        <p class="text-center text-base md:text-lg">
           {common.contactMe}
-          <span class="font-bold">{djEmail}</span>
         </p>
+        <div
+          id="copy-email"
+          class="cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
+          title={common.copyToClipboard ?? "Copiar al portapapeles"}
+        >
+          {djEmail}
+        </div>
       </div>
     </section>
   </PageLayout>
@@ -145,5 +151,30 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
   import { initScrollAnimations } from "@/utils/animations";
   // Ejecutamos la función en el evento 'astro:page-load'
   // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
-  document.addEventListener("astro:page-load", initScrollAnimations);
+  document.addEventListener("astro:page-load", () => {
+    initScrollAnimations();
+
+    const emailSpan = document.getElementById("copy-email");
+    if (!emailSpan) return;
+
+    const originalText = emailSpan.textContent;
+    // Asumimos que el diccionario i18n tendrá una clave para el texto "Copiado"
+    // Si no, usamos un valor por defecto.
+    const copiedMessage =
+      emailSpan.dataset.copiedText ??
+      (document.documentElement.lang === "es" ? "¡Copiado!" : "Copied!");
+
+    const handleClick = () => {
+      if (!originalText) return;
+
+      navigator.clipboard.writeText(originalText).then(() => {
+        emailSpan.textContent = copiedMessage;
+        setTimeout(() => {
+          emailSpan.textContent = originalText;
+        }, 1000);
+      });
+    };
+
+    emailSpan.addEventListener("click", handleClick);
+  });
 </script>

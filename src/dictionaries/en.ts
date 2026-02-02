@@ -64,6 +64,15 @@ export default {
     description:
       "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",
     heading: "YOU ARE HOUSED",
+    media: {
+      title: "Media",
+    },
+    design: {
+      title: "Design",
+    },
+    tools: {
+      title: "Skills and Tools",
+    },
     bio: {
       altImage:
         "DJ Jowy playing in a gig. He is looking down with the headsets on.",
@@ -87,7 +96,8 @@ Today, as a **DJ, producer, and sound designer**, I combine technique, creativit
 My journey has been one of constant learning—of testing, making mistakes, and improving—always with a clear objective: **to turn music and sound into something that is felt, lived, and remembered**.`,
   },
   common: {
-    contactMe: "Contáctame: ",
+    copyToClipboard: "Copy",
+    contactMe: "Contact Me: ",
     creator: "Made by mrcl29:",
     footer: {
       copyright: "Jowy. All rights reserved.",
