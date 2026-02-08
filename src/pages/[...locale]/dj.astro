@@ -39,11 +39,13 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
   title={djPage.title}
   lang={langParam}
   description={djPage.description}
+  neonGlowColor={djPage.neonGlowColor}
 >
   <PageLayout
     title={djPage.title}
     phrase={djPage.heading}
     socialNetworksList={djSocialNetworksList}
+    neonGlowColor={djPage.neonGlowColor}
   >
     <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
       <div class="relative h-150 w-full md:h-150">
@@ -59,7 +61,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.sets.title}
         </h3>
         <Separador />
@@ -83,7 +85,7 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.calendar.title}
         </h3>
         <Separador />
@@ -97,23 +99,23 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.bio.title}
         </h3>
         <Separador />
       </div>
       <div class="flex w-full flex-col items-center gap-8">
-        <p class="w-full text-justify text-base md:text-lg">
+        <p class="neon-text w-full text-justify text-base md:text-lg">
           {djPage.bio.text}
         </p>
       </div>
       <div class="mt-10 flex w-full items-center justify-center gap-8">
-        <p class="text-center text-base md:text-lg">
+        <p class="neon-text text-center text-base md:text-lg">
           {common.contactMe}
         </p>
         <div
           id="copy-email"
-          class="cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
+          class="neon-text cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
           title={common.copyToClipboard ?? "Copiar al portapapeles"}
         >
           {djEmail}

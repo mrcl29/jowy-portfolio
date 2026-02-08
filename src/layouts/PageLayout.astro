@@ -14,14 +14,17 @@ interface PageLayoutProps {
   title: string;
   phrase?: string;
   socialNetworksList?: SocialNetworksList;
+  neonGlowColor?: string;
 }
 
-const { title, phrase, socialNetworksList } = Astro.props as PageLayoutProps;
+const { title, phrase, socialNetworksList, neonGlowColor } = Astro.props as PageLayoutProps;
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
 const { indexPage, bioPage } = dictionary;
 
 const homeUrl = getRelativeLocaleUrl(langParam, "/");
+
+const mainStyle = neonGlowColor ? `--neon-glow-color: ${neonGlowColor};` : "";
 ---
 
 <a href={homeUrl}>
@@ -29,7 +32,7 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
     id="nav-home-icon"
     src={homeDarkIcon}
     alt="Home Icon"
-    class="fixed top-4 left-5 z-9999 h-[3vw] max-h-10 min-h-5 w-auto transition duration-300 ease-in-out hover:scale-120"
+    class="fixed top-4 left-5 z-9999 h-[3vw] max-h-10 min-h-5 w-auto transition duration-300 ease-in-out hover:scale-120 neon-icon-no-invert"
     loading="eager"
     fetchpriority="high"
     format="png"
@@ -44,15 +47,15 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
   )
 }
 
-<main class="mx-auto max-w-5xl px-20 py-12">
+<main class="mx-auto max-w-5xl px-20 py-12" style={mainStyle}>
     {
         phrase && (
-          <VerticalMarquee text={phrase} side="left" />
-    <VerticalMarquee text={phrase} side="right" />
+          <VerticalMarquee text={phrase} side="left" neonGlowColor={neonGlowColor} />
+          <VerticalMarquee text={phrase} side="right" neonGlowColor={neonGlowColor} />
         )
       }
   <h1
-    class="mb-15 flex w-full justify-center align-middle text-6xl font-extrabold"
+    class="neon-text-glow mb-15 flex w-full justify-center align-middle text-6xl font-extrabold"
   >
     {title}
   </h1>
@@ -147,3 +150,27 @@ const homeUrl = getRelativeLocaleUrl(langParam, "/");
   //   }, 200);
   // });
 </script>
+
+<style is:global>
+  .neon-text-glow {
+    color: var(--neon-glow-color);
+    text-shadow:
+      0 0 5px var(--neon-glow-color, transparent),
+      0 0 10px var(--neon-glow-color, transparent),
+      0 0 20px var(--neon-glow-color, transparent);
+  }
+
+  .neon-text {
+    color: var(--neon-glow-color);
+  }
+
+   .neon-icon {
+    filter: invert(1) drop-shadow(0 0 6px var(--neon-glow-color, #ffffff))
+      drop-shadow(0 0 8px var(--neon-glow-color, #ffffff));
+  }
+
+  .neon-icon-no-invert {
+    filter: drop-shadow(0 0 6px var(--neon-glow-color, #ffffff))
+      drop-shadow(0 0 8px var(--neon-glow-color, #ffffff));
+  }
+</style>

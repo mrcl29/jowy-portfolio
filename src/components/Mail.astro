@@ -9,9 +9,11 @@ const { email } = Astro.props as ModalProps;
 <a
   href={`mailto:${email}`}
   aria-label={`Enviar correo a ${email}`}
-  class="flex items-center justify-center gap-2 text-xl font-medium text-gray-200 transition-transform duration-300 hover:scale-110 hover:text-white"
+  class="flex items-center justify-center gap-2 text-xl font-medium transition-transform duration-300 hover:scale-110"
+  style="color: var(--neon-glow-color, #ffffff);"
 >
   <svg
+    class="neon-icon"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -25,6 +27,11 @@ const { email } = Astro.props as ModalProps;
     <rect width="20" height="16" x="2" y="4" rx="2"></rect><path
       d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
   </svg>
-
-  <!-- {email} -->
 </a>
+
+<style>
+  .neon-icon {
+    filter: drop-shadow(0 0 2px var(--neon-glow-color, #ffffff))
+      drop-shadow(0 0 5px var(--neon-glow-color, #ffffff));
+  }
+</style>

@@ -33,11 +33,13 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
   title={producerPage.title}
   lang={langParam}
   description={producerPage.description}
+  neonGlowColor={producerPage.neonGlowColor}
 >
   <PageLayout
     title={producerPage.title}
     phrase={producerPage.heading}
     socialNetworksList={producerSocialNetworksList}
+    neonGlowColor={producerPage.neonGlowColor}
   >
     <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
       <div class="relative h-150 w-full md:h-150">
@@ -53,7 +55,7 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {producerPage.discography.title}
         </h3>
         <Separador />
@@ -79,7 +81,7 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {producerPage.services.title}
         </h3>
         <Separador />
@@ -89,11 +91,11 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
       >
         {
           producerPage.services.list?.map((serviceInfo) => (
-            <div class="flex flex-col items-center gap-4 text-center">
+            <div class="neon-text flex flex-col items-center gap-4 text-center">
               <Image
                 src={serviceInfo.image}
                 alt={serviceInfo.name}
-                class="h-24 w-24 invert transition-transform duration-300 hover:scale-110"
+                class="neon-icon h-24 w-24 invert transition-transform duration-300 hover:scale-110"
               />
               <span class="text-xl font-semibold">{serviceInfo.name}</span>
             </div>
@@ -105,7 +107,7 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {producerPage.store.title}
         </h3>
         <Separador />
@@ -121,23 +123,23 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="shrink-0 text-2xl font-bold md:text-3xl">
+        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {producerPage.bio.title}
         </h3>
         <Separador />
       </div>
       <div class="flex w-full flex-col items-center gap-8">
-        <p class="w-full text-justify text-base md:text-lg">
+        <p class="neon-text w-full text-justify text-base md:text-lg">
           {producerPage.bio.text}
         </p>
       </div>
       <div class="mt-10 flex w-full items-center justify-center gap-8">
-        <p class="text-center text-base md:text-lg">
+        <p class="neon-text text-center text-base md:text-lg">
           {common.contactMe}
         </p>
         <div
           id="copy-email"
-          class="cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
+          class="neon-text cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
           title={common.copyToClipboard ?? "Copiar al portapapeles"}
         >
           {djEmail}

@@ -115,7 +115,7 @@ body {
   Tu versión original (transparent 0%, black 0%) no es fiable
   y puede no funcionar como esperas.
 */
-@media (max-width: 762px) {
+/* @media (max-width: 762px) {
   .mask-fade-diagonal {
     mask-image: none;
   }
@@ -125,7 +125,7 @@ body {
   .mask-fade-diagonal {
     mask-image: none;
   }
-}
+} */
 
 /* Estilo por defecto (pantallas grandes) */
 .div-poligono {
@@ -133,11 +133,11 @@ body {
 }
 
 /* Pantallas de 767px o menos */
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .div-poligono {
     clip-path: polygon(0 0, 0% 100%, 100% 100%);
   }
-}
+} */
 
 /* Scroll Animation */
 .animate-on-scroll {
@@ -161,4 +161,13 @@ body {
     transform: none;
     transition: none;
   }
+}
+
+.neon-style {
+  color: var(--neon-glow-color, #ffffff);
+  text-shadow:
+    0 0 5px var(--neon-glow-color, #ffffff),
+    0 0 8px var(--neon-glow-color, #ffffff),
+    0 0 15px var(--neon-glow-color, #ffffff),
+    0 0 25px var(--neon-glow-color, #ffffff);
 }

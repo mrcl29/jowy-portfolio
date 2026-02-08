@@ -8,8 +8,11 @@ interface SocialNetworkListProps {
   loadingMode?: "eager" | "lazy";
 }
 
-const { socialNetworksList, orientation = "vertical", loadingMode = "eager" } =
-  Astro.props as SocialNetworkListProps;
+const {
+  socialNetworksList,
+  orientation = "vertical",
+  loadingMode = "eager",
+} = Astro.props as SocialNetworkListProps;
 
 const containerClasses =
   orientation === "horizontal"
@@ -25,7 +28,7 @@ const containerClasses =
           <Image
             src={socialNetwork.imageUrl}
             alt={`${socialNetwork.name} logo`}
-            class={`h-8 w-8 invert transition-transform duration-300 ease-in-out hover:scale-125 ${socialNetwork.class}`}
+            class={`neon-icon h-8 w-8 transition-transform duration-300 ease-in-out hover:scale-125 ${socialNetwork.class}`}
             loading={loadingMode}
           />
         </a>
@@ -33,3 +36,4 @@ const containerClasses =
     })
   }
 </div>
+

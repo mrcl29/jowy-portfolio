@@ -5,6 +5,7 @@ import { colabIcon, mezclaIcon, masteringIcon } from "@/constants/icons";
 
 export default {
   djPage: {
+    neonGlowColor: "#ffffff",
     title: "DJ",
     description:
       "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",
@@ -25,6 +26,7 @@ export default {
     },
   },
   producerPage: {
+    neonGlowColor: "#d612c6",
     title: "JOWY",
     description:
       "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",
@@ -60,6 +62,7 @@ export default {
     },
   },
   soundPage: {
+    neonGlowColor: "#1c22df",
     title: "SOUND DESIGNER",
     description:
       "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",

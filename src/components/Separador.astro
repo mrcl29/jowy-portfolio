@@ -1,1 +1,23 @@
-<div class="h-px w-full grow bg-gray-500"></div>
+---
+interface Props {
+  neonGlowColor?: string;
+}
+
+const { neonGlowColor } = Astro.props;
+---
+
+<div
+  class="h-px w-full grow transition-all duration-300"
+  style={neonGlowColor ? `--local-glow: ${neonGlowColor}` : ""}
+>
+</div>
+
+<style>
+  div {
+    background-color: var(--local-glow, var(--neon-glow-color, #6b7280));
+    box-shadow:
+      0 0 3px var(--local-glow, var(--neon-glow-color, transparent)),
+      0 0 6px var(--local-glow, var(--neon-glow-color, transparent)),
+      0 0 9px var(--local-glow, var(--neon-glow-color, transparent));
+  }
+</style>

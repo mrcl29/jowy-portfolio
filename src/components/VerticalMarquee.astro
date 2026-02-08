@@ -2,35 +2,48 @@
 interface Props {
   text: string;
   speed?: string; // Para controlar la velocidad (ej: '20s')
-  side: 'left' | 'right'; // Para decidir en qué lado ponerlo
+  side: "left" | "right"; // Para decidir en qué lado ponerlo
+  neonGlowColor?: string;
 }
 
-const { text, speed = "120s", side } = Astro.props;
+const { text, speed = "120s", side, neonGlowColor } = Astro.props;
 
 // Repetimos el texto varias veces para asegurar que cubra la pantalla antes de hacer el loop
-const content = Array(10).fill(text).join(' • ');
+const content = Array(10).fill(text).join(" • ");
 
 // Definimos la clase de posición según el prop 'side'
-const positionClass = side === 'left' ? 'left-50' : 'right-50';
-const rotationClass = side === 'right' ? 'rotate-180' : '';
+const positionClass = side === "left" ? "left-50" : "right-50";
+const rotationClass = side === "right" ? "rotate-180" : "";
+
+const textShadow = neonGlowColor
+  ? `0 0 5px ${neonGlowColor}, 0 0 10px ${neonGlowColor}, 0 0 20px ${neonGlowColor}`
+  : "none";
+
+const textColor = neonGlowColor || "#fff";
 ---
 
-<div class={`hidden min-[1455px]:block fixed top-0 bottom-0 ${positionClass} ${rotationClass} w-30 z-0 overflow-hidden pointer-events-none select-none opacity-60`}>
+<div
+  class={`hidden min-[1455px]:block fixed top-0 bottom-0 ${positionClass} ${rotationClass} w-30 z-0 overflow-hidden pointer-events-none select-none opacity-60`}
+>
   <div class="track">
     <div class="content">
-      {content.split(' • ').map((item) => (
-        <span class="writing-vertical">{item}</span>
-      ))}
+      {
+        content
+          .split(" • ")
+          .map((item) => <span class="writing-vertical">{item}</span>)
+      }
     </div>
     <div class="content">
-      {content.split(' • ').map((item) => (
-        <span class="writing-vertical">{item}</span>
-      ))}
+      {
+        content
+          .split(" • ")
+          .map((item) => <span class="writing-vertical">{item}</span>)
+      }
     </div>
   </div>
 </div>
 
-<style define:vars={{ speed }}>
+<style define:vars={{ speed, textShadow, textColor }}>
   /* El contenedor que se mueve hacia arriba */
   .track {
     display: flex;
@@ -52,7 +65,8 @@ const rotationClass = side === 'right' ? 'rotate-180' : '';
     font-weight: bold;
     text-transform: uppercase;
     white-space: nowrap;
-    color: #fff; /* Cambia esto según tu fondo */
+    color: var(--textColor); /* Cambia esto según tu fondo */
+    text-shadow: var(--textShadow);
   }
 
   /* Si quieres que las letras estén rotadas o verticales */
@@ -67,7 +81,9 @@ const rotationClass = side === 'right' ? 'rotate-180' : '';
       transform: translateY(0);
     }
     100% {
-      transform: translateY(-50%); /* Se mueve exactamente la mitad (un bloque completo) */
+      transform: translateY(
+        -50%
+      ); /* Se mueve exactamente la mitad (un bloque completo) */
     }
   }
 </style>

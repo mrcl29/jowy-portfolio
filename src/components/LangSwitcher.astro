@@ -13,9 +13,11 @@ const otherUrl = getRelativeLocaleUrl(otherLang, normalizedPath);
 
 <a
   href={otherUrl}
-  class="cursor-pointer flex items-center justify-center sm:text-sm md:text-base lg:text-lg z-9999"
+  class="z-9999 flex cursor-pointer items-center justify-center sm:text-sm md:text-base lg:text-lg"
 >
-  <div class="z-9998 transition-all duration-300 hover:scale-125">
+  <span
+    class="neon-style font-bold transition-all duration-300 hover:scale-125"
+  >
     {otherLang.toUpperCase()}
-  </div>
+  </span>
 </a>
