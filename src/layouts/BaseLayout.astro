@@ -27,6 +27,16 @@ const {
 
 const socialImage = new URL(image, Astro.url).href;
 const fullTitle = `${title} | Jowy Portfolio`;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Jowy",
+  url: Astro.site || Astro.url.origin,
+  image: socialImage,
+  description: description,
+  jobTitle: ["DJ", "Music Producer", "Sound Engineer"],
+};
 ---
 
 <!doctype html>
@@ -56,6 +66,21 @@ const fullTitle = `${title} | Jowy Portfolio`;
         image: socialImage,
       }}
     />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+    ></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXXXXX");
+    </script>
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

@@ -7,11 +7,7 @@ interface NavPhotoProps {
   altImage?: string;
 }
 
-const {
-  image,
-  className = "",
-  altImage = "",
-} = Astro.props as NavPhotoProps;
+const { image, className = "", altImage = "" } = Astro.props as NavPhotoProps;
 ---
 
 <div class="flex h-full items-end justify-center overflow-hidden">
@@ -19,6 +15,8 @@ const {
     src={image}
     alt={altImage}
     class={`pb-0 w-auto object-bottom ${className} grayscale transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:grayscale-0`}
+    widths={[360, 720, 1000]}
+    sizes="(max-width: 768px) 100vw, 50vw"
     loading="eager"
     fetchpriority="high"
     format="webp"

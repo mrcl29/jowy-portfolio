@@ -1,0 +1,33 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { defaultLang, locales } from "@/../i18n.config";
+import { getI18nInfo } from "@/utils/i18n";
+
+export function getStaticPaths() {
+  return locales.map((lang) => {
+    if (lang === defaultLang) {
+      return { params: { locale: undefined } };
+    }
+    return { params: { locale: lang } };
+  });
+}
+
+const { langParam } = await getI18nInfo(Astro.params.locale);
+const homeUrl = getRelativeLocaleUrl(defaultLang, "/");
+---
+
+<BaseLayout title="404 - Not Found" lang={langParam} neonGlowColor="#ffffff">
+  <div
+    class="flex h-screen w-full flex-col items-center justify-center gap-4 text-center"
+  >
+    <h1 class="neon-text-glow text-9xl font-bold text-white">404</h1>
+    <p class="text-2xl text-gray-300">Page not found</p>
+    <a
+      href={homeUrl}
+      class="mt-4 rounded bg-white/10 px-4 py-2 text-white transition-colors hover:bg-white/20"
+    >
+      Go Home
+    </a>
+  </div>
+</BaseLayout>

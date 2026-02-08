@@ -28,7 +28,7 @@ const safeUrl = url.includes("youtube.com/embed")
       poster && (
         <img
           src={poster}
-          alt=""
+          alt={`Poster for ${title}`}
           class="absolute inset-0 h-full w-full object-cover opacity-60 transition-opacity group-hover:opacity-40"
         />
       )
