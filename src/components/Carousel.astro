@@ -4,7 +4,7 @@ import { arrowLeft, arrowRight } from "@/constants/icons";
 import { Image } from "astro:assets";
 ---
 
-<div id="sets-carousel" class="relative w-full px-16">
+<div id="sets-carousel" class="relative w-full sm:px-8 lg:px-16">
   <!-- Contenedor principal con overflow hidden para recortar el slider -->
   <div class="overflow-hidden rounded-lg">
     <!-- Slider que se moverá horizontalmente -->
@@ -16,7 +16,7 @@ import { Image } from "astro:assets";
   <!-- Botones de Navegación -->
   <button
     id="prev-btn"
-    class="absolute top-1/2 left-2 -translate-y-1/2 transform cursor-pointer rounded-full bg-black/50 p-2 text-white transition-transform duration-300 hover:scale-125 disabled:cursor-not-allowed disabled:opacity-20"
+    class="absolute left-2 -translate-y-1/2 transform cursor-pointer rounded-full bg-black/50 p-2 text-white transition-transform duration-300 hover:scale-125 disabled:cursor-not-allowed disabled:opacity-20 sm:top-2/2 sm:p-0 md:top-1/2 lg:top-1/2"
     aria-label="Set anterior"
   >
     <Image
@@ -31,7 +31,7 @@ import { Image } from "astro:assets";
   </button>
   <button
     id="next-btn"
-    class="absolute top-1/2 right-2 -translate-y-1/2 transform cursor-pointer rounded-full bg-black/50 p-2 text-white transition-transform duration-300 hover:scale-125 disabled:cursor-not-allowed disabled:opacity-20"
+    class="absolute right-2 -translate-y-1/2 transform cursor-pointer rounded-full bg-black/50 p-2 text-white transition-transform duration-300 hover:scale-125 disabled:cursor-not-allowed disabled:opacity-20 sm:top-2/2 sm:p-0 md:top-1/2 lg:top-1/2"
     aria-label="Siguiente set"
   >
     <Image
