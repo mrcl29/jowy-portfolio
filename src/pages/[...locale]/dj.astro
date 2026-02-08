@@ -53,6 +53,8 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
           src={djBio}
           alt={djPage.bio.altImage}
           class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+          widths={[360, 720, 1200]}
+          sizes="(max-width: 768px) 100vw, 1200px"
           loading="eager"
         />
       </div>
@@ -61,9 +63,9 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
+        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.sets.title}
-        </h3>
+        </h2>
         <Separador />
       </div>
       <div class="flex h-auto w-full flex-col justify-center gap-5">
@@ -85,9 +87,9 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
+        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.calendar.title}
-        </h3>
+        </h2>
         <Separador />
       </div>
       <Calendar
@@ -99,9 +101,9 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
+        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {djPage.bio.title}
-        </h3>
+        </h2>
         <Separador />
       </div>
       <div class="flex w-full flex-col items-center gap-8">

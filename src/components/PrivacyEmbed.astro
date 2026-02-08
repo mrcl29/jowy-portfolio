@@ -1,0 +1,98 @@
+---
+interface Props {
+  url: string;
+  title: string;
+  poster?: string; // Optional: Image to show before loading
+  class?: string;
+}
+
+const { url, title, poster, class: className } = Astro.props;
+
+// Automatically switch to youtube-nocookie if a standard YouTube URL is provided
+const safeUrl = url.includes("youtube.com/embed")
+  ? url.replace("youtube.com", "youtube-nocookie.com")
+  : url;
+---
+
+<div
+  class:list={[
+    "privacy-embed group relative w-full overflow-hidden bg-gray-900",
+    className,
+  ]}
+>
+  {/* Facade: Shown initially. No cookies set here. */}
+  <div
+    class="facade absolute inset-0 z-10 flex cursor-pointer flex-col items-center justify-center bg-cover bg-center transition-opacity duration-300"
+  >
+    {
+      poster && (
+        <img
+          src={poster}
+          alt=""
+          class="absolute inset-0 h-full w-full object-cover opacity-60 transition-opacity group-hover:opacity-40"
+        />
+      )
+    }
+
+    <button
+      class="load-btn relative z-20 rounded-full bg-white/20 p-4 text-white backdrop-blur-md transition-transform duration-300 group-hover:scale-110 group-hover:bg-white/30"
+      aria-label={`Load ${title}`}
+    >
+      {/* Play Icon */}
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="48"
+        height="48"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path d="M8 5v14l11-7z"></path>
+      </svg>
+    </button>
+    <span
+      class="relative z-20 mt-3 text-sm font-semibold text-white drop-shadow-md"
+      >Load Content</span
+    >
+  </div>
+
+  {/* Container where iframe will be injected on click */}
+  <div
+    class="iframe-container relative h-full w-full"
+    data-src={safeUrl}
+    data-title={title}
+  >
+  </div>
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const embeds = document.querySelectorAll(".privacy-embed");
+
+    embeds.forEach((embed) => {
+      const facade = embed.querySelector(".facade") as HTMLElement;
+      const container = embed.querySelector(".iframe-container");
+
+      if (facade && container) {
+        facade.addEventListener("click", () => {
+          const src = container.getAttribute("data-src");
+          const title = container.getAttribute("data-title");
+
+          if (src && !container.querySelector("iframe")) {
+            const iframe = document.createElement("iframe");
+            iframe.src = src;
+            iframe.title = title || "Embedded content";
+            iframe.style.width = "100%";
+            iframe.style.height = "100%";
+            iframe.style.border = "none";
+            iframe.allow =
+              "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+
+            container.appendChild(iframe);
+            facade.style.display = "none";
+          }
+        });
+      }
+    });
+  });
+</script>

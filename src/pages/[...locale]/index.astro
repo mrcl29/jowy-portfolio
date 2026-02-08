@@ -25,6 +25,10 @@ const { indexPage } = dictionary; // Contenido específico de la página princip
   description={indexPage.description}
   isLanding={true}
 >
+  <h1 class="sr-only">{indexPage.title} - {indexPage.description}</h1>
+  <p class="sr-only">
+    Bienvenido al portafolio de Jowy. {indexPage.description}
+  </p>
   <div
     id="landing-sections"
     class="flex min-h-screen w-full flex-col overflow-hidden md:flex-row"

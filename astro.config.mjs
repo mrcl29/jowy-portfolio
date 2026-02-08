@@ -7,7 +7,7 @@ import { defaultLang, locales } from "./i18n.config";
 
 // https://astro.build/config
 export default defineConfig({
-  // site: "https://tusitio.com", // cambia a tu dominio
+  site: "https://jowy-portfolio.vercel.app/", // cambia a tu dominio
   vite: {
     plugins: [tailwindcss()],
   },

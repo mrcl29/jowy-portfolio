@@ -1,8 +1,6 @@
 ---
-// scr/layout/BaseLayout.astro
 import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
-// import ThemeButton from "@/components/ThemeButton.astro";
 import LangSwitcher from "@/components/LangSwitcher.astro";
 import { defaultLang } from "../../i18n.config";
 import { djCutPhoto, soundCutPhoto, producerPhoto } from "@/constants/photos";
@@ -32,6 +30,7 @@ const {
     <SEO
       title=`${title} | Jowy Portfolio`
       description={description}
+      canonical={Astro.url.href}
       openGraph={{
         basic: {
           title,
@@ -39,7 +38,7 @@ const {
           image: "https://tusitio.com/og-image.png",
         },
         optional: {
-          siteName: "DJ Jowy",
+          siteName: "Jowy Portfolio",
         },
       }}
       twitter={{
@@ -51,30 +50,13 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script is:inline>
       (function () {
-        // try {
-        //   const storedTheme = localStorage.getItem("theme");
-        //   const prefersDark = window.matchMedia(
-        //     "(prefers-color-scheme: dark)"
-        //   ).matches;
-        //   const theme = storedTheme || (prefersDark ? "dark" : "light");
-
-        //   const html = document.documentElement;
-        //   if (theme === "dark") {
-        //     html.classList.add("dark");
-        //     html.setAttribute("data-theme", "github-dark-default");
-        //   } else {
-        //     html.classList.remove("dark");
-        //     html.setAttribute("data-theme", "github-light-default");
-        //   }
-        // } catch (e) {
-        //   // fallback silencioso
-        // }
         const html = document.documentElement;
         html.classList.add("dark");
         html.setAttribute("data-theme", "github-dark-default");
       })();
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
 
     <link rel="preload" as="image" href={djCutPhoto.src} />
@@ -127,7 +109,6 @@ const {
         ? "opacity-0 transition-opacity duration-700 ease-in-out"
         : ""}
     >
-      <!-- <ThemeButton /> -->
       <slot />
     </div>
     <script>

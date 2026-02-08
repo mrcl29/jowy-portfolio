@@ -1,21 +1,21 @@
 ---
+import PrivacyEmbed from "./PrivacyEmbed.astro";
+
 interface YouTubePlayerProps {
   videoId: string;
   title: string;
   loading?: "lazy" | "eager";
 }
 
-const { videoId, title, loading = "eager" } = Astro.props as YouTubePlayerProps;
+const { videoId, title } = Astro.props as YouTubePlayerProps;
 
 const url = `https://www.youtube.com/embed/${videoId}`;
+const poster = `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`;
 ---
 
-<iframe
-  class="h-auto min-h-100 w-full"
-  src={url}
+<PrivacyEmbed
+  url={url}
   title={title}
-  frameborder="0"
-  referrerpolicy="strict-origin-when-cross-origin"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-  loading={loading}></iframe>
+  poster={poster}
+  class="aspect-video h-auto min-h-100 w-full rounded-lg"
+/>

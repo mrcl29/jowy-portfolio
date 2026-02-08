@@ -46,6 +46,8 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
           src={djBio}
           alt={soundPage.bio.altImage}
           class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+          widths={[360, 720, 1200]}
+          sizes="(max-width: 768px) 100vw, 1200px"
           loading="eager"
         />
       </div>
@@ -54,9 +56,9 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
+        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {soundPage.media.title}
-        </h3>
+        </h2>
         <Separador />
       </div>
       <div
@@ -70,9 +72,9 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
+        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {soundPage.design.title}
-        </h3>
+        </h2>
         <Separador />
       </div>
       <div
@@ -86,9 +88,9 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
+        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {soundPage.tools.title}
-        </h3>
+        </h2>
         <Separador />
       </div>
       <div
@@ -102,9 +104,9 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
     <section class="animate-on-scroll w-full">
       <div class="mb-4 flex w-full items-center gap-4">
         <Separador />
-        <h3 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
+        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
           {soundPage.bio.title}
-        </h3>
+        </h2>
         <Separador />
       </div>
       <div class="flex w-full flex-col items-center gap-8">

@@ -1,5 +1,4 @@
 // src/dictionaries/en.ts
-import { title } from "framer-motion/client";
 import { djCutPhoto, soundCutPhoto, producerPhoto } from "../constants/photos"; // Asumiendo que las fotos están aquí
 import { colabIcon, mezclaIcon, masteringIcon } from "@/constants/icons";
 

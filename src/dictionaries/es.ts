@@ -1,5 +1,4 @@
 // src/dictionaries/es.ts
-import { image, title } from "framer-motion/client";
 import { djCutPhoto, soundCutPhoto, producerPhoto } from "../constants/photos"; // Asumiendo que las fotos están aquí
 import { colabIcon, mezclaIcon, masteringIcon } from "@/constants/icons";
 
@@ -63,7 +62,7 @@ export default {
   },
   soundPage: {
     neonGlowColor: "#1c22df",
-    title: "SOUND DESIGNER",
+    title: "Sound Designer",
     description:
       "Jowy: DJ, producer and sound engineer. Explore my portfolio of music, track production and professional audio services.",
     heading: "YOU ARE HOUSED",
@@ -119,6 +118,7 @@ Mi camino ha sido de aprendizaje constante, de probar, equivocarse y mejorar, si
         mask: "mask-fade-top-bottom-right translate-y-20 max-h-full",
         link: "dj", // Usamos pathSegment en lugar de link completo
         neonGlowColor: "#ffffff", // Color para el efecto neón
+        alt: "Jowy DJ actuando en directo con auriculares y mesa de mezclas",
       },
       {
         image: producerPhoto,
@@ -127,6 +127,7 @@ Mi camino ha sido de aprendizaje constante, de probar, equivocarse y mejorar, si
         mask: "-translate-y-25 px-10 max-h-[70%]",
         link: "producer", // Usamos pathSegment en lugar de link completo
         neonGlowColor: "#b616a8",
+        alt: "Retrato artístico de Jowy, productor musical",
       },
       {
         image: soundCutPhoto,
@@ -135,6 +136,7 @@ Mi camino ha sido de aprendizaje constante, de probar, equivocarse y mejorar, si
         mask: "mask-fade-top-bottom-left translate-y-30 -translate-x-15 max-h-[90%]",
         link: "sound",
         neonGlowColor: "#1c22df",
+        alt: "Jowy trabajando en estudio de sonido con equipo profesional",
       },
     ],
   },
