@@ -39,15 +39,7 @@ const mainStyle = neonGlowColor ? `--neon-glow-color: ${neonGlowColor};` : "";
   />
 </a>
 
-{
-  socialNetworksList && (
-    <div class="fixed top-1/2 left-4 z-50 -translate-y-1/2">
-      <SocialNetworksListComponent socialNetworksList={socialNetworksList} />
-    </div>
-  )
-}
-
-<main class="mx-auto max-w-5xl px-20 py-12" style={mainStyle}>
+<main class="mx-auto lg:max-w-5xl px-5 lg:px-20 py-12" style={mainStyle}>
     {
         phrase && (
           <VerticalMarquee text={phrase} side="left" neonGlowColor={neonGlowColor} />
@@ -55,19 +47,27 @@ const mainStyle = neonGlowColor ? `--neon-glow-color: ${neonGlowColor};` : "";
         )
       }
   <h1
-    class="neon-text-glow mb-15 flex w-full justify-center align-middle text-6xl font-extrabold"
+    class="neon-text-glow mb-15 flex w-full justify-center align-middle lg:text-6xl md:text-5xl text-3xl font-extrabold"
   >
     {title}
   </h1>
   <div
-    class="flex min-h-screen w-full flex-col items-center gap-8 overflow-hidden"
+    class="flex min-h-screen w-full flex-col items-center gap-8 overflow-hidden mb-10"
   >
     <slot />
   </div>
+
+  {
+  socialNetworksList && (
+    <div class="lg:fixed lg:top-1/2 lg:left-4 flex z-50 lg:-translate-y-1/2 items-center justify-center">
+      <SocialNetworksListComponent socialNetworksList={socialNetworksList} orientation="responsive" />
+    </div>
+  )
+}
 </main>
 
 <footer
-  class="relative z-10 mt-20 w-full border-t border-gray-700 px-6 py-8 text-center text-sm text-gray-400 bg-black"
+  class="relative z-10 pb-15 mt-10 lg:mt-20 w-full border-t border-gray-700 px-6 py-8 text-center text-sm text-gray-400 bg-black"
 >
   <div
     class="w-full flex flex-col items-center justify-between gap-8 md:flex-row px-25"

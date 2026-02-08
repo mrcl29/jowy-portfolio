@@ -4,7 +4,7 @@ import { type SocialNetworksList } from "@/types/socialNetworksList.d";
 
 interface SocialNetworkListProps {
   socialNetworksList: SocialNetworksList;
-  orientation?: "horizontal" | "vertical";
+  orientation?: "horizontal" | "vertical" | "responsive";
   loadingMode?: "eager" | "lazy";
 }
 
@@ -17,7 +17,9 @@ const {
 const containerClasses =
   orientation === "horizontal"
     ? "flex flex-row items-center justify-center gap-6"
-    : "flex flex-col items-center justify-center gap-6";
+    : orientation === "vertical"
+      ? "flex flex-col items-center justify-center gap-6"
+      : "flex flex-row lg:flex-col items-center justify-center gap-6";
 ---
 
 <div class={containerClasses}>
@@ -36,4 +38,3 @@ const containerClasses =
     })
   }
 </div>
-
