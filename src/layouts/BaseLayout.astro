@@ -13,6 +13,7 @@ interface BaseLayoutProps {
   lang: string;
   isLanding?: boolean;
   neonGlowColor?: string;
+  image?: string;
 }
 
 const {
@@ -21,28 +22,38 @@ const {
   lang = defaultLang,
   isLanding = false,
   neonGlowColor,
+  image = djCutPhoto.src,
 } = Astro.props as BaseLayoutProps;
+
+const socialImage = new URL(image, Astro.url).href;
+const fullTitle = `${title} | Jowy Portfolio`;
 ---
 
 <!doctype html>
 <html lang={lang} class="scroll-smooth" transition:animate="none">
   <head>
     <SEO
-      title=`${title} | Jowy Portfolio`
+      title={fullTitle}
       description={description}
       canonical={Astro.url.href}
       openGraph={{
         basic: {
-          title,
+          title: fullTitle,
           type: "website",
-          image: "https://tusitio.com/og-image.png",
+          image: socialImage,
+          url: Astro.url.href,
         },
         optional: {
           siteName: "Jowy Portfolio",
+          description: description,
+          locale: lang,
         },
       }}
       twitter={{
         card: "summary_large_image",
+        title: fullTitle,
+        description: description,
+        image: socialImage,
       }}
     />
 
@@ -58,6 +69,23 @@ const {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Optimización de fuentes: Preconnect y carga no bloqueante -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
+        rel="stylesheet"
+        type="text/css"
+      />
+    </noscript>
 
     <link rel="preload" as="image" href={djCutPhoto.src} />
     <link rel="preload" as="image" href={soundCutPhoto.src} />
