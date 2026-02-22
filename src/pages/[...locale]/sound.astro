@@ -14,12 +14,12 @@ import { djEmail } from "@/constants/email";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
-  return locales.map((lang) => {
-    if (lang === defaultLang) {
-      return { params: { locale: undefined } };
-    }
-    return { params: { locale: lang } };
-  });
+    return locales.map((lang) => {
+        if (lang === defaultLang) {
+            return { params: { locale: undefined } };
+        }
+        return { params: { locale: lang } };
+    });
 }
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
@@ -29,137 +29,164 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
 ---
 
 <BaseLayout
-  title={soundPage.title}
-  lang={langParam}
-  description={soundPage.description}
-  neonGlowColor={soundPage.neonGlowColor}
->
-  <PageLayout
     title={soundPage.title}
-    phrase={soundPage.heading}
-    socialNetworksList={soundSocialNetworksList}
+    lang={langParam}
+    description={soundPage.description}
     neonGlowColor={soundPage.neonGlowColor}
-  >
-    <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
-      <div class="relative h-150 w-full md:h-150">
-        <Image
-          src={djBio}
-          alt={soundPage.bio.altImage}
-          class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
-          widths={[360, 720, 1200]}
-          sizes="(max-width: 768px) 100vw, 1200px"
-          loading="eager"
-        />
-      </div>
-    </div>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {soundPage.media.title}
-        </h2>
-        <Separador />
-      </div>
-      <div
-        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center md:grid-cols-2"
-      >
-        <!-- TODO -->
-        🏗️ Coming soon...
-      </div>
-    </section>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {soundPage.design.title}
-        </h2>
-        <Separador />
-      </div>
-      <div
-        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
-      >
-        <!-- TODO -->
-        🏗️ Coming soon...
-      </div>
-    </section>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {soundPage.tools.title}
-        </h2>
-        <Separador />
-      </div>
-      <div
-        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
-      >
-        <!-- TODO -->
-        🏗️ Coming soon...
-      </div>
-    </section>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {soundPage.bio.title}
-        </h2>
-        <Separador />
-      </div>
-      <div class="flex w-full flex-col items-center gap-8">
-        <p class="neon-text w-full text-justify text-base md:text-lg">
-          {soundPage.bio.text}
-        </p>
-      </div>
-      <div
-        class="mt-10 flex w-full items-center justify-center sm:gap-4 md:gap-8 lg:gap-8"
-      >
-        <p class="neon-text text-center text-base md:text-lg">
-          {common.contactMe}
-        </p>
-        <div
-          id="copy-email"
-          class="neon-text cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
-          title={common.copyToClipboard ?? "Copiar al portapapeles"}
-        >
-          {djEmail}
+>
+    <PageLayout
+        title={soundPage.title}
+        phrase={soundPage.heading}
+        socialNetworksList={soundSocialNetworksList}
+        neonGlowColor={soundPage.neonGlowColor}
+    >
+        <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
+            <div class="relative h-150 w-full md:h-150">
+                <Image
+                    src={djBio}
+                    alt={soundPage.bio.altImage}
+                    class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+                    widths={[360, 720, 1200]}
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                    loading="eager"
+                />
+            </div>
         </div>
-      </div>
-    </section>
-  </PageLayout>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {soundPage.media.title}
+                </h2>
+                <Separador />
+            </div>
+            <div
+                class="mt-5 flex w-full flex-row flex-wrap items-start justify-center md:grid-cols-2"
+            >
+                <p
+                    class="neon-text flex w-full flex-row items-start justify-center text-justify text-base md:text-lg"
+                >
+                    <!-- TODO: Implementar -->
+                    🏗️ Coming soon...
+                </p>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {soundPage.design.title}
+                </h2>
+                <Separador />
+            </div>
+            <div
+                class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
+            >
+                <div class="neon-text flex flex-col items-center text-center">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1em"
+                        height="1em"
+                        viewBox="0 0 24 24"
+                        class="neon-icon h-40 w-40 transition-transform duration-300 hover:scale-110"
+                        ><title>dolby-atmos</title><path
+                            fill="#000000"
+                            d="M15.413 8.291h.589v3.887h-.589Zm-3.443 7.238h-.007l-.786-2.016h-.571v2.624h.356v-2.194h.007l.868 2.194h.233l.871-2.194h.008v2.194h.367v-2.624h-.571Zm-4.421-1.694h.842v2.302h.367v-2.302H9.6v-.322H7.549Zm11.711 1.032a1 1 0 0 0-.236-.13a4 4 0 0 0-.257-.088l-.2-.069a.7.7 0 0 1-.162-.081a.4.4 0 0 1-.109-.116a.33.33 0 0 1-.041-.171a.36.36 0 0 1 .044-.182a.4.4 0 0 1 .115-.126a.5.5 0 0 1 .156-.074a.6.6 0 0 1 .172-.023a.6.6 0 0 1 .285.065a.6.6 0 0 1 .2.167l.246-.239a.8.8 0 0 0-.306-.208a1.1 1.1 0 0 0-.409-.078a1.2 1.2 0 0 0-.309.041a.8.8 0 0 0-.274.128a.7.7 0 0 0-.2.222a.75.75 0 0 0-.019.61a.6.6 0 0 0 .148.2a1 1 0 0 0 .208.13a2 2 0 0 0 .236.087q.12.038.227.075a1 1 0 0 1 .189.09a.4.4 0 0 1 .129.129a.35.35 0 0 1 .047.188a.4.4 0 0 1-.046.192a.4.4 0 0 1-.118.132a.5.5 0 0 1-.16.078a.7.7 0 0 1-.176.024a.66.66 0 0 1-.321-.08a.66.66 0 0 1-.236-.212l-.272.229a.9.9 0 0 0 .365.272a1.2 1.2 0 0 0 .457.091a1.1 1.1 0 0 0 .322-.046a.8.8 0 0 0 .277-.139a.7.7 0 0 0 .192-.236a.74.74 0 0 0 .072-.337a.63.63 0 0 0-.067-.308a.6.6 0 0 0-.169-.207m2.097-5.38l-.767 1.724l-.767-1.724h-.643l1.089 2.446l-.022.048l-.008.019l-.239.53a.315.315 0 0 1-.415.159l-.084-.037l-.164.369l-.074.164l.2.091a.764.764 0 0 0 1.006-.386L22 9.487Zm-9.314.745A1.944 1.944 0 0 0 10.1 8.29H8.7v3.883h1.4a1.944 1.944 0 0 0 1.943-1.941M9.7 11.585h-.412V8.879h.812a1.353 1.353 0 0 1 0 2.706zm8.155-2.098a1.33 1.33 0 0 0-.769.242V8.291H16.5v3.887h.59v-.243a1.345 1.345 0 1 0 .769-2.448zm0 2.151a.81.81 0 0 1-.769-.556a.8.8 0 0 1 0-.511a.811.811 0 1 1 .769 1.067m-1.243 2.237a1.3 1.3 0 0 0-.42-.266a1.52 1.52 0 0 0-1.056 0a1.3 1.3 0 0 0-.417.266a1.2 1.2 0 0 0-.275.413a1.48 1.48 0 0 0 0 1.064a1.2 1.2 0 0 0 .275.416a1.3 1.3 0 0 0 .417.272a1.5 1.5 0 0 0 1.056 0a1.3 1.3 0 0 0 .42-.272a1.3 1.3 0 0 0 .276-.416a1.45 1.45 0 0 0 0-1.064a1.2 1.2 0 0 0-.276-.413m-.067 1.338a1 1 0 0 1-.191.319a.9.9 0 0 1-.3.213a.95.95 0 0 1-.391.078a.9.9 0 0 1-.388-.078a.9.9 0 0 1-.3-.213a1 1 0 0 1-.19-.319a1.2 1.2 0 0 1-.067-.391a1.1 1.1 0 0 1 .067-.386a1 1 0 0 1 .189-.319a.9.9 0 0 1 .3-.217a1 1 0 0 1 .782 0a.9.9 0 0 1 .3.217a1 1 0 0 1 .191.319a1.1 1.1 0 0 1 .067.386a1.2 1.2 0 0 1-.069.391M2.573 8.291H2v3.882h.573a1.941 1.941 0 1 0 0-3.882m11.114 3.886a1.346 1.346 0 1 0-1.345-1.345a1.346 1.346 0 0 0 1.345 1.345m0-2.161a.811.811 0 1 1-.811.811a.815.815 0 0 1 .811-.811m-6.164 2.157V8.291h-.572a1.941 1.941 0 1 0 0 3.882zm-1.885 1.34L4.5 16.137h.408l.263-.644h1.246l.267.644H7.1l-1.128-2.624ZM5.3 15.17l.493-1.231l.489 1.231Z"
+                        ></path></svg
+                    >
+                </div>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {soundPage.education.title}
+                </h2>
+                <Separador />
+            </div>
+            <div
+                class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
+            >
+                <p
+                    class="neon-text flex w-full flex-row items-start justify-center text-justify text-base md:text-lg"
+                >
+                    <!-- TODO: Implementar -->
+                    🏗️ Coming soon...
+                </p>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {soundPage.bio.title}
+                </h2>
+                <Separador />
+            </div>
+            <div class="flex w-full flex-col items-center gap-8">
+                <p class="neon-text w-full text-justify text-base md:text-lg">
+                    {soundPage.bio.text}
+                </p>
+            </div>
+            <div
+                class="mt-10 flex w-full items-center justify-center sm:gap-4 md:gap-8 lg:gap-8"
+            >
+                <p class="neon-text text-center text-base md:text-lg">
+                    {common.contactMe}
+                </p>
+                <div
+                    id="copy-email"
+                    class="neon-text cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
+                    title={common.copyToClipboard ?? "Copiar al portapapeles"}
+                >
+                    {djEmail}
+                </div>
+            </div>
+        </section>
+    </PageLayout>
 </BaseLayout>
 
 <script>
-  import { initScrollAnimations } from "@/utils/animations";
-  // Ejecutamos la función en el evento 'astro:page-load'
-  // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
-  document.addEventListener("astro:page-load", () => {
-    initScrollAnimations();
+    import { initScrollAnimations } from "@/utils/animations";
+    // Ejecutamos la función en el evento 'astro:page-load'
+    // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
+    document.addEventListener("astro:page-load", () => {
+        initScrollAnimations();
 
-    const emailSpan = document.getElementById("copy-email");
-    if (!emailSpan) return;
+        const emailSpan = document.getElementById("copy-email");
+        if (!emailSpan) return;
 
-    const originalText = emailSpan.textContent;
-    // Asumimos que el diccionario i18n tendrá una clave para el texto "Copiado"
-    // Si no, usamos un valor por defecto.
-    const copiedMessage =
-      emailSpan.dataset.copiedText ??
-      (document.documentElement.lang === "es" ? "¡Copiado!" : "Copied!");
+        const originalText = emailSpan.textContent;
+        // Asumimos que el diccionario i18n tendrá una clave para el texto "Copiado"
+        // Si no, usamos un valor por defecto.
+        const copiedMessage =
+            emailSpan.dataset.copiedText ??
+            (document.documentElement.lang === "es" ? "¡Copiado!" : "Copied!");
 
-    const handleClick = () => {
-      if (!originalText) return;
+        const handleClick = () => {
+            if (!originalText) return;
 
-      navigator.clipboard.writeText(originalText).then(() => {
-        emailSpan.textContent = copiedMessage;
-        setTimeout(() => {
-          emailSpan.textContent = originalText;
-        }, 1000);
-      });
-    };
+            navigator.clipboard.writeText(originalText).then(() => {
+                emailSpan.textContent = copiedMessage;
+                setTimeout(() => {
+                    emailSpan.textContent = originalText;
+                }, 1000);
+            });
+        };
 
-    emailSpan.addEventListener("click", handleClick);
-  });
+        emailSpan.addEventListener("click", handleClick);
+    });
 </script>

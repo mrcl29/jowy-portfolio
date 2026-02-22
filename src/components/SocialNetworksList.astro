@@ -1,40 +1,44 @@
 ---
 import { Image } from "astro:assets";
 import { type SocialNetworksList } from "@/types/socialNetworksList.d";
+import { djEmail } from "@/constants/email";
+import { div } from "framer-motion/client";
+import Mail from "./Mail.astro";
 
 interface SocialNetworkListProps {
-  socialNetworksList: SocialNetworksList;
-  orientation?: "horizontal" | "vertical" | "responsive";
-  loadingMode?: "eager" | "lazy";
+    socialNetworksList: SocialNetworksList;
+    orientation?: "horizontal" | "vertical" | "responsive";
+    loadingMode?: "eager" | "lazy";
 }
 
 const {
-  socialNetworksList,
-  orientation = "vertical",
-  loadingMode = "eager",
+    socialNetworksList,
+    orientation = "vertical",
+    loadingMode = "eager",
 } = Astro.props as SocialNetworkListProps;
 
 const containerClasses =
-  orientation === "horizontal"
-    ? "flex flex-row items-center justify-center gap-6"
-    : orientation === "vertical"
-      ? "flex flex-col items-center justify-center gap-6"
-      : "flex flex-row lg:flex-col items-center justify-center gap-6";
+    orientation === "horizontal"
+        ? "flex flex-row items-center justify-center gap-6"
+        : orientation === "vertical"
+          ? "flex flex-col items-center justify-center gap-6"
+          : "flex flex-row lg:flex-col items-center justify-center gap-6";
 ---
 
 <div class={containerClasses}>
-  {
-    socialNetworksList.map((socialNetwork) => {
-      return (
-        <a href={socialNetwork.url} target="_blank">
-          <Image
-            src={socialNetwork.imageUrl}
-            alt={`${socialNetwork.name} logo`}
-            class={`neon-icon h-8 w-8 transition-transform duration-300 ease-in-out hover:scale-125 ${socialNetwork.class}`}
-            loading={loadingMode}
-          />
-        </a>
-      );
-    })
-  }
+    {
+        socialNetworksList.map((socialNetwork) => {
+            return (
+                <a href={socialNetwork.url} target="_blank">
+                    <Image
+                        src={socialNetwork.imageUrl}
+                        alt={`${socialNetwork.name} logo`}
+                        class={`neon-icon h-8 w-8 transition-transform duration-300 ease-in-out hover:scale-125 ${socialNetwork.class}`}
+                        loading={loadingMode}
+                    />
+                </a>
+            );
+        })
+    }
+    <Mail email={djEmail} />
 </div>

@@ -8,212 +8,226 @@ import Mail from "@/components/Mail.astro";
 import { djEmail } from "@/constants/email";
 
 interface BaseLayoutProps {
-  title?: string;
-  description?: string;
-  lang: string;
-  isLanding?: boolean;
-  neonGlowColor?: string;
-  image?: string;
+    title?: string;
+    description?: string;
+    lang: string;
+    isLanding?: boolean;
+    neonGlowColor?: string;
+    image?: string;
 }
 
 const {
-  title = "Jowy",
-  description = "Productor musical · DJ · Sonidista",
-  lang = defaultLang,
-  isLanding = false,
-  neonGlowColor,
-  image = djCutPhoto.src,
+    title = "Jowy",
+    description = "Productor musical · DJ · Sonidista",
+    lang = defaultLang,
+    isLanding = false,
+    neonGlowColor,
+    image = djCutPhoto.src,
 } = Astro.props as BaseLayoutProps;
 
 const socialImage = new URL(image, Astro.url).href;
 const fullTitle = `${title} | Jowy Portfolio`;
 
 const schema = {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  name: "Jowy",
-  url: Astro.site || Astro.url.origin,
-  image: socialImage,
-  description: description,
-  jobTitle: ["DJ", "Music Producer", "Sound Engineer"],
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: "Jowy",
+    url: Astro.site || Astro.url.origin,
+    image: socialImage,
+    description: description,
+    jobTitle: ["DJ", "Music Producer", "Sound Engineer"],
 };
 ---
 
 <!doctype html>
 <html lang={lang} class="scroll-smooth" transition:animate="none">
-  <head>
-    <SEO
-      title={fullTitle}
-      description={description}
-      canonical={Astro.url.href}
-      openGraph={{
-        basic: {
-          title: fullTitle,
-          type: "website",
-          image: socialImage,
-          url: Astro.url.href,
-        },
-        optional: {
-          siteName: "Jowy Portfolio",
-          description: description,
-          locale: lang,
-        },
-      }}
-      twitter={{
-        card: "summary_large_image",
-        title: fullTitle,
-        description: description,
-        image: socialImage,
-      }}
-    />
+    <head>
+        <SEO
+            title={fullTitle}
+            description={description}
+            canonical={Astro.url.href}
+            openGraph={{
+                basic: {
+                    title: fullTitle,
+                    type: "website",
+                    image: socialImage,
+                    url: Astro.url.href,
+                },
+                optional: {
+                    siteName: "Jowy Portfolio",
+                    description: description,
+                    locale: lang,
+                },
+            }}
+            twitter={{
+                card: "summary_large_image",
+                title: fullTitle,
+                description: description,
+                image: socialImage,
+            }}
+        />
 
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+        <!-- Structured Data (JSON-LD) -->
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
-    ></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-XXXXXXXXXX");
-    </script>
+        <!-- Google Analytics -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"
+        ></script>
+        <script is:inline>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-XXXXXXXXXX");
+        </script>
 
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script is:inline>
-      (function () {
-        const html = document.documentElement;
-        html.classList.add("dark");
-        html.setAttribute("data-theme", "github-dark-default");
-      })();
-    </script>
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <meta name="generator" content={Astro.generator} />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script is:inline>
+            (function () {
+                const html = document.documentElement;
+                html.classList.add("dark");
+                html.setAttribute("data-theme", "github-dark-default");
+            })();
+        </script>
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <meta name="generator" content={Astro.generator} />
 
-    <!-- Optimización de fuentes: Preconnect y carga no bloqueante -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
-        rel="stylesheet"
-        type="text/css"
-      />
-    </noscript>
+        <!-- Optimización de fuentes: Preconnect y carga no bloqueante -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+            <link
+                href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
+                rel="stylesheet"
+                type="text/css"
+            />
+        </noscript>
 
-    <link rel="preload" as="image" href={djCutPhoto.src} />
-    <link rel="preload" as="image" href={soundCutPhoto.src} />
-    <link rel="preload" as="image" href={producerPhoto.src} />
+        <link rel="preload" as="image" href={djCutPhoto.src} />
+        <link rel="preload" as="image" href={soundCutPhoto.src} />
+        <link rel="preload" as="image" href={producerPhoto.src} />
 
-    <ClientRouter />
-  </head>
-  <body
-    class="overflow-y-auto bg-primary-dark font-sans text-text-dark transition-colors duration-500 ease-in-out [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:m-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-neutral-700"
-    transition:animate="fade"
-    style={neonGlowColor ? `--neon-glow-color: ${neonGlowColor};` : ""}
-  >
-    {
-      isLanding && (
-        <div
-          id="intro-overlay"
-          class="fixed inset-0 z-[99999] flex h-full w-full items-center justify-center bg-black transition-opacity duration-1000 ease-in-out"
-        >
-          <div class="flex h-full w-full items-center justify-center overflow-hidden text-6xl font-bold text-white md:text-9xl">
-            <span class="neon-style inline-block translate-y-20 font-extrabold opacity-0 transition-all duration-700 ease-out">
-              J
-            </span>
-            <span class="neon-style inline-block translate-y-20 font-extrabold opacity-0 transition-all delay-100 duration-700 ease-out">
-              O
-            </span>
-            <span class="neon-style inline-block translate-y-20 font-extrabold opacity-0 transition-all delay-200 duration-700 ease-out">
-              W
-            </span>
-            <span class="neon-style inline-block translate-y-20 font-extrabold opacity-0 transition-all delay-300 duration-700 ease-out">
-              Y
-            </span>
-          </div>
-        </div>
-      )
-    }
-    <div
-      id="nav-icons"
-      class={`fixed top-5 right-5 z-9999 flex flex-row justify-center gap-8 pt-[1dvh] align-middle ${
-        isLanding ? "opacity-0 transition-opacity duration-700 ease-in-out" : ""
-      }`}
+        <ClientRouter />
+    </head>
+    <body
+        class="overflow-y-auto bg-primary-dark font-sans text-text-dark transition-colors duration-500 ease-in-out [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 [&::-webkit-scrollbar-track]:m-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 dark:[&::-webkit-scrollbar-track]:bg-neutral-700"
+        transition:animate="fade"
+        style={neonGlowColor ? `--neon-glow-color: ${neonGlowColor};` : ""}
     >
-      <Mail email={djEmail} />
-      <LangSwitcher currentLang={lang} />
-    </div>
-    <div
-      id="main-wrapper"
-      data-is-landing={isLanding ? "true" : "false"}
-      class={isLanding
-        ? "opacity-0 transition-opacity duration-700 ease-in-out"
-        : ""}
-    >
-      <slot />
-    </div>
-    <script>
-      document.addEventListener("astro:page-load", () => {
-        const main = document.getElementById("main-wrapper");
-        const navIcons = document.getElementById("nav-icons");
-        const overlay = document.getElementById("intro-overlay");
-        const isLanding = main?.dataset.isLanding === "true";
-
-        if (!isLanding) {
-          (window as any).hasPlayedIntro = false;
-        } else {
-          const chars = document.querySelectorAll("#intro-overlay .neon-style");
-
-          if (!(window as any).hasPlayedIntro) {
-            // 1. Animación de entrada de letras (staggered)
-            setTimeout(() => {
-              chars.forEach((char) => {
-                char.classList.remove("opacity-0", "translate-y-20");
-              });
-            }, 100);
-
-            // 2. Animación de salida de letras
-            setTimeout(() => {
-              chars.forEach((char) => {
-                char.classList.add("opacity-0", "translate-y-20");
-              });
-            }, 1300);
-
-            // 3. Salida del overlay y entrada del contenido
-            setTimeout(() => {
-              if (overlay) overlay.classList.add("opacity-0");
-              if (main) main.classList.remove("opacity-0");
-              if (navIcons) navIcons.classList.remove("opacity-0");
-              window.dispatchEvent(new CustomEvent("intro-reveal"));
-
-              // Eliminar del DOM tras la transición
-              setTimeout(() => {
-                if (overlay) overlay.style.display = "none";
-              }, 700);
-            }, 2300); // Duración total de la intro
-
-            (window as any).hasPlayedIntro = true;
-          } else {
-            // Si ya se ha visto, mostrar contenido inmediatamente
-            if (overlay) overlay.style.display = "none";
-            if (main) main.classList.remove("opacity-0");
-            if (navIcons) navIcons.classList.remove("opacity-0");
-            window.dispatchEvent(new CustomEvent("intro-reveal"));
-          }
+        {
+            isLanding && (
+                <div
+                    id="intro-overlay"
+                    class="fixed inset-0 z-99999 flex h-full w-full items-center justify-center bg-black transition-opacity duration-1000 ease-in-out"
+                >
+                    <div class="flex h-full w-full items-center justify-center overflow-hidden text-6xl font-bold text-white md:text-9xl">
+                        <span class="neon-style inline-block translate-y-20 font-extrabold opacity-0 transition-all duration-700 ease-out">
+                            J
+                        </span>
+                        <span class="neon-style inline-block translate-y-20 font-extrabold opacity-0 transition-all delay-100 duration-700 ease-out">
+                            O
+                        </span>
+                        <span class="neon-style inline-block translate-y-20 font-extrabold opacity-0 transition-all delay-200 duration-700 ease-out">
+                            W
+                        </span>
+                        <span class="neon-style inline-block translate-y-20 font-extrabold opacity-0 transition-all delay-300 duration-700 ease-out">
+                            Y
+                        </span>
+                    </div>
+                </div>
+            )
         }
-      });
-    </script>
-  </body>
+        <div
+            id="nav-icons"
+            class={`fixed top-5 right-5 z-9999 flex flex-row justify-center gap-8 pt-[1dvh] align-middle ${
+                isLanding
+                    ? "opacity-0 transition-opacity duration-700 ease-in-out"
+                    : ""
+            }`}
+        >
+            <LangSwitcher currentLang={lang} />
+        </div>
+        <div
+            id="main-wrapper"
+            data-is-landing={isLanding ? "true" : "false"}
+            class={isLanding
+                ? "opacity-0 transition-opacity duration-700 ease-in-out"
+                : ""}
+        >
+            <slot />
+        </div>
+        <script>
+            document.addEventListener("astro:page-load", () => {
+                const main = document.getElementById("main-wrapper");
+                const navIcons = document.getElementById("nav-icons");
+                const overlay = document.getElementById("intro-overlay");
+                const isLanding = main?.dataset.isLanding === "true";
+
+                if (!isLanding) {
+                    (window as any).hasPlayedIntro = false;
+                } else {
+                    const chars = document.querySelectorAll(
+                        "#intro-overlay .neon-style"
+                    );
+
+                    if (!(window as any).hasPlayedIntro) {
+                        // 1. Animación de entrada de letras (staggered)
+                        setTimeout(() => {
+                            chars.forEach((char) => {
+                                char.classList.remove(
+                                    "opacity-0",
+                                    "translate-y-20"
+                                );
+                            });
+                        }, 100);
+
+                        // 2. Animación de salida de letras
+                        setTimeout(() => {
+                            chars.forEach((char) => {
+                                char.classList.add(
+                                    "opacity-0",
+                                    "translate-y-20"
+                                );
+                            });
+                        }, 1300);
+
+                        // 3. Salida del overlay y entrada del contenido
+                        setTimeout(() => {
+                            if (overlay) overlay.classList.add("opacity-0");
+                            if (main) main.classList.remove("opacity-0");
+                            if (navIcons)
+                                navIcons.classList.remove("opacity-0");
+                            window.dispatchEvent(
+                                new CustomEvent("intro-reveal")
+                            );
+
+                            // Eliminar del DOM tras la transición
+                            setTimeout(() => {
+                                if (overlay) overlay.style.display = "none";
+                            }, 700);
+                        }, 2300); // Duración total de la intro
+
+                        (window as any).hasPlayedIntro = true;
+                    } else {
+                        // Si ya se ha visto, mostrar contenido inmediatamente
+                        if (overlay) overlay.style.display = "none";
+                        if (main) main.classList.remove("opacity-0");
+                        if (navIcons) navIcons.classList.remove("opacity-0");
+                        window.dispatchEvent(new CustomEvent("intro-reveal"));
+                    }
+                }
+            });
+        </script>
+    </body>
 </html>

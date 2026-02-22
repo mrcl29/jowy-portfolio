@@ -15,12 +15,12 @@ import { djBio } from "@/constants/photos";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
-  return locales.map((lang) => {
-    if (lang === defaultLang) {
-      return { params: { locale: undefined } };
-    }
-    return { params: { locale: lang } };
-  });
+    return locales.map((lang) => {
+        if (lang === defaultLang) {
+            return { params: { locale: undefined } };
+        }
+        return { params: { locale: lang } };
+    });
 }
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
@@ -30,157 +30,171 @@ const tracksLinks = await getShortSoundCloudTracksLinks();
 ---
 
 <BaseLayout
-  title={producerPage.title}
-  lang={langParam}
-  description={producerPage.description}
-  neonGlowColor={producerPage.neonGlowColor}
->
-  <PageLayout
     title={producerPage.title}
-    phrase={producerPage.heading}
-    socialNetworksList={producerSocialNetworksList}
+    lang={langParam}
+    description={producerPage.description}
     neonGlowColor={producerPage.neonGlowColor}
-  >
-    <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
-      <div class="relative h-150 w-full md:h-150">
-        <Image
-          src={djBio}
-          alt={djPage.bio.altImage}
-          class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
-          widths={[360, 720, 1200]}
-          sizes="(max-width: 768px) 100vw, 1200px"
-          loading="eager"
-        />
-      </div>
-    </div>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {producerPage.discography.title}
-        </h2>
-        <Separador />
-      </div>
-      <div class="mt-5 grid w-full grid-cols-1 gap-8 md:grid-cols-2">
-        {
-          tracksLinks?.slice(0, 6).map((link) => {
-            return (
-              <SoundCloudPlayer
-                trackUrl={link}
-                buying="false"
-                sharing="true"
-                download="true"
-                loading="lazy"
-              />
-            );
-          })
-        }
-        <!-- TODO: Implementar las canciones de spotify -->
-      </div>
-    </section>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {producerPage.services.title}
-        </h2>
-        <Separador />
-      </div>
-      <div
-        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
-      >
-        {
-          producerPage.services.list?.map((serviceInfo) => (
-            <div class="neon-text flex flex-col items-center gap-4 text-center">
-              <Image
-                src={serviceInfo.image}
-                alt={serviceInfo.name}
-                class="neon-icon h-24 w-24 invert transition-transform duration-300 hover:scale-110"
-              />
-              <span class="text-xl font-semibold">{serviceInfo.name}</span>
+>
+    <PageLayout
+        title={producerPage.title}
+        phrase={producerPage.heading}
+        socialNetworksList={producerSocialNetworksList}
+        neonGlowColor={producerPage.neonGlowColor}
+    >
+        <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
+            <div class="relative h-150 w-full md:h-150">
+                <Image
+                    src={djBio}
+                    alt={djPage.bio.altImage}
+                    class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+                    widths={[360, 720, 1200]}
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                    loading="eager"
+                />
             </div>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {producerPage.store.title}
-        </h2>
-        <Separador />
-      </div>
-      <div
-        class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
-      >
-        <!-- TODO: Implementar tienda -->
-        🏗️ Coming soon...
-      </div>
-    </section>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {producerPage.bio.title}
-        </h2>
-        <Separador />
-      </div>
-      <div class="flex w-full flex-col items-center gap-8">
-        <p class="neon-text w-full text-justify text-base md:text-lg">
-          {producerPage.bio.text}
-        </p>
-      </div>
-      <div
-        class="mt-10 flex w-full items-center justify-center sm:gap-4 md:gap-8 lg:gap-8"
-      >
-        <p class="neon-text text-center text-base md:text-lg">
-          {common.contactMe}
-        </p>
-        <div
-          id="copy-email"
-          class="neon-text cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
-          title={common.copyToClipboard ?? "Copiar al portapapeles"}
-        >
-          {djEmail}
         </div>
-      </div>
-    </section>
-  </PageLayout>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {producerPage.discography.title}
+                </h2>
+                <Separador />
+            </div>
+            <div class="mt-5 grid w-full grid-cols-1 gap-8 md:grid-cols-2">
+                {
+                    tracksLinks?.slice(0, 6).map((link) => {
+                        return (
+                            <SoundCloudPlayer
+                                trackUrl={link}
+                                buying="false"
+                                sharing="true"
+                                download="true"
+                                loading="lazy"
+                            />
+                        );
+                    })
+                }
+                <!-- TODO: Implementar las canciones de spotify -->
+            </div>
+        </section>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {producerPage.services.title}
+                </h2>
+                <Separador />
+            </div>
+            <div
+                class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
+            >
+                {
+                    producerPage.services.list?.map((serviceInfo) => (
+                        <div class="neon-text flex flex-col items-center gap-4 text-center">
+                            <Image
+                                src={serviceInfo.image}
+                                alt={serviceInfo.name}
+                                class="neon-icon h-24 w-24 invert transition-transform duration-300 hover:scale-110"
+                            />
+                            <span class="text-xl font-semibold">
+                                {serviceInfo.name}
+                            </span>
+                        </div>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {producerPage.store.title}
+                </h2>
+                <Separador />
+            </div>
+            <div
+                class="mt-5 flex w-full flex-row flex-wrap items-start justify-center gap-x-35 gap-y-8"
+            >
+                <p
+                    class="neon-text flex w-full flex-row items-start justify-center text-justify text-base md:text-lg"
+                >
+                    <!-- TODO: Implementar tienda -->
+                    🏗️ Coming soon...
+                </p>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {producerPage.bio.title}
+                </h2>
+                <Separador />
+            </div>
+            <div class="flex w-full flex-col items-center gap-8">
+                <p class="neon-text w-full text-justify text-base md:text-lg">
+                    {producerPage.bio.text}
+                </p>
+            </div>
+            <div
+                class="mt-10 flex w-full items-center justify-center sm:gap-4 md:gap-8 lg:gap-8"
+            >
+                <p class="neon-text text-center text-base md:text-lg">
+                    {common.contactMe}
+                </p>
+                <div
+                    id="copy-email"
+                    class="neon-text cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
+                    title={common.copyToClipboard ?? "Copiar al portapapeles"}
+                >
+                    {djEmail}
+                </div>
+            </div>
+        </section>
+    </PageLayout>
 </BaseLayout>
 
 <script>
-  import { initScrollAnimations } from "@/utils/animations";
-  // Ejecutamos la función en el evento 'astro:page-load'
-  // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
-  document.addEventListener("astro:page-load", () => {
-    initScrollAnimations();
+    import { initScrollAnimations } from "@/utils/animations";
+    // Ejecutamos la función en el evento 'astro:page-load'
+    // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
+    document.addEventListener("astro:page-load", () => {
+        initScrollAnimations();
 
-    const emailSpan = document.getElementById("copy-email");
-    if (!emailSpan) return;
+        const emailSpan = document.getElementById("copy-email");
+        if (!emailSpan) return;
 
-    const originalText = emailSpan.textContent;
-    // Asumimos que el diccionario i18n tendrá una clave para el texto "Copiado"
-    // Si no, usamos un valor por defecto.
-    const copiedMessage =
-      emailSpan.dataset.copiedText ??
-      (document.documentElement.lang === "es" ? "¡Copiado!" : "Copied!");
+        const originalText = emailSpan.textContent;
+        // Asumimos que el diccionario i18n tendrá una clave para el texto "Copiado"
+        // Si no, usamos un valor por defecto.
+        const copiedMessage =
+            emailSpan.dataset.copiedText ??
+            (document.documentElement.lang === "es" ? "¡Copiado!" : "Copied!");
 
-    const handleClick = () => {
-      if (!originalText) return;
+        const handleClick = () => {
+            if (!originalText) return;
 
-      navigator.clipboard.writeText(originalText).then(() => {
-        emailSpan.textContent = copiedMessage;
-        setTimeout(() => {
-          emailSpan.textContent = originalText;
-        }, 1000);
-      });
-    };
+            navigator.clipboard.writeText(originalText).then(() => {
+                emailSpan.textContent = copiedMessage;
+                setTimeout(() => {
+                    emailSpan.textContent = originalText;
+                }, 1000);
+            });
+        };
 
-    emailSpan.addEventListener("click", handleClick);
-  });
+        emailSpan.addEventListener("click", handleClick);
+    });
 </script>

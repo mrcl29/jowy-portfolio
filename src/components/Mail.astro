@@ -1,37 +1,37 @@
 ---
 interface ModalProps {
-  email: string;
+    email: string;
 }
 
 const { email } = Astro.props as ModalProps;
 ---
 
 <a
-  href={`mailto:${email}`}
-  aria-label={`Enviar correo a ${email}`}
-  class="flex items-center justify-center gap-2 text-xl font-medium transition-transform duration-300 hover:scale-110"
-  style="color: var(--neon-glow-color, #ffffff);"
+    href={`mailto:${email}`}
+    aria-label={`Enviar correo a ${email}`}
+    class="neon-icon h-8 w-8 transition-transform duration-300 ease-in-out hover:scale-125"
+    style="color: var(--neon-glow-color, #ffffff);"
 >
-  <svg
-    class="neon-icon"
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    stroke-width="2"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-  >
-    <rect width="20" height="16" x="2" y="4" rx="2"></rect><path
-      d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-  </svg>
+    <svg
+        class="neon-icon"
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    >
+        <rect width="20" height="16" x="2" y="4" rx="2"></rect><path
+            d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+    </svg>
 </a>
 
 <style>
-  .neon-icon {
-    filter: drop-shadow(0 0 2px var(--neon-glow-color, #ffffff))
-      drop-shadow(0 0 5px var(--neon-glow-color, #ffffff));
-  }
+    .neon-icon {
+        filter: drop-shadow(0 0 2px var(--neon-glow-color, #ffffff))
+            drop-shadow(0 0 5px var(--neon-glow-color, #ffffff));
+    }
 </style>

@@ -4,7 +4,7 @@ import djPhoto from "../assets/photo/dj.webp"
 import djCutPhoto from "../assets/photo/dj_recortada.webp"
 import soundPhoto from "../assets/photo/sonido.webp"
 import soundCutPhoto from "../assets/photo/sonido_recortada.webp"
-import producerPhoto from "../assets/photo/productor.webp"
+import producerPhoto from "../assets/photo/productor.png"
 import djBio from "@/assets/dj/dj_bio.webp"
 
 export { photo1, djPhoto, djCutPhoto, soundPhoto, soundCutPhoto, producerPhoto, djBio };
