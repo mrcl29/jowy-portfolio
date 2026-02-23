@@ -1,20 +1,20 @@
 ---
 import { Image } from "astro:assets";
 import { type SocialNetworksList } from "@/types/socialNetworksList.d";
-import { djEmail } from "@/constants/email";
-import { div } from "framer-motion/client";
 import Mail from "./Mail.astro";
 
 interface SocialNetworkListProps {
     socialNetworksList: SocialNetworksList;
     orientation?: "horizontal" | "vertical" | "responsive";
     loadingMode?: "eager" | "lazy";
+    email?: string | null;
 }
 
 const {
     socialNetworksList,
     orientation = "vertical",
     loadingMode = "eager",
+    email = null,
 } = Astro.props as SocialNetworkListProps;
 
 const containerClasses =
@@ -40,5 +40,5 @@ const containerClasses =
             );
         })
     }
-    <Mail email={djEmail} />
+    {email && <Mail email={email} />}
 </div>

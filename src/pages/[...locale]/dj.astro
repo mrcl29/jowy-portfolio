@@ -20,12 +20,12 @@ import { djEmail } from "@/constants/email";
 
 // Genera rutas estáticas: "/", "/en"
 export function getStaticPaths() {
-  return locales.map((lang) => {
-    if (lang === defaultLang) {
-      return { params: { locale: undefined } };
-    }
-    return { params: { locale: lang } };
-  });
+    return locales.map((lang) => {
+        if (lang === defaultLang) {
+            return { params: { locale: undefined } };
+        }
+        return { params: { locale: lang } };
+    });
 }
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
@@ -36,127 +36,137 @@ const youTubeSetsInfo = await getYoutubeSetsInfo();
 ---
 
 <BaseLayout
-  title={djPage.title}
-  lang={langParam}
-  description={djPage.description}
-  neonGlowColor={djPage.neonGlowColor}
->
-  <PageLayout
     title={djPage.title}
-    phrase={djPage.heading}
-    socialNetworksList={djSocialNetworksList}
+    lang={langParam}
+    description={djPage.description}
     neonGlowColor={djPage.neonGlowColor}
-  >
-    <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
-      <div class="relative h-150 w-full md:h-150">
-        <Image
-          src={djBio}
-          alt={djPage.bio.altImage}
-          class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
-          widths={[360, 720, 1200]}
-          sizes="(max-width: 768px) 100vw, 1200px"
-          loading="eager"
-        />
-      </div>
-    </div>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {djPage.sets.title}
-        </h2>
-        <Separador />
-      </div>
-      <div class="flex h-auto w-full flex-col justify-center gap-5">
-        <Carousel>
-          {
-            youTubeSetsInfo?.map((setInfo) => (
-              <YouTubePlayer title={setInfo.title} videoId={setInfo.videoId} />
-            ))
-          }
-          {
-            setsLinks?.map((link) => (
-              <SoundCloudPlayer trackUrl={link} loading="lazy" />
-            ))
-          }
-        </Carousel>
-      </div>
-    </section>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {djPage.calendar.title}
-        </h2>
-        <Separador />
-      </div>
-      <Calendar
-        googleCalendarSrc={djGoogleCalendarSrc}
-        title={djPage.calendar.calendarTitle}
-      />
-    </section>
-
-    <section class="animate-on-scroll w-full">
-      <div class="mb-4 flex w-full items-center gap-4">
-        <Separador />
-        <h2 class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl">
-          {djPage.bio.title}
-        </h2>
-        <Separador />
-      </div>
-      <div class="flex w-full flex-col items-center gap-8">
-        <p class="neon-text w-full text-justify text-base md:text-lg">
-          {djPage.bio.text}
-        </p>
-      </div>
-      <div
-        class="mt-10 flex w-full items-center justify-center sm:gap-4 md:gap-8 lg:gap-8"
-      >
-        <p class="neon-text text-center text-base md:text-lg">
-          {common.contactMe}
-        </p>
-        <div
-          id="copy-email"
-          class="neon-text cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
-          title={common.copyToClipboard ?? "Copiar al portapapeles"}
-        >
-          {djEmail}
+>
+    <PageLayout
+        title={djPage.title}
+        phrase={djPage.heading}
+        socialNetworksList={djSocialNetworksList}
+        neonGlowColor={djPage.neonGlowColor}
+        lang={langParam}
+    >
+        <div class="animate-on-scroll mb-4 flex w-full items-center gap-4">
+            <div class="relative h-150 w-full md:h-150">
+                <Image
+                    src={djBio}
+                    alt={djPage.bio.altImage}
+                    class="absolute h-full w-full rounded-lg object-cover object-top shadow-lg"
+                    widths={[360, 720, 1200]}
+                    sizes="(max-width: 768px) 100vw, 1200px"
+                    loading="eager"
+                />
+            </div>
         </div>
-      </div>
-    </section>
-  </PageLayout>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {djPage.sets.title}
+                </h2>
+                <Separador />
+            </div>
+            <div class="flex h-auto w-full flex-col justify-center gap-5">
+                <Carousel>
+                    {
+                        youTubeSetsInfo?.map((setInfo) => (
+                            <YouTubePlayer
+                                title={setInfo.title}
+                                videoId={setInfo.videoId}
+                            />
+                        ))
+                    }
+                    {
+                        setsLinks?.map((link) => (
+                            <SoundCloudPlayer trackUrl={link} loading="lazy" />
+                        ))
+                    }
+                </Carousel>
+            </div>
+        </section>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {djPage.calendar.title}
+                </h2>
+                <Separador />
+            </div>
+            <Calendar
+                googleCalendarSrc={djGoogleCalendarSrc}
+                title={djPage.calendar.calendarTitle}
+            />
+        </section>
+
+        <section class="animate-on-scroll w-full">
+            <div class="mb-4 flex w-full items-center gap-4">
+                <Separador />
+                <h2
+                    class="neon-text-glow shrink-0 text-2xl font-bold md:text-3xl"
+                >
+                    {djPage.bio.title}
+                </h2>
+                <Separador />
+            </div>
+            <div class="flex w-full flex-col items-center gap-8">
+                <p class="neon-text w-full text-justify text-base md:text-lg">
+                    {djPage.bio.text}
+                </p>
+            </div>
+            <div
+                class="mt-10 flex w-full items-center justify-center sm:gap-4 md:gap-8 lg:gap-8"
+            >
+                <p class="neon-text text-center text-base md:text-lg">
+                    {common.contactMe}
+                </p>
+                <div
+                    id="copy-email"
+                    class="neon-text cursor-pointer font-bold transition-transform duration-300 ease-in-out hover:scale-110"
+                    title={common.copyToClipboard ?? "Copiar al portapapeles"}
+                >
+                    {djEmail}
+                </div>
+            </div>
+        </section>
+    </PageLayout>
 </BaseLayout>
 
 <script>
-  import { initScrollAnimations } from "@/utils/animations";
-  // Ejecutamos la función en el evento 'astro:page-load'
-  // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
-  document.addEventListener("astro:page-load", () => {
-    initScrollAnimations();
+    import { initScrollAnimations } from "@/utils/animations";
+    // Ejecutamos la función en el evento 'astro:page-load'
+    // Este evento se dispara en la carga inicial Y en cada navegación por View Transitions
+    document.addEventListener("astro:page-load", () => {
+        initScrollAnimations();
 
-    const emailSpan = document.getElementById("copy-email");
-    if (!emailSpan) return;
+        const emailSpan = document.getElementById("copy-email");
+        if (!emailSpan) return;
 
-    const originalText = emailSpan.textContent;
-    // Asumimos que el diccionario i18n tendrá una clave para el texto "Copiado"
-    // Si no, usamos un valor por defecto.
-    const copiedMessage =
-      emailSpan.dataset.copiedText ??
-      (document.documentElement.lang === "es" ? "¡Copiado!" : "Copied!");
+        const originalText = emailSpan.textContent;
+        // Asumimos que el diccionario i18n tendrá una clave para el texto "Copiado"
+        // Si no, usamos un valor por defecto.
+        const copiedMessage =
+            emailSpan.dataset.copiedText ??
+            (document.documentElement.lang === "es" ? "¡Copiado!" : "Copied!");
 
-    const handleClick = () => {
-      if (!originalText) return;
+        const handleClick = () => {
+            if (!originalText) return;
 
-      navigator.clipboard.writeText(originalText).then(() => {
-        emailSpan.textContent = copiedMessage;
-        setTimeout(() => {
-          emailSpan.textContent = originalText;
-        }, 1000);
-      });
-    };
+            navigator.clipboard.writeText(originalText).then(() => {
+                emailSpan.textContent = copiedMessage;
+                setTimeout(() => {
+                    emailSpan.textContent = originalText;
+                }, 1000);
+            });
+        };
 
-    emailSpan.addEventListener("click", handleClick);
-  });
+        emailSpan.addEventListener("click", handleClick);
+    });
 </script>

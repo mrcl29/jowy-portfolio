@@ -5,18 +5,21 @@ import { getI18nInfo } from "@/utils/i18n";
 import { homeDarkIcon } from "@/constants/icons";
 import { type SocialNetworksList } from "@/types/socialNetworksList";
 import SocialNetworksListComponent from "@/components/SocialNetworksList.astro";
-import { djEmail } from "@/constants/email";
+import { djEmail, designerEmail } from "@/constants/email";
 import { creatorNetworkList } from "@/constants/socialNetworksList";
 import VerticalMarquee from '@/components/VerticalMarquee.astro';
+import LangSwitcher from "@/components/LangSwitcher.astro";
+import { defaultLang } from "i18n.config";
 
 interface PageLayoutProps {
   title: string;
   phrase?: string;
   socialNetworksList?: SocialNetworksList;
   neonGlowColor?: string;
+  lang?: string;
 }
 
-const { title, phrase, socialNetworksList, neonGlowColor } = Astro.props as PageLayoutProps;
+const { title, phrase, socialNetworksList, neonGlowColor, lang=defaultLang } = Astro.props as PageLayoutProps;
 
 const { dictionary, langParam } = await getI18nInfo(Astro.params.locale);
 const { indexPage, bioPage } = dictionary;
@@ -37,6 +40,13 @@ const mainStyle = neonGlowColor ? `--neon-glow-color: ${neonGlowColor};` : "";
     format="png"
   />
 </a>
+
+<div
+            id="nav-icons"
+            class={`fixed top-5 right-5 z-9999 flex flex-row justify-center gap-8 pt-[1dvh] align-middle`}
+        >
+            <LangSwitcher currentLang={lang} />
+        </div>
 
 <main class="mx-auto lg:max-w-5xl px-3 lg:px-20 py-12" style={mainStyle}>
     {
@@ -59,7 +69,7 @@ const mainStyle = neonGlowColor ? `--neon-glow-color: ${neonGlowColor};` : "";
   {
   socialNetworksList && (
     <div class="lg:fixed lg:top-1/2 lg:left-4 flex z-50 lg:-translate-y-1/2 items-center justify-center">
-      <SocialNetworksListComponent socialNetworksList={socialNetworksList} orientation="responsive" />
+      <SocialNetworksListComponent socialNetworksList={socialNetworksList} orientation="responsive" email={djEmail} />
     </div>
   )
 }
@@ -104,8 +114,9 @@ const mainStyle = neonGlowColor ? `--neon-glow-color: ${neonGlowColor};` : "";
         socialNetworksList && (
           <SocialNetworksListComponent
             socialNetworksList={creatorNetworkList}
-            orientation="horizontal"
+            orientation="vertical"
             loadingMode="lazy"
+            email={designerEmail}
           />
         )
       }
