@@ -1,6 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import LangSwitcher from "@/components/LangSwitcher.astro";
 import { defaultLang } from "../../i18n.config";
 import { djCutPhoto, soundCutPhoto, producerPhoto } from "@/constants/photos";
@@ -229,5 +230,6 @@ const schema = {
                 }
             });
         </script>
+        <SpeedInsights />
     </body>
 </html>
