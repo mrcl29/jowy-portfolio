@@ -12,6 +12,8 @@ interface NavPhotoSectionProps {
   link?: string;
   neonGlowColor?: string;
   alt?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
 }
 
 const {
@@ -23,6 +25,8 @@ const {
   link = Astro.url.pathname,
   neonGlowColor,
   alt = "Jowy Portfolio Image",
+  loading,
+  fetchpriority,
 } = Astro.props as NavPhotoSectionProps;
 
 const { langParam } = await getI18nInfo(Astro.params.locale);
@@ -80,5 +84,7 @@ const titleStyle = `
     image={image}
     alt={alt}
     className={`mt-auto ${mask} ${extraClass}`}
+    loading={loading}
+    fetchpriority={fetchpriority}
   />
 </a>

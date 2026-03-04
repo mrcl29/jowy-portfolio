@@ -5,9 +5,17 @@ interface NavPhotoProps {
   image: any;
   className?: string;
   altImage?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
 }
 
-const { image, className = "", altImage = "" } = Astro.props as NavPhotoProps;
+const {
+  image,
+  className = "",
+  altImage = "",
+  loading = "lazy",
+  fetchpriority = "auto",
+} = Astro.props as NavPhotoProps;
 ---
 
 <div class="flex h-full items-end justify-center overflow-hidden">
@@ -17,8 +25,8 @@ const { image, className = "", altImage = "" } = Astro.props as NavPhotoProps;
     class={`pb-0 w-auto object-bottom ${className} grayscale transition-all duration-500 ease-in-out group-hover:scale-110 group-hover:grayscale-0`}
     widths={[360, 720, 1000]}
     sizes="(max-width: 768px) 100vw, 50vw"
-    loading="eager"
-    fetchpriority="high"
+    loading={loading}
+    fetchpriority={fetchpriority}
     format="webp"
   />
 </div>

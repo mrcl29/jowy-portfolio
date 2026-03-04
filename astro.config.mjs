@@ -4,12 +4,19 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import compress from "astro-compress";
 import { defaultLang, locales } from "./i18n.config";
+import { visualizer } from "rollup-plugin-visualizer";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://jowy-portfolio.vercel.app/", // cambia a tu dominio
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      visualizer({
+        emitFile: true,
+        filename: "stats.html",
+      }),
+    ],
   },
   server: {
     host: true, // Establece el host en '0.0.0.0'

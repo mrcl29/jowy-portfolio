@@ -1,4 +1,5 @@
 ---
+import "@fontsource-variable/syne";
 import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
 import Analytics from "@vercel/analytics/astro";
@@ -21,7 +22,7 @@ const {
     lang = defaultLang,
     isLanding = false,
     neonGlowColor,
-    image = djCutPhoto.src,
+    image = soundCutPhoto.src,
 } = Astro.props as BaseLayoutProps;
 
 const socialImage = new URL(image, Astro.url).href;
@@ -98,26 +99,9 @@ const schema = {
 
         <Analytics />
 
-        <!-- Optimización de fuentes: Preconnect y carga no bloqueante -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            rel="preload"
-            href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
-            as="style"
-            onload="this.onload=null;this.rel='stylesheet'"
-        />
-        <noscript>
-            <link
-                href="https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap"
-                rel="stylesheet"
-                type="text/css"
-            />
-        </noscript>
-
-        <link rel="preload" as="image" href={djCutPhoto.src} />
+        <!-- <link rel="preload" as="image" href={djCutPhoto.src} />
         <link rel="preload" as="image" href={soundCutPhoto.src} />
-        <link rel="preload" as="image" href={producerPhoto.src} />
+        <link rel="preload" as="image" href={producerPhoto.src} /> -->
 
         <ClientRouter />
     </head>
@@ -152,9 +136,7 @@ const schema = {
         <div
             id="main-wrapper"
             data-is-landing={isLanding ? "true" : "false"}
-            class={isLanding
-                ? "opacity-0 transition-opacity duration-700 ease-in-out"
-                : ""}
+            class="opacity-0 transition-opacity duration-700 ease-in-out"
         >
             <slot />
         </div>
@@ -196,7 +178,7 @@ const schema = {
                         // 3. Salida del overlay y entrada del contenido
                         setTimeout(() => {
                             if (overlay) overlay.classList.add("opacity-0");
-                            if (main) main.classList.remove("opacity-0");
+                            // if (main) main.classList.remove("opacity-0");
                             if (navIcons)
                                 navIcons.classList.remove("opacity-0");
                             window.dispatchEvent(
@@ -213,7 +195,7 @@ const schema = {
                     } else {
                         // Si ya se ha visto, mostrar contenido inmediatamente
                         if (overlay) overlay.style.display = "none";
-                        if (main) main.classList.remove("opacity-0");
+                        // if (main) main.classList.remove("opacity-0");
                         if (navIcons) navIcons.classList.remove("opacity-0");
                         window.dispatchEvent(new CustomEvent("intro-reveal"));
                     }
