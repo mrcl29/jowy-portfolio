@@ -29,3 +29,5 @@ Jowy Portfolio - API Doc
 # PNPM cache
 .pnpm-store/
 
+.unlighthouse
+unlighthouse.config.ts
