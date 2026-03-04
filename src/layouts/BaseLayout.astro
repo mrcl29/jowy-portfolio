@@ -1,6 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import { ClientRouter } from "astro:transitions";
+import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import { defaultLang } from "../../i18n.config";
 import { djCutPhoto, soundCutPhoto, producerPhoto } from "@/constants/photos";
@@ -94,6 +95,8 @@ const schema = {
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <meta name="generator" content={Astro.generator} />
+
+        <Analytics />
 
         <!-- Optimización de fuentes: Preconnect y carga no bloqueante -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
